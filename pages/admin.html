@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Dashboard | Aurora Deli & Market</title>
+  <meta name="description" content="Enterprise admin command center for Aurora Deli & Market approvals, security, audit logs, and system health.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Aurora Deli & Market homepage">
+      <span class="brand-mark">A</span>
+      <span><strong>Aurora Deli & Market</strong><small>Admin command center</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="staff.html">Staff</a>
+      <a href="messages.html">Messages</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+      <a href="admin.html" aria-current="page">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="reports-hero admin-hero">
+      <div>
+        <p class="eyebrow">Enterprise admin</p>
+        <h1>Command center for store operations, controls, and system oversight.</h1>
+        <p>Monitor executive summaries, pending approvals, security posture, audit activity, and system health from a single operator workspace.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" alt="Operations dashboard with business analytics charts">
+    </section>
+
+    <section class="reports-dashboard admin-dashboard">
+      <div class="report-actions" aria-label="Admin command center header">
+        <div>
+          <p class="eyebrow">Command center</p>
+          <h2>Admin overview</h2>
+        </div>
+        <div class="export-actions">
+          <button type="button">Review Queue</button>
+          <button type="button">Run Health Check</button>
+          <button type="button">Export Audit</button>
+        </div>
+      </div>
+
+      <div class="report-summary-grid admin-summary-grid" aria-label="Admin summary">
+        <article>
+          <span>Open approvals</span>
+          <strong>7</strong>
+          <p>Refunds, supplier reorders, and schedule exceptions awaiting review.</p>
+        </article>
+        <article class="summary-warning">
+          <span>Security notices</span>
+          <strong>2</strong>
+          <p>Manager password rotation and inactive staff account review due.</p>
+        </article>
+        <article>
+          <span>Modules online</span>
+          <strong>8/8</strong>
+          <p>Storefront, ordering, catering, CRM, inventory, staff, reports, settings.</p>
+        </article>
+        <article>
+          <span>System status</span>
+          <strong>Stable</strong>
+          <p>Store systems are healthy. External vendor integrations remain under review.</p>
+        </article>
+        <article>
+          <span>Projected sales</span>
+          <strong>$6.1k</strong>
+          <p>Forecast based on current order pace and catering pickups.</p>
+        </article>
+        <article>
+          <span>Labor exposure</span>
+          <strong>1.5 hrs</strong>
+          <p>Potential overtime if closing coverage is extended.</p>
+        </article>
+        <article>
+          <span>Inventory risk</span>
+          <strong>5 items</strong>
+          <p>Turkey, ciabatta, soda, cookies, and soup need attention.</p>
+        </article>
+        <article>
+          <span>Lead pipeline</span>
+          <strong>$3.8k</strong>
+          <p>Open catering and corporate account opportunities.</p>
+        </article>
+      </div>
+
+      <section class="report-grid" aria-label="Admin module containers">
+        <article class="metric-panel admin-module-panel admin-approval-panel">
+          <p class="eyebrow">Approvals</p>
+          <h2>Approval queue</h2>
+          <div class="metric-list">
+            <div><span>Refund requests</span><strong>2</strong></div>
+            <div><span>Supplier reorders</span><strong>3</strong></div>
+            <div><span>Schedule exceptions</span><strong>2</strong></div>
+          </div>
+          <div class="conversion-list admin-queue-list">
+            <article>
+              <span>High priority</span>
+              <strong>Approve $184 supplier reorder for turkey breast</strong>
+              <p>Requested by Luis. Needed before Monday lunch prep.</p>
+            </article>
+            <article>
+              <span>Customer issue</span>
+              <strong>Review refund for pickup order #1048</strong>
+              <p>Missing chips and drink. Assigned to Noah for customer callback.</p>
+            </article>
+            <article>
+              <span>Staffing</span>
+              <strong>Approve Avery early-leave request for Saturday close</strong>
+              <p>Approval depends on finding one dish station closer.</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="metric-panel admin-module-panel admin-security-panel">
+          <p class="eyebrow">Security</p>
+          <h2>Access controls</h2>
+          <div class="metric-list">
+            <div><span>Active staff accounts</span><strong>17</strong></div>
+            <div><span>Admin users</span><strong>3</strong></div>
+            <div><span>Review required</span><strong>2</strong></div>
+          </div>
+          <div class="conversion-list admin-security-list">
+            <article>
+              <span>Password policy</span>
+              <strong>Manager rotation due in 3 days</strong>
+              <p>Maya, Luis, and Priya are flagged for quarterly credential refresh.</p>
+            </article>
+            <article>
+              <span>Inactive account</span>
+              <strong>Disable former cashier login before payroll close</strong>
+              <p>Account last used 18 days ago and still has order adjustment access.</p>
+            </article>
+            <article>
+              <span>Permission review</span>
+              <strong>Shift leads can update stock but not export reports</strong>
+              <p>Current role policy matches the settings permission matrix.</p>
+            </article>
+          </div>
+        </article>
+
+        <article class="metric-panel admin-module-panel admin-audit-panel">
+          <p class="eyebrow">Audit logs</p>
+          <h2>Recent activity</h2>
+          <div class="metric-list">
+            <div><span>Settings changes</span><strong>5</strong></div>
+            <div><span>Inventory overrides</span><strong>8</strong></div>
+            <div><span>Order adjustments</span><strong>4</strong></div>
+          </div>
+          <div class="conversion-list admin-audit-list">
+            <article>
+              <span>10:25 AM</span>
+              <strong>Maya changed catering cutoff to 24 hours</strong>
+              <p>Settings update: catering request rules.</p>
+            </article>
+            <article>
+              <span>10:11 AM</span>
+              <strong>Luis marked chicken soup batch as sold out</strong>
+              <p>Inventory override: prepared soups.</p>
+            </article>
+            <article>
+              <span>9:58 AM</span>
+              <strong>Noah adjusted order #1048 for missing drink</strong>
+              <p>Order adjustment: customer issue resolution.</p>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <section class="trend-section" aria-labelledby="executive-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Executive summary</p>
+            <h2 id="executive-heading">Operator priorities</h2>
+          </div>
+          <a href="reports.html">View reports</a>
+        </div>
+        <div class="trend-grid">
+          <article>
+            <span>Revenue</span>
+            <strong>On track</strong>
+            <p>Lunch traffic and catering pickups are ahead of Sunday average.</p>
+          </article>
+          <article>
+            <span>Operations</span>
+            <strong>Watch close</strong>
+            <p>Closing team may need one extra dishwasher if dinner orders continue.</p>
+          </article>
+          <article>
+            <span>Inventory</span>
+            <strong>Reorder today</strong>
+            <p>Ciabatta and turkey constraints could suppress sandwich sales tomorrow.</p>
+          </article>
+          <article>
+            <span>Customers</span>
+            <strong>2 urgent</strong>
+            <p>One pickup complaint and one high-value catering lead need follow-up.</p>
+          </article>
+          <article>
+            <span>Security</span>
+            <strong>Review due</strong>
+            <p>Inactive staff account and manager credential rotation remain open.</p>
+          </article>
+          <article>
+            <span>Modules</span>
+            <strong>Healthy</strong>
+            <p>All store modules are available; external vendor connections are under review.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="trend-section admin-operations-section" aria-labelledby="store-controls-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Store operations</p>
+            <h2 id="store-controls-heading">Daily control switches</h2>
+          </div>
+          <a href="settings.html">Edit controls</a>
+        </div>
+        <div class="operations-grid admin-control-grid">
+          <article>
+            <span>Ordering mode</span>
+            <strong>Pickup active</strong>
+            <p>Order desk accepts pickup windows from 10:30 AM to 6:30 PM.</p>
+          </article>
+          <article>
+            <span>Hot bar service</span>
+            <strong>Lunch rush</strong>
+            <p>Soup and hot sandwich counters are set for peak service monitoring.</p>
+          </article>
+          <article>
+            <span>Refund approvals</span>
+            <strong>Manager review</strong>
+            <p>Refunds over $25 route to Maya Chen before ledger adjustment.</p>
+          </article>
+          <article>
+            <span>Supplier orders</span>
+            <strong>Hold until 3 PM</strong>
+            <p>Produce and bakery reorder requests are staged for owner review.</p>
+          </article>
+          <article>
+            <span>After-hours leads</span>
+            <strong>Capture on</strong>
+            <p>Catering and voicemail-style contact requests remain visible overnight.</p>
+          </article>
+          <article>
+            <span>Daily close</span>
+            <strong>Checklist open</strong>
+            <p>Cash drawer, waste log, prep count, and cleaning signoff are pending.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="trend-section admin-oversight-section" aria-labelledby="oversight-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Operational oversight</p>
+            <h2 id="oversight-heading">Live business risk panels</h2>
+          </div>
+          <a href="reports.html">View analytics</a>
+        </div>
+        <div class="admin-oversight-grid">
+          <article class="admin-oversight-card">
+            <div>
+              <span>Catering and delivery</span>
+              <strong>$3,840 active pipeline</strong>
+            </div>
+            <ul>
+              <li>Reno Legal Group lunch for 42 guests awaiting deposit approval.</li>
+              <li>Silver Peak Realty breakfast trays need a 7:45 AM prep confirmation.</li>
+              <li>Two delivery windows remain open before kitchen capacity warning.</li>
+            </ul>
+            <a href="catering.html">Review catering desk</a>
+          </article>
+          <article class="admin-oversight-card">
+            <div>
+              <span>Inventory risk</span>
+              <strong>5 low-stock drivers</strong>
+            </div>
+            <ul>
+              <li>Ciabatta rolls are below par and affect three signature sandwiches.</li>
+              <li>Turkey breast expires tomorrow unless lunch prep uses 8 pounds today.</li>
+              <li>Tomato soup cups may run short if catering add-ons exceed forecast.</li>
+            </ul>
+            <a href="inventory.html">Review inventory dashboard</a>
+          </article>
+          <article class="admin-oversight-card">
+            <div>
+              <span>Staff coverage</span>
+              <strong>1.5 hour exposure</strong>
+            </div>
+            <ul>
+              <li>Closing dish station needs backup if dinner orders exceed 35 tickets.</li>
+              <li>Maria Lopez time-off request conflicts with Thursday catering prep.</li>
+              <li>Counter coverage is solid through lunch with one trainee shadowing.</li>
+            </ul>
+            <a href="staff.html">Review staff schedule</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="reports-lower-grid">
+        <div class="report-table-panel admin-health-panel" aria-labelledby="system-health-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">System health</p>
+              <h2 id="system-health-heading">Module health and oversight</h2>
+            </div>
+            <a href="settings.html">Business settings</a>
+          </div>
+          <div class="report-table-wrap">
+            <table class="report-table admin-health-table">
+              <thead>
+                <tr>
+                  <th scope="col">Module</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Owner</th>
+                  <th scope="col">Last Check</th>
+                  <th scope="col">Operational Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Approvals</th>
+                  <td><span class="status-pill warning">Open queue</span></td>
+                  <td>Maya Chen</td>
+                  <td>10:18 AM</td>
+                  <td>Refunds, supplier orders, and labor exceptions waiting for owner review.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Security</th>
+                  <td><span class="status-pill warning">Review due</span></td>
+                  <td>Owner</td>
+                  <td>9:45 AM</td>
+                  <td>Inactive user and credential rotation checks queued for end of day.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Audit Logs</th>
+                  <td><span class="status-pill good">Recording</span></td>
+                  <td>System</td>
+                  <td>10:22 AM</td>
+                  <td>Settings, inventory, order adjustment, and staff schedule events visible.</td>
+                </tr>
+                <tr>
+                  <th scope="row">System Health</th>
+                  <td><span class="status-pill good">Stable</span></td>
+                  <td>System</td>
+                  <td>10:25 AM</td>
+                  <td>All store systems are available; vendor integrations are pending review.</td>
+                </tr>
+                <tr>
+                  <th scope="row">CRM Leads</th>
+                  <td><span class="status-pill warning">Attention needed</span></td>
+                  <td>Priya Shah</td>
+                  <td>10:16 AM</td>
+                  <td>Reno Legal Group quote and Silver Peak breakfast follow-up are pending.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Inventory Controls</th>
+                  <td><span class="status-pill danger">Low-stock risk</span></td>
+                  <td>Luis Ortega</td>
+                  <td>10:09 AM</td>
+                  <td>Five active stock warnings may affect sandwich and catering availability.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Ordering Desk</th>
+                  <td><span class="status-pill good">Accepting orders</span></td>
+                  <td>Jordan Patel</td>
+                  <td>10:24 AM</td>
+                  <td>Pickup windows, cart flow, and daily order totals are aligned.</td>
+                </tr>
+                <tr>
+                  <th scope="row">Catering Pipeline</th>
+                  <td><span class="status-pill good">Active</span></td>
+                  <td>Maya Chen</td>
+                  <td>10:21 AM</td>
+                  <td>Three open quotes are visible with no delivery capacity conflicts.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="conversion-panel" aria-labelledby="admin-links-heading">
+          <p class="eyebrow">Admin modules</p>
+          <h2 id="admin-links-heading">Operator links</h2>
+          <div class="conversion-list">
+            <article>
+              <span>Reports</span>
+              <strong><a href="reports.html">Analytics</a></strong>
+            </article>
+            <article>
+              <span>CRM</span>
+              <strong><a href="messages.html">Messages</a></strong>
+            </article>
+            <article>
+              <span>Inventory</span>
+              <strong><a href="inventory.html">Stock</a></strong>
+            </article>
+            <article>
+              <span>Staff</span>
+              <strong><a href="staff.html">Schedule</a></strong>
+            </article>
+          </div>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Aurora Deli & Market</strong>
+      <p>Admin command center for approvals, operations, security, and system health.</p>
+    </div>
+    <div class="footer-links">
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </footer>
+  <script src="../assets/js/business-api.js"></script>
+</body>
+</html>

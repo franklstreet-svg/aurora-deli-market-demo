@@ -1,0 +1,68 @@
+[
+  {
+    "id": "inv-turkey",
+    "name": "Roasted Turkey Breast",
+    "category": "Deli meats",
+    "quantity": 19,
+    "unit": "lb",
+    "par": 31,
+    "supplier": "Sierra Provisions",
+    "reorder_status": "ordered",
+    "expires": "2026-05-12"
+  },
+  {
+    "id": "inv-salami",
+    "name": "Genoa Salami",
+    "category": "Deli meats",
+    "quantity": 12,
+    "unit": "lb",
+    "par": 19,
+    "supplier": "Sierra Provisions",
+    "reorder_status": "ordered",
+    "expires": "2026-05-18"
+  },
+  {
+    "id": "inv-sourdough",
+    "name": "Sourdough Loaves",
+    "category": "Bakery",
+    "quantity": 42,
+    "unit": "loaves",
+    "par": 40,
+    "supplier": "Truckee River Bakery",
+    "reorder_status": "hold",
+    "expires": "2026-05-11"
+  },
+  {
+    "id": "inv-tomato-bisque",
+    "name": "Tomato Basil Bisque",
+    "category": "Soup",
+    "quantity": 8,
+    "unit": "qt",
+    "par": 10,
+    "supplier": "In-house prep",
+    "reorder_status": "prep",
+    "expires": "2026-05-10"
+  },
+  {
+    "id": "inv-kettle-chips",
+    "name": "Tahoe Kettle Chips",
+    "category": "Market",
+    "quantity": 22,
+    "unit": "bags",
+    "par": 48,
+    "supplier": "Tahoe Snacks",
+    "reorder_status": "needed",
+    "expires": "2026-09-01"
+  },
+  {
+    "id": "inv-cookie-trays",
+    "name": "Catering Cookie Trays",
+    "category": "Catering",
+    "quantity": 3,
+    "unit": "trays",
+    "par": 8,
+    "supplier": "In-house bakery",
+    "reorder_status": "prep",
+    "expires": "2026-05-11"
+  }
+]

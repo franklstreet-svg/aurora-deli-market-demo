@@ -1,0 +1,42 @@
+[
+  {
+    "id": "MSG-3101",
+    "customer_name": "Nora Bell",
+    "source": "web",
+    "subject": "Boxed lunches for 42",
+    "status": "awaiting_quote",
+    "priority": "high",
+    "assigned_staff": "Maya Chen",
+    "notes": "Needs vegetarian count by Wednesday."
+  },
+  {
+    "id": "MSG-3102",
+    "customer_name": "Janelle Price",
+    "source": "phone",
+    "subject": "Missing chips from pickup",
+    "status": "unresolved",
+    "priority": "medium",
+    "assigned_staff": "Theo Martin",
+    "notes": "Offer replacement on next visit."
+  },
+  {
+    "id": "MSG-3103",
+    "customer_name": "B8 Test Customer",
+    "source": "web",
+    "subject": "Question about lunch trays",
+    "status": "contacted",
+    "priority": "high",
+    "assigned_staff": "Maya Chen",
+    "notes": "B8 update test"
+  },
+  {
+    "id": "MSG-3104",
+    "customer_name": "B12 Message",
+    "source": "web",
+    "subject": "Catering quote follow up",
+    "status": "contacted",
+    "priority": "high",
+    "assigned_staff": "Priya Shah",
+    "notes": "B12 persistence test"
+  }
+]

@@ -1,0 +1,163 @@
+[
+  {
+    "id": "AUD-1001",
+    "timestamp": "2026-05-10T08:12:00Z",
+    "actor": "Maya Chen",
+    "action": "settings.update",
+    "detail": "Catering cutoff changed to 24 hours."
+  },
+  {
+    "id": "AUD-1002",
+    "timestamp": "2026-05-10T09:05:00Z",
+    "actor": "Luis Ortega",
+    "action": "inventory.update",
+    "detail": "Tomato basil bisque marked for prep."
+  },
+  {
+    "id": "AUD-1003",
+    "timestamp": "2026-05-10T23:06:16Z",
+    "actor": "Store manager",
+    "action": "product.update",
+    "detail": "Updated Sierra Turkey Club product fields."
+  },
+  {
+    "id": "AUD-1004",
+    "timestamp": "2026-05-10T23:07:26Z",
+    "actor": "Order desk",
+    "action": "order.create",
+    "detail": "Created order ADM-1002."
+  },
+  {
+    "id": "AUD-1005",
+    "timestamp": "2026-05-10T23:07:36Z",
+    "actor": "Order desk",
+    "action": "order.update",
+    "detail": "Updated order ADM-1002."
+  },
+  {
+    "id": "AUD-1006",
+    "timestamp": "2026-05-10T23:08:52Z",
+    "actor": "Catering desk",
+    "action": "catering.create",
+    "detail": "Created catering request CAT-2202."
+  },
+  {
+    "id": "AUD-1007",
+    "timestamp": "2026-05-10T23:08:58Z",
+    "actor": "Catering desk",
+    "action": "catering.update",
+    "detail": "Updated catering request CAT-2202."
+  },
+  {
+    "id": "AUD-1008",
+    "timestamp": "2026-05-10T23:09:53Z",
+    "actor": "Inventory desk",
+    "action": "inventory.update",
+    "detail": "Updated inventory item Roasted Turkey Breast."
+  },
+  {
+    "id": "AUD-1009",
+    "timestamp": "2026-05-10T23:10:54Z",
+    "actor": "Schedule desk",
+    "action": "staff.create",
+    "detail": "Created shift shift-005."
+  },
+  {
+    "id": "AUD-1010",
+    "timestamp": "2026-05-10T23:11:01Z",
+    "actor": "Schedule desk",
+    "action": "staff.update",
+    "detail": "Updated shift shift-005."
+  },
+  {
+    "id": "AUD-1011",
+    "timestamp": "2026-05-10T23:11:57Z",
+    "actor": "Customer desk",
+    "action": "message.create",
+    "detail": "Created message MSG-3103."
+  },
+  {
+    "id": "AUD-1012",
+    "timestamp": "2026-05-10T23:12:04Z",
+    "actor": "Customer desk",
+    "action": "message.update",
+    "detail": "Updated message MSG-3103."
+  },
+  {
+    "id": "AUD-1013",
+    "timestamp": "2026-05-10T23:14:05Z",
+    "actor": "Settings desk",
+    "action": "settings.update",
+    "detail": "Updated business settings."
+  },
+  {
+    "id": "AUD-1014",
+    "timestamp": "2026-05-10T23:17:19Z",
+    "actor": "Order desk",
+    "action": "order.create",
+    "detail": "Created order ADM-1003."
+  },
+  {
+    "id": "AUD-1015",
+    "timestamp": "2026-05-10T23:17:19Z",
+    "actor": "Catering desk",
+    "action": "catering.create",
+    "detail": "Created catering request CAT-2203."
+  },
+  {
+    "id": "AUD-1016",
+    "timestamp": "2026-05-10T23:17:19Z",
+    "actor": "Schedule desk",
+    "action": "staff.create",
+    "detail": "Created shift shift-006."
+  },
+  {
+    "id": "AUD-1017",
+    "timestamp": "2026-05-10T23:17:19Z",
+    "actor": "Customer desk",
+    "action": "message.create",
+    "detail": "Created message MSG-3104."
+  },
+  {
+    "id": "AUD-1018",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Order desk",
+    "action": "order.update",
+    "detail": "Updated order ADM-1003."
+  },
+  {
+    "id": "AUD-1019",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Catering desk",
+    "action": "catering.update",
+    "detail": "Updated catering request CAT-2203."
+  },
+  {
+    "id": "AUD-1020",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Inventory desk",
+    "action": "inventory.update",
+    "detail": "Updated inventory item Genoa Salami."
+  },
+  {
+    "id": "AUD-1021",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Schedule desk",
+    "action": "staff.update",
+    "detail": "Updated shift shift-006."
+  },
+  {
+    "id": "AUD-1022",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Customer desk",
+    "action": "message.update",
+    "detail": "Updated message MSG-3104."
+  },
+  {
+    "id": "AUD-1023",
+    "timestamp": "2026-05-10T23:17:46Z",
+    "actor": "Settings desk",
+    "action": "settings.update",
+    "detail": "Updated business settings."
+  }
+]

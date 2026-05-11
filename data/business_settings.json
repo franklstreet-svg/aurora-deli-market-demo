@@ -1,0 +1,23 @@
+{
+  "business_name": "Aurora Deli & Market",
+  "category": "Deli, grocery market, catering",
+  "phone": "(775) 555-0194",
+  "address": "1842 Sierra Market Lane, Reno, NV 89501",
+  "hours": {
+    "mon_fri": "6:30 AM-8:00 PM",
+    "saturday": "7:00 AM-8:00 PM",
+    "sunday": "8:00 AM-5:00 PM"
+  },
+  "notifications": {
+    "catering_sms": true,
+    "order_issue_email": true,
+    "inventory_warning": true,
+    "staff_coverage": true
+  },
+  "operations": {
+    "online_ordering": true,
+    "catering_requests": true,
+    "after_hours_leads": true
+  },
+  "backend_phase": "B12"
+}

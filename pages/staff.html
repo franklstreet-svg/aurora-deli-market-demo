@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Staff Schedule | Aurora Deli & Market</title>
+  <meta name="description" content="Staff scheduling page for Aurora Deli & Market weekly shifts, roles, coverage warnings, time-off requests, and contacts.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Aurora Deli & Market homepage">
+      <span class="brand-mark">A</span>
+      <span><strong>Aurora Deli & Market</strong><small>Staff schedule</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="staff.html" aria-current="page">Staff</a>
+      <a href="messages.html">Messages</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="staff-hero">
+      <div>
+        <p class="eyebrow">Schedule</p>
+        <h1>Weekly coverage for counter, kitchen, cashier, and closing teams.</h1>
+        <p>Review today's staffing summary, role assignments, coverage warnings, time-off requests, and team contact details for the deli.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1559329007-40df8a9345d8?auto=format&fit=crop&w=1200&q=80" alt="Deli staff working behind a food counter">
+    </section>
+
+    <section class="staff-dashboard">
+      <div class="staff-summary-grid" aria-label="Today's staffing summary">
+        <article>
+          <span>Scheduled today</span>
+          <strong>9</strong>
+          <p>Five front-of-house, three kitchen, one manager.</p>
+        </article>
+        <article class="summary-warning">
+          <span>Coverage warnings</span>
+          <strong>2</strong>
+          <p>Lunch cashier gap and short closing dishwasher support.</p>
+        </article>
+        <article>
+          <span>Open hours covered</span>
+          <strong>6 AM-8 PM</strong>
+          <p>Prep, service, delivery pickup, and close included.</p>
+        </article>
+        <article>
+          <span>Pending time off</span>
+          <strong>3</strong>
+          <p>Requests need manager approval by Wednesday.</p>
+        </article>
+      </div>
+
+      <section class="coverage-panel" aria-labelledby="coverage-heading">
+        <div>
+          <p class="eyebrow">Today</p>
+          <h2 id="coverage-heading">Coverage notes</h2>
+        </div>
+        <div class="coverage-grid">
+          <article>
+            <strong>Lunch register gap</strong>
+            <span>12:30 PM-2:00 PM</span>
+            <p>Move a floor lead to register or call in backup for the sandwich rush.</p>
+          </article>
+          <article>
+            <strong>Catering pickup window</strong>
+            <span>10:00 AM-11:30 AM</span>
+            <p>Kitchen lead and counter runner are both assigned for the Reno office tray order.</p>
+          </article>
+          <article>
+            <strong>Closing support short</strong>
+            <span>7:00 PM-8:45 PM</span>
+            <p>Dish station has one person. Add a closer if dinner orders run heavy.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="schedule-section" aria-labelledby="weekly-schedule-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Weekly schedule</p>
+            <h2 id="weekly-schedule-heading">May 11-17 staffing plan</h2>
+          </div>
+          <a href="admin.html">Open admin</a>
+        </div>
+
+        <div class="schedule-table-wrap">
+          <table class="schedule-table">
+            <thead>
+              <tr>
+                <th scope="col">Employee</th>
+                <th scope="col">Role</th>
+                <th scope="col">Mon</th>
+                <th scope="col">Tue</th>
+                <th scope="col">Wed</th>
+                <th scope="col">Thu</th>
+                <th scope="col">Fri</th>
+                <th scope="col">Sat</th>
+                <th scope="col">Sun</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Maya Chen</th>
+                <td><span class="role-pill manager">Manager</span></td>
+                <td>7 AM-3 PM</td>
+                <td>7 AM-3 PM</td>
+                <td>Off</td>
+                <td>8 AM-4 PM</td>
+                <td>10 AM-6 PM</td>
+                <td>9 AM-5 PM</td>
+                <td>Off</td>
+              </tr>
+              <tr>
+                <th scope="row">Luis Ortega</th>
+                <td><span class="role-pill kitchen">Kitchen lead</span></td>
+                <td>6 AM-2 PM</td>
+                <td>6 AM-2 PM</td>
+                <td>6 AM-2 PM</td>
+                <td>6 AM-2 PM</td>
+                <td>6 AM-2 PM</td>
+                <td>Off</td>
+                <td>Off</td>
+              </tr>
+              <tr>
+                <th scope="row">Priya Shah</th>
+                <td><span class="role-pill counter">Deli counter</span></td>
+                <td>9 AM-5 PM</td>
+                <td>9 AM-5 PM</td>
+                <td>9 AM-5 PM</td>
+                <td>Off</td>
+                <td>11 AM-7 PM</td>
+                <td>11 AM-7 PM</td>
+                <td>10 AM-4 PM</td>
+              </tr>
+              <tr>
+                <th scope="row">Noah Brooks</th>
+                <td><span class="role-pill cashier">Cashier</span></td>
+                <td>10 AM-4 PM</td>
+                <td>Off</td>
+                <td>10 AM-4 PM</td>
+                <td>10 AM-4 PM</td>
+                <td class="coverage-warning-cell">12 PM-6 PM</td>
+                <td>9 AM-3 PM</td>
+                <td>9 AM-3 PM</td>
+              </tr>
+              <tr>
+                <th scope="row">Grace Miller</th>
+                <td><span class="role-pill prep">Prep cook</span></td>
+                <td>6 AM-12 PM</td>
+                <td>6 AM-12 PM</td>
+                <td>6 AM-12 PM</td>
+                <td>6 AM-12 PM</td>
+                <td>6 AM-12 PM</td>
+                <td>7 AM-1 PM</td>
+                <td>Off</td>
+              </tr>
+              <tr>
+                <th scope="row">Sam Rivera</th>
+                <td><span class="role-pill counter">Deli counter</span></td>
+                <td>12 PM-8 PM</td>
+                <td>12 PM-8 PM</td>
+                <td>Off</td>
+                <td>12 PM-8 PM</td>
+                <td>12 PM-8 PM</td>
+                <td>12 PM-8 PM</td>
+                <td>Off</td>
+              </tr>
+              <tr>
+                <th scope="row">Avery Kim</th>
+                <td><span class="role-pill closing">Closer</span></td>
+                <td>3 PM-9 PM</td>
+                <td>3 PM-9 PM</td>
+                <td>3 PM-9 PM</td>
+                <td>Off</td>
+                <td>3 PM-9 PM</td>
+                <td class="coverage-warning-cell">4 PM-9 PM</td>
+                <td>3 PM-8 PM</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="staff-lower-grid">
+        <div class="timeoff-panel" aria-labelledby="timeoff-heading">
+          <p class="eyebrow">Requests</p>
+          <h2 id="timeoff-heading">Time-off queue</h2>
+          <article>
+            <strong>Priya Shah</strong>
+            <span>Thursday, May 14</span>
+            <p>Appointment. Needs counter coverage from 9 AM-5 PM.</p>
+          </article>
+          <article>
+            <strong>Noah Brooks</strong>
+            <span>Tuesday, May 12</span>
+            <p>Approved unpaid day. Register shift moved to Grace for lunch only.</p>
+          </article>
+          <article>
+            <strong>Avery Kim</strong>
+            <span>Saturday, May 16</span>
+            <p>Pending early leave request. Closing dishwasher support not covered.</p>
+          </article>
+        </div>
+
+        <div class="contact-panel" aria-labelledby="contacts-heading">
+          <p class="eyebrow">Contacts</p>
+          <h2 id="contacts-heading">Staff contact list</h2>
+          <div class="contact-list">
+            <article>
+              <strong>Maya Chen</strong>
+              <span>Manager</span>
+              <a href="tel:+17755550121">(775) 555-0121</a>
+            </article>
+            <article>
+              <strong>Luis Ortega</strong>
+              <span>Kitchen lead</span>
+              <a href="tel:+17755550134">(775) 555-0134</a>
+            </article>
+            <article>
+              <strong>Priya Shah</strong>
+              <span>Deli counter</span>
+              <a href="tel:+17755550146">(775) 555-0146</a>
+            </article>
+            <article>
+              <strong>Avery Kim</strong>
+              <span>Closer</span>
+              <a href="tel:+17755550159">(775) 555-0159</a>
+            </article>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Aurora Deli & Market</strong>
+      <p>Staff schedule for store coverage, roles, and time-off planning.</p>
+    </div>
+    <div class="footer-links">
+      <a href="inventory.html">Inventory</a>
+      <a href="messages.html">Messages</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </footer>
+</body>
+</html>

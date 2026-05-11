@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Messages | Aurora Deli & Market</title>
+  <meta name="description" content="CRM and customer messages dashboard for Aurora Deli & Market inquiries, catering leads, complaints, reminders, and response tracking.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Aurora Deli & Market homepage">
+      <span class="brand-mark">A</span>
+      <span><strong>Aurora Deli & Market</strong><small>Customer CRM</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="inventory.html">Inventory</a>
+      <a href="staff.html">Staff</a>
+      <a href="messages.html" aria-current="page">Messages</a>
+      <a href="reports.html">Reports</a>
+      <a href="settings.html">Settings</a>
+      <a href="admin.html">Admin</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="crm-hero">
+      <div>
+        <p class="eyebrow">Customer CRM</p>
+        <h1>Customer conversations, catering leads, and issue follow-ups in one workspace.</h1>
+        <p>Monitor unread messages, assign staff, prioritize leads, track response status, and keep customer profiles visible during follow-up.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?auto=format&fit=crop&w=1200&q=80" alt="Customer service team reviewing messages on a laptop">
+    </section>
+
+    <section class="crm-dashboard">
+      <div class="crm-summary-grid" aria-label="CRM summary">
+        <article>
+          <span>Unread messages</span>
+          <strong>14</strong>
+          <p>Six catering leads, five order questions, three service issues.</p>
+        </article>
+        <article class="summary-warning">
+          <span>High priority</span>
+          <strong>4</strong>
+          <p>Needs response before the lunch rush or event cutoff.</p>
+        </article>
+        <article>
+          <span>Open leads</span>
+          <strong>$3,840</strong>
+          <p>Estimated value from active catering and market orders.</p>
+        </article>
+        <article>
+          <span>Avg response</span>
+          <strong>18 min</strong>
+          <p>Target is under 20 minutes during store hours.</p>
+        </article>
+      </div>
+
+      <section class="crm-workspace" aria-label="Customer message workspace">
+        <aside class="message-queue" aria-labelledby="message-queue-heading">
+          <div class="queue-head">
+            <div>
+              <p class="eyebrow">Inbox</p>
+              <h2 id="message-queue-heading">Message queue</h2>
+            </div>
+            <span class="unread-badge">14 unread</span>
+          </div>
+
+          <article class="message-card is-active">
+            <div class="message-topline">
+              <strong>Reno Legal Group</strong>
+              <span class="priority-tag high">High</span>
+            </div>
+            <p>Catering lead: boxed lunches for 42 guests this Friday.</p>
+            <div class="message-meta"><span>Assigned: Maya</span><span>New 8 min ago</span></div>
+          </article>
+
+          <article class="message-card">
+            <div class="message-topline">
+              <strong>Evan Torres</strong>
+              <span class="priority-tag issue">Issue</span>
+            </div>
+            <p>Order complaint: missing chips and drink from pickup #1048.</p>
+            <div class="message-meta"><span>Assigned: Noah</span><span>Unread</span></div>
+          </article>
+
+          <article class="message-card">
+            <div class="message-topline">
+              <strong>Sierra Kids Camp</strong>
+              <span class="priority-tag lead">Lead</span>
+            </div>
+            <p>Asking for sandwich tray pricing and delivery to Truckee.</p>
+            <div class="message-meta"><span>Assigned: Priya</span><span>Due today</span></div>
+          </article>
+
+          <article class="message-card">
+            <div class="message-topline">
+              <strong>Nina Patel</strong>
+              <span class="priority-tag normal">Normal</span>
+            </div>
+            <p>Question about gluten-free bread and dairy-free soup options.</p>
+            <div class="message-meta"><span>Assigned: Grace</span><span>Read</span></div>
+          </article>
+
+          <article class="message-card">
+            <div class="message-topline">
+              <strong>Silver Peak Realty</strong>
+              <span class="priority-tag high">High</span>
+            </div>
+            <p>Recurring Friday breakfast board inquiry for 25 staff.</p>
+            <div class="message-meta"><span>Assigned: Maya</span><span>Follow-up 2 PM</span></div>
+          </article>
+        </aside>
+
+        <section class="conversation-panel" aria-labelledby="conversation-heading">
+          <div class="conversation-header">
+            <div>
+              <p class="eyebrow">Conversation preview</p>
+              <h2 id="conversation-heading">Reno Legal Group</h2>
+              <p>Corporate catering lead for Friday lunch. Estimated value $714 before drinks.</p>
+            </div>
+            <span class="status-pill warning">Awaiting quote</span>
+          </div>
+
+          <div class="conversation-thread">
+            <article class="chat-bubble customer">
+              <span>Customer</span>
+              <p>We need boxed lunches for 42 people this Friday at noon. Can you include vegetarian options and deliver downtown?</p>
+            </article>
+            <article class="chat-bubble staff">
+              <span>Maya Chen</span>
+              <p>Yes. I can quote turkey, Italian, veggie, chips, cookies, and bottled drinks. Delivery downtown is available.</p>
+            </article>
+            <article class="chat-bubble customer">
+              <span>Customer</span>
+              <p>Great. Please send pricing and confirm if labels can include dietary notes.</p>
+            </article>
+          </div>
+
+          <div class="response-tracker" aria-label="Response status tracking">
+            <article>
+              <span>Status</span>
+              <strong>Quote needed</strong>
+            </article>
+            <article>
+              <span>Assigned staff</span>
+              <strong>Maya Chen</strong>
+            </article>
+            <article>
+              <span>Next follow-up</span>
+              <strong>Today 11:45 AM</strong>
+            </article>
+          </div>
+        </section>
+
+        <aside class="profile-panel" aria-labelledby="profile-heading">
+          <p class="eyebrow">Customer profile</p>
+          <h2 id="profile-heading">Reno Legal Group</h2>
+          <div class="profile-card">
+            <strong>Primary contact</strong>
+            <span>Janelle Morris</span>
+            <a href="tel:+17755550188">(775) 555-0188</a>
+            <a href="mailto:janelle@example.com">janelle@example.com</a>
+          </div>
+          <div class="profile-card">
+            <strong>Customer type</strong>
+            <span>Corporate catering account</span>
+            <span>3 previous orders</span>
+          </div>
+          <div class="profile-card">
+            <strong>Preferences</strong>
+            <span>Label boxed lunches</span>
+            <span>Include vegetarian and dairy-free choices</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="crm-lower-grid">
+        <div class="lead-table-panel" aria-labelledby="lead-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Pipeline</p>
+              <h2 id="lead-heading">Active leads and issues</h2>
+            </div>
+            <a href="catering.html">Catering page</a>
+          </div>
+          <div class="lead-table-wrap">
+            <table class="lead-table">
+              <thead>
+                <tr>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">Priority</th>
+                  <th scope="col">Assigned</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Next step</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Reno Legal Group</th>
+                  <td>Catering lead</td>
+                  <td><span class="priority-tag high">High</span></td>
+                  <td>Maya</td>
+                  <td><span class="status-pill warning">Awaiting quote</span></td>
+                  <td>Send boxed lunch proposal</td>
+                </tr>
+                <tr>
+                  <th scope="row">Evan Torres</th>
+                  <td>Order issue</td>
+                  <td><span class="priority-tag issue">Issue</span></td>
+                  <td>Noah</td>
+                  <td><span class="status-pill danger">Unresolved</span></td>
+                  <td>Offer refund or remake</td>
+                </tr>
+                <tr>
+                  <th scope="row">Sierra Kids Camp</th>
+                  <td>Catering lead</td>
+                  <td><span class="priority-tag lead">Lead</span></td>
+                  <td>Priya</td>
+                  <td><span class="status-pill good">Contacted</span></td>
+                  <td>Confirm guest count</td>
+                </tr>
+                <tr>
+                  <th scope="row">Nina Patel</th>
+                  <td>Menu inquiry</td>
+                  <td><span class="priority-tag normal">Normal</span></td>
+                  <td>Grace</td>
+                  <td><span class="status-pill good">Draft ready</span></td>
+                  <td>Send allergy notes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="reminder-panel" aria-labelledby="reminders-heading">
+          <p class="eyebrow">Follow-ups</p>
+          <h2 id="reminders-heading">Reminder queue</h2>
+          <article>
+            <strong>11:45 AM</strong>
+            <span>Send Reno Legal Group quote</span>
+          </article>
+          <article>
+            <strong>1:30 PM</strong>
+            <span>Call Evan Torres about pickup issue</span>
+          </article>
+          <article>
+            <strong>2:00 PM</strong>
+            <span>Confirm Silver Peak breakfast board budget</span>
+          </article>
+          <article>
+            <strong>4:15 PM</strong>
+            <span>Close loop with Nina on gluten-free options</span>
+          </article>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>Aurora Deli & Market</strong>
+      <p>Customer message workspace for inquiries, catering leads, and follow-up tracking.</p>
+    </div>
+    <div class="footer-links">
+      <a href="catering.html">Catering</a>
+      <a href="reports.html">Reports</a>
+      <a href="admin.html">Admin</a>
+    </div>
+  </footer>
+</body>
+</html>
