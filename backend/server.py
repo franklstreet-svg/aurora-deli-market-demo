@@ -20,10 +20,18 @@ else:
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PORT = 8126
+DEFAULT_ALLOWED_ORIGINS = "*"
 
 
 class AuroraDeliHandler(BaseHTTPRequestHandler):
     server_version = "AuroraDeliBackend/0.1"
+
+    def do_OPTIONS(self) -> None:
+        self.send_response(HTTPStatus.NO_CONTENT)
+        self.send_cors_headers()
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, PATCH, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
 
     def do_GET(self) -> None:
         parsed = urlparse(self.path)
@@ -385,10 +393,16 @@ class AuroraDeliHandler(BaseHTTPRequestHandler):
     def send_json(self, payload: object, status: HTTPStatus = HTTPStatus.OK) -> None:
         content = json.dumps(payload, indent=2).encode("utf-8")
         self.send_response(status)
+        self.send_cors_headers()
         self.send_header("Content-Type", "application/json")
         self.send_header("Content-Length", str(len(content)))
         self.end_headers()
         self.wfile.write(content)
+
+    def send_cors_headers(self) -> None:
+        allowed = os.environ.get("AURORA_DELI_ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS)
+        self.send_header("Access-Control-Allow-Origin", allowed)
+        self.send_header("Vary", "Origin")
 
     def read_json_body(self) -> object | None:
         try:
@@ -646,14 +660,20 @@ def ensure_storage() -> None:
     marker.touch(exist_ok=True)
 
 
-def run(port: int = DEFAULT_PORT, host: str = '127.0.0.1') -> None:
- ensure_storage()
- server = ThreadingHTTPServer((host, port), AuroraDeliHandler)
- print(f'Aurora Deli backend running at http://{host}:{port}')
- server.serve_forever()
+def run(port: int = DEFAULT_PORT, host: str = "127.0.0.1") -> None:
+    ensure_storage()
+    server = ThreadingHTTPServer((host, port), AuroraDeliHandler)
+    print(f"Aurora Deli backend running at http://{host}:{port}")
+    server.serve_forever()
 
 
-if __name__ == '__main__':
- deployment_port = int(os.environ.get('PORT', os.environ.get('AURORA_DELI_PORT', DEFAULT_PORT)))
- deployment_host = os.environ.get('AURORA_DELI_HOST', '0.0.0.0' if os.environ.get('PORT') else '127.0.0.1')
- run(deployment_port, deployment_host)
+if __name__ == "__main__":
+    try:
+        deployment_port = int(os.environ.get("PORT", os.environ.get("AURORA_DELI_PORT", DEFAULT_PORT)))
+    except ValueError as exc:
+        raise SystemExit("PORT or AURORA_DELI_PORT must be an integer") from exc
+    deployment_host = os.environ.get(
+        "AURORA_DELI_HOST",
+        "0.0.0.0" if os.environ.get("PORT") else "127.0.0.1",
+    )
+    run(deployment_port, deployment_host)

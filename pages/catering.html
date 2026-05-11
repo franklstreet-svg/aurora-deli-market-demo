@@ -210,6 +210,7 @@
     </div>
   </footer>
 
+  <script src="../assets/js/business-api.js"></script>
   <script>
     const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
     const taxRate = 0.08265;
@@ -280,7 +281,8 @@
         notes: document.getElementById('event-notes').value.trim()
       };
       try {
-        const response = await fetch('/api/catering', {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/catering') : '/api/catering';
+        const response = await fetch(apiPath, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(requestBody)

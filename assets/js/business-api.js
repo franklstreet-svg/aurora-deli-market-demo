@@ -1,10 +1,22 @@
 (function () {
+  function apiBase() {
+    const meta = document.querySelector('meta[name="aurora-deli-api-base"]');
+    const configured = window.AURORA_DELI_API_BASE || (meta && meta.content) || localStorage.getItem('auroraDeliApiBase') || '';
+    return String(configured).replace(/\/+$/, '');
+  }
+
+  function apiURL(path) {
+    if (/^https?:\/\//i.test(path)) return path;
+    const base = apiBase();
+    return base ? `${base}${path}` : path;
+  }
+
   function money(value) {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(value || 0);
   }
 
   async function getJSON(path) {
-    const response = await fetch(path);
+    const response = await fetch(apiURL(path));
     if (!response.ok) throw new Error('Request failed');
     return response.json();
   }
@@ -51,5 +63,9 @@
     hydrateReports();
     hydrateAdmin();
   });
-})();
 
+  window.AuroraDeliAPI = {
+    url: apiURL,
+    getJSON
+  };
+})();

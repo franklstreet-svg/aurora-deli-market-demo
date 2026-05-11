@@ -234,6 +234,7 @@
     </div>
   </footer>
 
+  <script src="../assets/js/business-api.js"></script>
   <script>
     const cart = new Map();
     const taxRate = 0.08265;
@@ -313,7 +314,8 @@
         price: item.price
       }));
       try {
-        const response = await fetch('/api/orders', {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/orders') : '/api/orders';
+        const response = await fetch(apiPath, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ customer_name: name, phone, pickup_time: pickup, notes, type: 'pickup', items })
