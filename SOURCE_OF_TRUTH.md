@@ -1,10 +1,10 @@
-# Aurora Deli & Market Source Of Truth
+# PurBlum Source Of Truth
 
-Last updated: May 10, 2026 - purblum.com domain connection guidance
+Last updated: May 11, 2026 - Phase 1 PurBlum rebrand complete
 
 ## Core Architecture
 
-Aurora Deli & Market is a standalone customer-owned and customer-operated business website and operations system.
+PurBlum is a standalone customer-owned and customer-operated business website and operations system.
 
 It is not connected to Orbi yet. It is not an Orbi-owned site, not an Orbi runtime, and not an Orbi-controlled business system. Treat it as the realistic customer business environment that existed before buying any outside automation product.
 
@@ -25,6 +25,7 @@ Do not touch Orbi core brain code while working in this project. Do not add Orbi
 
 ## Deployment State
 
+- Phase 1 rebrand status: customer-facing frontend and business display name changed from Aurora Deli to `PurBlum`; functionality, backend routes, API paths, deployment URLs, and local project path were kept unchanged.
 - Frontend: verified live on Vercel at `https://aurora-deli-market-demo.vercel.app`.
 - Planned custom domain: `purblum.com`.
 - Planned `www` custom domain: `www.purblum.com`.
@@ -41,6 +42,7 @@ Do not touch Orbi core brain code while working in this project. Do not add Orbi
 - Current local server command binds to `127.0.0.1` and reads `AURORA_DELI_PORT`, defaulting to `8126`.
 - Backend deployment config: `render.yaml`
 - Frontend/backend API config: same-origin by default; deployed frontend now uses `assets/js/deployment-config.js` to set `window.AURORA_DELI_API_BASE` to the verified Render backend URL.
+- Current live Vercel/Render service names still contain the legacy `aurora-deli-market-demo` slug; this is deployment naming only and was intentionally not changed in Phase 1.
 
 ## Current Folders And Files
 
@@ -185,6 +187,44 @@ Minimal backend wiring exists only where it was added safely:
 - `assets/js/deployment-config.js` sets the deployed backend base URL to `https://aurora-deli-market-demo.onrender.com`.
 - Connected pages load `deployment-config.js` before `business-api.js`: order, catering, reports, and admin.
 
+## Phase 1 PurBlum Rebrand
+
+Completed scope:
+
+- Rebranded customer-facing visible frontend text across all 10 HTML pages from Aurora Deli / Aurora Deli & Market to `PurBlum`.
+- Updated page titles, meta descriptions, header brand labels, footer labels, aria homepage labels, catering confirmation text, and the visible brand mark from `A` to `P`.
+- Updated `data/business_settings.json` business display name to `PurBlum`.
+- Kept deli/market/catering operations language where it describes the business type or products.
+- Kept backend routes, API paths, order ID prefixes, deployment service names, Render URL, Vercel URL, and `AURORA_DELI_API_BASE` internal variable names unchanged to avoid breaking deployment behavior.
+
+Files changed in Phase 1:
+
+- `index.html`
+- `pages/menu.html`
+- `pages/order.html`
+- `pages/catering.html`
+- `pages/inventory.html`
+- `pages/staff.html`
+- `pages/messages.html`
+- `pages/reports.html`
+- `pages/settings.html`
+- `pages/admin.html`
+- `data/business_settings.json`
+- `SOURCE_OF_TRUTH.md`
+
+Phase 1 verification:
+
+- `python3 -m py_compile backend/server.py backend/storage.py backend/__init__.py` passed.
+- `node --check assets/js/business-api.js` and `node --check assets/js/deployment-config.js` passed.
+- Local link/asset resolver passed across all 10 HTML files.
+- Customer-facing forbidden wording scan passed across all 10 HTML files.
+- Customer-facing old-brand scan passed across all 10 HTML files and `data/business_settings.json`.
+- Local HTTP checks returned `200 OK` for all 10 HTML pages and `assets/css/styles.css` on port `8126`.
+- Local `/api/settings` returned `"business_name": "PurBlum"`.
+- Local backend server was stopped after testing; port `8126` was confirmed not listening.
+- Live Render `/health` returned HTTP 200 JSON.
+- Git diff review confirmed Phase 1 changes are limited to frontend HTML, `data/business_settings.json`, and this source-of-truth file.
+
 ## Live Deployment Verification Guidance
 
 Render backend:
@@ -217,7 +257,7 @@ Custom domain connection for `purblum.com`:
 Vercel dashboard steps:
 
 1. Open Vercel dashboard.
-2. Open the Aurora Deli project that currently serves `https://aurora-deli-market-demo.vercel.app`.
+2. Open the PurBlum project that currently serves `https://aurora-deli-market-demo.vercel.app`.
 3. Go to `Settings` -> `Domains`.
 4. Add `purblum.com`.
 5. Add `www.purblum.com`.
@@ -267,7 +307,7 @@ Expected propagation:
 
 Expected final behavior:
 
-- `https://purblum.com` should serve the Aurora Deli Vercel frontend.
+- `https://purblum.com` should serve the PurBlum Vercel frontend.
 - `https://www.purblum.com` should also work if both domains are added in Vercel.
 - One of root or `www` should be configured as the primary domain in Vercel, with the other redirecting to it to avoid duplicate content.
 

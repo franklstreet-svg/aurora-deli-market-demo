@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Catering | Aurora Deli & Market</title>
-  <meta name="description" content="Catering requests for Aurora Deli & Market tray packages, platters, breakfast, and lunch events.">
+  <title>Catering | PurBlum</title>
+  <meta name="description" content="Catering requests for PurBlum tray packages, platters, breakfast, and lunch events.">
   <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="../index.html" aria-label="Aurora Deli & Market homepage">
-      <span class="brand-mark">A</span>
-      <span><strong>Aurora Deli & Market</strong><small>Catering requests</small></span>
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Catering requests</small></span>
     </a>
     <nav class="main-nav" aria-label="Primary navigation">
       <a href="../index.html">Home</a>
@@ -200,7 +200,7 @@
 
   <footer class="site-footer">
     <div>
-      <strong>Aurora Deli & Market</strong>
+      <strong>PurBlum</strong>
       <p>Catering requests are reviewed by the store team before confirmation.</p>
     </div>
     <div class="footer-links">
@@ -290,9 +290,9 @@
         });
         if (!response.ok) throw new Error('Catering request failed');
         const data = await response.json();
-        status.textContent = `Catering request ${data.catering_request.id} saved for review. Aurora Deli will call back to confirm timing and menu details.`;
+        status.textContent = `Catering request ${data.catering_request.id} saved for review. PurBlum will call back to confirm timing and menu details.`;
       } catch (error) {
-        status.textContent = 'Catering request saved for review. Aurora Deli will call back to confirm timing and menu details.';
+        status.textContent = 'Catering request saved for review. PurBlum will call back to confirm timing and menu details.';
       }
       status.className = 'order-status success';
     });
