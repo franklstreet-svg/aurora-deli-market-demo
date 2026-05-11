@@ -245,6 +245,7 @@ Completed May 11, 2026:
 - Confirmed the PurBlum Vercel deployment source is the GitHub repo root for `https://github.com/franklstreet-svg/aurora-deli-market-demo`; there is no separate local `dist`, `public`, `vercel.json`, or build output folder in this project.
 - Identified the remaining live issue: the storefront refocus existed locally but had not yet been committed and pushed to `origin/main`, so Vercel could still serve the previous committed version after refresh.
 - Cleaned `assets/js/business-api.js` so public order/catering pages no longer load report/admin hydration code.
+- Pushed deploy-source fix to GitHub `origin/main` in commit `d2eb090` (`Refocus PurBlum public storefront navigation`) so Vercel can redeploy the public UI fix.
 
 Files changed in live public UI source fix:
 
