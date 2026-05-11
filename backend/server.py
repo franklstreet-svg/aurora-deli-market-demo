@@ -646,12 +646,14 @@ def ensure_storage() -> None:
     marker.touch(exist_ok=True)
 
 
-def run(port: int = DEFAULT_PORT) -> None:
-    ensure_storage()
-    server = ThreadingHTTPServer(("127.0.0.1", port), AuroraDeliHandler)
-    print(f"Aurora Deli backend running at http://127.0.0.1:{port}")
-    server.serve_forever()
+def run(port: int = DEFAULT_PORT, host: str = '127.0.0.1') -> None:
+ ensure_storage()
+ server = ThreadingHTTPServer((host, port), AuroraDeliHandler)
+ print(f'Aurora Deli backend running at http://{host}:{port}')
+ server.serve_forever()
 
 
-if __name__ == "__main__":
-    run(int(os.environ.get("AURORA_DELI_PORT", DEFAULT_PORT)))
+if __name__ == '__main__':
+ deployment_port = int(os.environ.get('PORT', os.environ.get('AURORA_DELI_PORT', DEFAULT_PORT)))
+ deployment_host = os.environ.get('AURORA_DELI_HOST', '0.0.0.0' if os.environ.get('PORT') else '127.0.0.1')
+ run(deployment_port, deployment_host)
