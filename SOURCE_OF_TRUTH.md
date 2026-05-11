@@ -1,6 +1,6 @@
 # PurBlum Source Of Truth
 
-Last updated: May 11, 2026 - Phase 1 PurBlum rebrand complete
+Last updated: May 11, 2026 - Public storefront deploy source fixed
 
 ## Core Architecture
 
@@ -9,6 +9,8 @@ PurBlum is a standalone customer-owned and customer-operated business website an
 It is not connected to Orbi yet. It is not an Orbi-owned site, not an Orbi runtime, and not an Orbi-controlled business system. Treat it as the realistic customer business environment that existed before buying any outside automation product.
 
 Do not touch Orbi core brain code while working in this project. Do not add Orbi, AI, receptionist, controller, scan, scanning, setup, or powered wording to customer-facing pages.
+
+Current public website scope: storefront home, menu/products, pickup order request, catering request, contact/location/hours, customer help, and safe public availability language only. Internal business OS pages remain in the repo for future gated/admin products, but they are removed from public navigation and visually gated when opened directly.
 
 ## Exact Project Root
 
@@ -76,6 +78,7 @@ aurora_deli_market_demo/
   pages/
     admin.html
     catering.html
+    contact.html
     inventory.html
     menu.html
     messages.html
@@ -174,18 +177,91 @@ ss -tlnp | grep 8126
 
 ## Frontend Connection State
 
-The site still loads as a static storefront and operations UI.
+The site now loads as a static public storefront. Internal operations pages still exist in the repo, but they are not public storefront surfaces.
 
 Minimal backend wiring exists only where it was added safely:
 
 - `pages/order.html` submits demo orders to `/api/orders` when the backend is available, with static fallback behavior if unavailable.
 - `pages/catering.html` submits catering requests to `/api/catering` when the backend is available, with static fallback behavior if unavailable.
-- `pages/reports.html` uses `assets/js/business-api.js` to hydrate report summary values from `/api/reports` when available.
-- `pages/admin.html` uses `assets/js/business-api.js` to hydrate backend status details from `/api/system-status` when available.
+- `pages/reports.html` and `pages/admin.html` remain in the repo, but are visually gated as private workspace pages and no longer hydrate internal APIs while gated.
 - `assets/js/business-api.js` exposes `window.AuroraDeliAPI.url(path)` and `window.AuroraDeliAPI.getJSON(path)`.
 - `pages/order.html` and `pages/catering.html` now use the shared API URL helper while keeping local same-origin fallback.
 - `assets/js/deployment-config.js` sets the deployed backend base URL to `https://aurora-deli-market-demo.onrender.com`.
 - Connected pages load `deployment-config.js` before `business-api.js`: order, catering, reports, and admin.
+
+## Public Storefront Refocus
+
+Completed May 11, 2026:
+
+- Public navigation now exposes only `Home`, `Menu`, `Order`, `Catering`, and `Contact`.
+- Public footer links now expose only customer-facing pages.
+- The homepage business-systems section was replaced with customer help links for menu, pickup order request, catering request, and store contact.
+- Added `pages/contact.html` for customer help, hours, location, phone/email, pickup help, catering help, and public availability questions.
+- Internal pages are not deleted, but are hidden/gated from public UI:
+  - `pages/admin.html`
+  - `pages/settings.html`
+  - `pages/reports.html`
+  - `pages/staff.html`
+  - `pages/messages.html`
+  - `pages/inventory.html`
+- Internal pages now include `noindex,nofollow`, a private-workspace notice, public navigation only, public footer links only, and hidden dashboard `<main>` content for public/direct browser visits.
+- `assets/js/business-api.js` now skips report/admin hydration on gated internal pages so direct public visits do not call internal report/admin status APIs.
+- Backend routes, JSON data, internal modules, and business API behavior were not deleted. They remain available for future gated admin/business product work.
+
+Files changed in public storefront refocus:
+
+- `index.html`
+- `pages/menu.html`
+- `pages/order.html`
+- `pages/catering.html`
+- `pages/contact.html`
+- `pages/inventory.html`
+- `pages/staff.html`
+- `pages/messages.html`
+- `pages/reports.html`
+- `pages/settings.html`
+- `pages/admin.html`
+- `assets/css/styles.css`
+- `assets/js/business-api.js`
+- `SOURCE_OF_TRUTH.md`
+
+Public storefront refocus verification:
+
+- Public header/footer scan passed: no public header/footer links to `admin`, `settings`, `reports`, `staff`, `messages`, or `inventory`.
+- Local link/asset resolver passed across all HTML pages.
+- `node --check assets/js/business-api.js` passed.
+- `python3 -m py_compile backend/server.py backend/storage.py` passed.
+- HTTP checks on temporary port `8128` returned `200 OK` for `/`, `pages/menu.html`, `pages/order.html`, `pages/catering.html`, `pages/contact.html`, and `assets/css/styles.css`.
+- Temporary server on port `8128` was stopped after testing.
+- `ss -tlnp` confirmed port `8128` was not listening after shutdown.
+- Generated `__pycache__` folders were removed after compile checks.
+
+## Live Public UI Source Fix
+
+Completed May 11, 2026:
+
+- Inspected the PurBlum project source at `/home/frank/projects/ORBI_AI_SOLUTIONS/Orbi_AI_ChatBrain/aurora_deli_market_demo`.
+- Inspected the Orbi marketing export at `/home/frank/projects/bridge_website_factory/13_EXPORTS/orbi_ai/live`; that folder is the Orbi AI Solutions marketing site, not the PurBlum storefront deploy source.
+- Confirmed the PurBlum Vercel deployment source is the GitHub repo root for `https://github.com/franklstreet-svg/aurora-deli-market-demo`; there is no separate local `dist`, `public`, `vercel.json`, or build output folder in this project.
+- Identified the remaining live issue: the storefront refocus existed locally but had not yet been committed and pushed to `origin/main`, so Vercel could still serve the previous committed version after refresh.
+- Cleaned `assets/js/business-api.js` so public order/catering pages no longer load report/admin hydration code.
+
+Files changed in live public UI source fix:
+
+- `assets/js/business-api.js`
+- `SOURCE_OF_TRUTH.md`
+- `/home/frank/projects/ORBI_AI_SOLUTIONS/ORBI_HANDOFF.md`
+
+Verification:
+
+- Source public HTML scan passed: no `href` links or visible nav/footer tabs for `admin`, `settings`, `reports`, `staff`, `messages`, or `inventory` in `index.html`, `pages/menu.html`, `pages/order.html`, `pages/catering.html`, or `pages/contact.html`.
+- Source public HTML/JS scan passed for internal UI words; the only remaining public-page matches were `POST` request methods in order/catering scripts, a false positive for the `POS` substring.
+- `node --check assets/js/business-api.js` passed.
+- `node --check assets/js/deployment-config.js` passed.
+- `python3 -m py_compile backend/server.py backend/storage.py` passed.
+- Local link/asset resolver passed across all HTML pages.
+- Temporary static server on port `8128` returned `200 OK` for `/`, `pages/menu.html`, `pages/order.html`, `pages/catering.html`, `pages/contact.html`, and `assets/js/business-api.js`.
+- Temporary server was stopped; `ss -tlnp` confirmed no listener on `8128`.
 
 ## Phase 1 PurBlum Rebrand
 

@@ -459,6 +459,143 @@ dd {
   text-decoration: underline;
 }
 
+.public-link-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.contact-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: 36px;
+  align-items: center;
+  padding: 54px clamp(20px, 6vw, 76px);
+  background: #f7f1e7;
+}
+
+.contact-hero h1 {
+  margin: 10px 0 14px;
+  max-width: 760px;
+  font-size: clamp(2.3rem, 5vw, 4.6rem);
+  line-height: 0.98;
+  color: #18382d;
+}
+
+.contact-hero p {
+  max-width: 680px;
+  color: #4f625b;
+  font-size: 1.05rem;
+}
+
+.contact-hero img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(20, 40, 32, 0.16);
+}
+
+.contact-grid,
+.help-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.contact-card,
+.help-grid article,
+.contact-form {
+  background: #fffaf1;
+  border: 1px solid rgba(38, 88, 71, 0.14);
+  border-radius: 8px;
+  padding: 22px;
+  box-shadow: 0 12px 28px rgba(20, 40, 32, 0.08);
+}
+
+.contact-card h2,
+.help-grid h3 {
+  margin: 10px 0 8px;
+  color: #18382d;
+}
+
+.contact-card p,
+.help-grid p {
+  color: #52645e;
+}
+
+.compact-hours {
+  padding: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.help-grid a {
+  display: inline-flex;
+  margin-top: 10px;
+  color: #265847;
+  font-weight: 800;
+}
+
+.contact-form-section {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 7px;
+  color: #30443c;
+  font-weight: 800;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid rgba(38, 88, 71, 0.22);
+  border-radius: 8px;
+  padding: 12px 13px;
+  color: #18382d;
+  background: #ffffff;
+  font: inherit;
+}
+
+.internal-gated-page main {
+  display: none;
+}
+
+.internal-access-notice {
+  min-height: 58vh;
+  display: grid;
+  align-content: center;
+  gap: 16px;
+  padding: 64px 5vw;
+  background:
+    linear-gradient(90deg, rgba(255, 250, 241, 0.96), rgba(255, 250, 241, 0.82)),
+    url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1400&q=80") center/cover;
+}
+
+.internal-access-notice h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4.2rem);
+  line-height: 1;
+  color: #18382d;
+}
+
+.internal-access-notice p {
+  max-width: 660px;
+  margin: 0;
+  color: #52645e;
+  font-size: 1.05rem;
+}
+
 .menu-hero {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
@@ -2904,7 +3041,9 @@ dd {
   .order-hero,
   .order-layout,
   .catering-hero,
+  .contact-hero,
   .catering-layout,
+  .contact-form-section,
   .inventory-hero,
   .inventory-alerts,
   .staff-hero,
@@ -2955,6 +3094,8 @@ dd {
   .order-card-grid,
   .package-grid,
   .catering-options-grid,
+  .contact-grid,
+  .help-grid,
   .summary-grid,
   .alert-grid,
   .supplier-strip,
@@ -3068,6 +3209,7 @@ dd {
   .menu-hero,
   .order-hero,
   .catering-hero,
+  .contact-hero,
   .inventory-hero,
   .staff-hero,
   .crm-hero,
@@ -3122,6 +3264,8 @@ dd {
   .simple-menu,
   .market-grid,
   .catering-grid,
+  .contact-grid,
+  .help-grid,
   .order-card-grid {
     grid-template-columns: 1fr;
   }
@@ -3129,6 +3273,7 @@ dd {
   .menu-hero h1,
   .order-hero h1,
   .catering-hero h1,
+  .contact-hero h1,
   .inventory-hero h1,
   .staff-hero h1,
   .crm-hero h1,
@@ -3140,6 +3285,9 @@ dd {
   .form-row,
   .package-grid,
   .catering-options-grid,
+  .contact-form-section,
+  .contact-grid,
+  .help-grid,
   .summary-grid,
   .alert-grid,
   .supplier-strip,
