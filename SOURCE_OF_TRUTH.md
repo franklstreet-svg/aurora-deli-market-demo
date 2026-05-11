@@ -1,6 +1,6 @@
 # Aurora Deli & Market Source Of Truth
 
-Last updated: May 10, 2026 - live deployment verification guidance
+Last updated: May 10, 2026 - Vercel frontend verified against Render backend
 
 ## Core Architecture
 
@@ -25,12 +25,15 @@ Do not touch Orbi core brain code while working in this project. Do not add Orbi
 
 ## Deployment State
 
-- Frontend: deployed to Vercel and appears live.
+- Frontend: verified live on Vercel at `https://aurora-deli-market-demo.vercel.app`.
 - Backend: verified live on Render at `https://aurora-deli-market-demo.onrender.com`.
 - Current Render issue addressed in code: backend now reads Render `PORT` first and binds to `0.0.0.0` when `PORT` is present.
 - Render `/health` verified with HTTP 200 JSON.
 - Render `/api/system-status` verified with HTTP 200 JSON.
 - Render CORS preflight to `/api/orders` verified with HTTP 204.
+- Live Vercel pages verified with HTTP 200: order, catering, reports, and admin.
+- Live Vercel connected pages load `assets/js/deployment-config.js` before `assets/js/business-api.js`.
+- Live Vercel to Render API verification created order `ADM-1004` and catering request `CAT-2204`.
 - Local backend port: `8126`
 - Current local server command binds to `127.0.0.1` and reads `AURORA_DELI_PORT`, defaulting to `8126`.
 - Backend deployment config: `render.yaml`
@@ -198,26 +201,29 @@ Render backend:
 
 Vercel frontend:
 
+- Verified production URL: `https://aurora-deli-market-demo.vercel.app`
 - No Vercel environment variable is required for the current static deployment.
 - Static frontend backend URL is committed in `assets/js/deployment-config.js`.
 - If the Render URL changes, update `assets/js/deployment-config.js`, then commit and push.
 - If replacing static config with Vercel environment variables later, add a real build-time injection step first; plain static HTML will not consume Vercel environment variables by itself.
 - After Vercel redeploys from GitHub, verify the connected pages load `assets/js/deployment-config.js` before `assets/js/business-api.js`.
 
-Final deployment checklist:
+Final deployment checklist status:
 
-1. Confirm GitHub `main` contains the latest deployment commit.
-2. Confirm Render redeployed from GitHub `main`.
-3. Check `https://aurora-deli-market-demo.onrender.com/health`.
-4. Check `https://aurora-deli-market-demo.onrender.com/api/system-status`.
-5. Check CORS preflight for `/api/orders` from the frontend origin.
-6. Confirm Vercel redeployed from GitHub `main`.
-7. Open Vercel frontend order page and submit a test pickup order.
-8. Open Vercel frontend catering page and submit a test catering request.
-9. Open Vercel reports page and confirm metrics hydrate from Render.
-10. Open Vercel admin page and confirm backend status details hydrate from Render.
-11. Confirm no Orbi/AI/receptionist/controller wording appears in customer-facing pages.
-12. Record the Vercel production URL here once provided or verified.
+1. Confirm GitHub `main` contains the latest deployment commit - done.
+2. Confirm Render redeployed from GitHub `main` - done.
+3. Check `https://aurora-deli-market-demo.onrender.com/health` - done, HTTP 200 JSON.
+4. Check `https://aurora-deli-market-demo.onrender.com/api/system-status` - done, HTTP 200 JSON.
+5. Check CORS preflight for `/api/orders` from the frontend origin - done, HTTP 204.
+6. Confirm Vercel redeployed from GitHub `main` - done; production pages return HTTP 200.
+7. Open Vercel frontend order page and submit a test pickup order - API equivalent done with Vercel origin; created `ADM-1004`.
+8. Open Vercel frontend catering page and submit a test catering request - API equivalent done with Vercel origin; created `CAT-2204`.
+9. Open Vercel reports page and confirm metrics hydrate from Render - page scripts verified and `/api/reports` returned live data from Render.
+10. Open Vercel admin page and confirm backend status details hydrate from Render - page scripts verified and `/api/system-status` returned live data from Render.
+11. Confirm no Orbi/AI/receptionist/controller wording appears in customer-facing pages - done.
+12. Record the Vercel production URL here once provided or verified - done: `https://aurora-deli-market-demo.vercel.app`.
+
+Note: local browser automation was not available in this environment (`playwright` and `puppeteer` are not installed). Verification used live HTTP page fetches, live frontend asset checks, CORS preflight, and live Render API calls with `Origin: https://aurora-deli-market-demo.vercel.app`.
 
 ## Files Changed In Deployment Readiness Pass
 
@@ -268,6 +274,15 @@ Deployment readiness verification completed:
 - Live Render CORS preflight to `/api/orders` returned HTTP 204 with expected allow headers.
 - `assets/js/deployment-config.js` syntax check passed.
 - Connected page asset resolver passed after adding deployment config script tags.
+- Live Vercel production URL verified: `https://aurora-deli-market-demo.vercel.app`.
+- Live Vercel pages returned HTTP 200 for order, catering, reports, and admin.
+- Live Vercel `assets/js/deployment-config.js` returns the verified Render backend URL.
+- Live order page contains `deployment-config.js`, `business-api.js`, and configurable `/api/orders` submit logic.
+- Live catering, reports, and admin pages contain the expected deployment/backend scripts.
+- Live Render order create from Vercel origin succeeded and persisted as `ADM-1004`.
+- Live Render catering create from Vercel origin succeeded and persisted as `CAT-2204`.
+- Live Render reports API returned updated report data.
+- Live Render system-status API confirmed orders and catering counts after live verification.
 
 ## Current Known Deployment Issue
 
@@ -278,13 +293,11 @@ Inspect and fix only when explicitly requested:
 - Render usually provides `PORT`.
 - Current code reads `PORT`, then `AURORA_DELI_PORT`, then defaults to `8126`.
 - Current code binds `0.0.0.0` when `PORT` exists and `127.0.0.1` for local default runs.
-- Remaining deployment verification is browser-checking the Vercel production frontend against the verified Render backend and recording the exact Vercel URL.
+- Remaining deployment verification: optional manual visual browser pass on the Vercel production site. Automated browser tooling was not installed locally.
 
 ## Next Steps
 
-1. Commit and push live deployment verification/config updates to `origin main`.
-2. Confirm Vercel redeploys from GitHub `main`.
-3. Browser-test the Vercel order, catering, reports, and admin pages against `https://aurora-deli-market-demo.onrender.com`.
-4. Record the exact Vercel production URL after it is provided or verified.
-5. Keep all customer-facing pages free of Orbi/AI/receptionist/controller language.
-6. Do not connect this project to Orbi until an explicit external attach phase begins.
+1. Commit and push this final frontend verification source-of-truth update to `origin main`.
+2. Optionally run a manual visual browser pass on `https://aurora-deli-market-demo.vercel.app`.
+3. Keep all customer-facing pages free of Orbi/AI/receptionist/controller language.
+4. Do not connect this project to Orbi until an explicit external attach phase begins.
