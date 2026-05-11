@@ -1,6 +1,6 @@
 # Aurora Deli & Market Source Of Truth
 
-Last updated: May 10, 2026 - Vercel frontend verified against Render backend
+Last updated: May 10, 2026 - purblum.com domain connection guidance
 
 ## Core Architecture
 
@@ -26,6 +26,9 @@ Do not touch Orbi core brain code while working in this project. Do not add Orbi
 ## Deployment State
 
 - Frontend: verified live on Vercel at `https://aurora-deli-market-demo.vercel.app`.
+- Planned custom domain: `purblum.com`.
+- Planned `www` custom domain: `www.purblum.com`.
+- Custom domain connection status: manual Vercel and GoDaddy steps still required.
 - Backend: verified live on Render at `https://aurora-deli-market-demo.onrender.com`.
 - Current Render issue addressed in code: backend now reads Render `PORT` first and binds to `0.0.0.0` when `PORT` is present.
 - Render `/health` verified with HTTP 200 JSON.
@@ -202,11 +205,71 @@ Render backend:
 Vercel frontend:
 
 - Verified production URL: `https://aurora-deli-market-demo.vercel.app`
+- Planned production custom domains: `https://purblum.com` and `https://www.purblum.com`
 - No Vercel environment variable is required for the current static deployment.
 - Static frontend backend URL is committed in `assets/js/deployment-config.js`.
 - If the Render URL changes, update `assets/js/deployment-config.js`, then commit and push.
 - If replacing static config with Vercel environment variables later, add a real build-time injection step first; plain static HTML will not consume Vercel environment variables by itself.
 - After Vercel redeploys from GitHub, verify the connected pages load `assets/js/deployment-config.js` before `assets/js/business-api.js`.
+
+Custom domain connection for `purblum.com`:
+
+Vercel dashboard steps:
+
+1. Open Vercel dashboard.
+2. Open the Aurora Deli project that currently serves `https://aurora-deli-market-demo.vercel.app`.
+3. Go to `Settings` -> `Domains`.
+4. Add `purblum.com`.
+5. Add `www.purblum.com`.
+6. In the Vercel domain settings, choose which domain is primary:
+   - Recommended: make `purblum.com` primary and redirect `www.purblum.com` to it.
+   - Acceptable alternative: make `www.purblum.com` primary and redirect `purblum.com` to it.
+7. Use Vercel's domain screen to verify the exact DNS values. Vercel's current general-purpose values are listed below, but if the dashboard shows project-specific values, use the dashboard values.
+
+Expected GoDaddy DNS records:
+
+| Type | Name / Host | Value / Points to | TTL |
+|------|-------------|-------------------|-----|
+| A | `@` | `76.76.21.21` | Default / 1 hour |
+| CNAME | `www` | `cname.vercel-dns-0.com` | Default / 1 hour |
+
+Important DNS cleanup:
+
+- Remove any conflicting `A`, `AAAA`, or `CNAME` records for `@`.
+- Remove any conflicting `A`, `AAAA`, or `CNAME` records for `www`.
+- Do not change nameservers unless intentionally moving DNS hosting to Vercel.
+- If GoDaddy has CAA records on the domain, allow Let's Encrypt by adding or preserving a CAA record: `0 issue "letsencrypt.org"`.
+
+GoDaddy steps:
+
+1. Sign in to GoDaddy.
+2. Open `My Products`.
+3. Find `purblum.com`.
+4. Open `DNS` or `Manage DNS`.
+5. In `Records`, edit or add the apex/root record:
+   - Type: `A`
+   - Name: `@`
+   - Value: `76.76.21.21`
+   - TTL: default or 1 hour
+6. Edit or add the `www` record:
+   - Type: `CNAME`
+   - Name: `www`
+   - Value: `cname.vercel-dns-0.com`
+   - TTL: default or 1 hour
+7. Save the DNS changes.
+8. Return to Vercel `Settings` -> `Domains` and click refresh/check if available.
+
+Expected propagation:
+
+- Often visible in 5-30 minutes.
+- Can take up to 24-48 hours depending on DNS cache and previous records.
+- Vercel SSL certificate provisioning usually starts automatically after DNS verifies and typically completes within a few minutes.
+
+Expected final behavior:
+
+- `https://purblum.com` should serve the Aurora Deli Vercel frontend.
+- `https://www.purblum.com` should also work if both domains are added in Vercel.
+- One of root or `www` should be configured as the primary domain in Vercel, with the other redirecting to it to avoid duplicate content.
 
 Final deployment checklist status:
 
@@ -222,6 +285,10 @@ Final deployment checklist status:
 10. Open Vercel admin page and confirm backend status details hydrate from Render - page scripts verified and `/api/system-status` returned live data from Render.
 11. Confirm no Orbi/AI/receptionist/controller wording appears in customer-facing pages - done.
 12. Record the Vercel production URL here once provided or verified - done: `https://aurora-deli-market-demo.vercel.app`.
+13. Add `purblum.com` and `www.purblum.com` in Vercel project domain settings - manual step pending.
+14. Add GoDaddy DNS records for apex and `www` - manual step pending.
+15. Verify Vercel marks both custom domains valid and provisions SSL - manual step pending.
+16. Test `https://purblum.com` and `https://www.purblum.com` after propagation - manual step pending.
 
 Note: local browser automation was not available in this environment (`playwright` and `puppeteer` are not installed). Verification used live HTTP page fetches, live frontend asset checks, CORS preflight, and live Render API calls with `Origin: https://aurora-deli-market-demo.vercel.app`.
 
@@ -283,6 +350,7 @@ Deployment readiness verification completed:
 - Live Render catering create from Vercel origin succeeded and persisted as `CAT-2204`.
 - Live Render reports API returned updated report data.
 - Live Render system-status API confirmed orders and catering counts after live verification.
+- Vercel custom-domain DNS guidance recorded for `purblum.com`.
 
 ## Current Known Deployment Issue
 
@@ -294,10 +362,15 @@ Inspect and fix only when explicitly requested:
 - Current code reads `PORT`, then `AURORA_DELI_PORT`, then defaults to `8126`.
 - Current code binds `0.0.0.0` when `PORT` exists and `127.0.0.1` for local default runs.
 - Remaining deployment verification: optional manual visual browser pass on the Vercel production site. Automated browser tooling was not installed locally.
+- Remaining custom-domain work: manually add `purblum.com` and `www.purblum.com` to the Vercel project, update GoDaddy DNS, wait for propagation, then verify both HTTPS domains.
 
 ## Next Steps
 
 1. Commit and push this final frontend verification source-of-truth update to `origin main`.
-2. Optionally run a manual visual browser pass on `https://aurora-deli-market-demo.vercel.app`.
-3. Keep all customer-facing pages free of Orbi/AI/receptionist/controller language.
-4. Do not connect this project to Orbi until an explicit external attach phase begins.
+2. Add `purblum.com` and `www.purblum.com` to the Vercel project.
+3. Add the required DNS records in GoDaddy.
+4. Wait for DNS propagation and Vercel SSL provisioning.
+5. Verify `https://purblum.com` and `https://www.purblum.com`.
+6. Optionally run a manual visual browser pass on `https://aurora-deli-market-demo.vercel.app` and the custom domain.
+7. Keep all customer-facing pages free of Orbi/AI/receptionist/controller language.
+8. Do not connect this project to Orbi until an explicit external attach phase begins.
