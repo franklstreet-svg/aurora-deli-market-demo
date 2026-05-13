@@ -131,7 +131,76 @@
       <a href="order.html">Order</a>
       <a href="catering.html">Catering</a>
       <a href="contact.html">Contact</a>
+      <button class="business-login-link" type="button" id="business-login-open">Business Login</button>
     </div>
   </footer>
+
+  <div class="business-login-modal" id="business-login-modal" hidden>
+    <div class="business-login-card" role="dialog" aria-modal="true" aria-labelledby="business-login-title">
+      <button class="business-login-close" type="button" id="business-login-close" aria-label="Close business login">x</button>
+      <p class="eyebrow">Private access</p>
+      <h2 id="business-login-title">Business Login</h2>
+      <form id="business-login-form">
+        <label>
+          Role
+          <select id="business-login-role">
+            <option value="owner">Owner</option>
+            <option value="manager">Manager</option>
+            <option value="staff">Staff</option>
+          </select>
+        </label>
+        <label>
+          Access code
+          <input type="password" id="business-login-code" autocomplete="current-password" required>
+        </label>
+        <button class="place-order-btn" type="submit">Enter Private Workspace</button>
+        <p class="order-status" id="business-login-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script src="../assets/js/business-auth.js"></script>
+  <script>
+    const loginModal = document.getElementById('business-login-modal');
+    const loginStatus = document.getElementById('business-login-status');
+
+    document.getElementById('business-login-open').addEventListener('click', () => {
+      loginModal.hidden = false;
+      document.getElementById('business-login-code').focus();
+    });
+
+    document.getElementById('business-login-close').addEventListener('click', () => {
+      loginModal.hidden = true;
+      loginStatus.textContent = '';
+    });
+
+    document.getElementById('business-login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      loginStatus.textContent = 'Checking access...';
+      loginStatus.className = 'order-status';
+      try {
+        await window.PurBlumBusinessAuth.login(
+          document.getElementById('business-login-role').value,
+          document.getElementById('business-login-code').value
+        );
+        window.location.href = 'orders-dashboard.html';
+      } catch (error) {
+        loginStatus.textContent = 'Business login was not accepted.';
+        loginStatus.className = 'order-status warning';
+      }
+    });
+  </script>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
 </body>
 </html>

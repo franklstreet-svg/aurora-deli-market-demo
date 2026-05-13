@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Private Orders Dashboard | PurBlum</title>
+  <meta name="description" content="Private PurBlum order status dashboard for store staff.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="private-backend-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Private order desk</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="private-hero">
+      <p class="eyebrow">Private workspace</p>
+      <h1>Order intake dashboard</h1>
+      <p>Review pickup requests and move orders through New, Accepted, Ready, Completed, Canceled, or Rejected.</p>
+    </section>
+
+    <section class="private-dashboard">
+      <div class="private-session-bar">
+        <span id="private-session-label">Private order desk</span>
+        <div>
+          <a class="private-owner-link" id="tax-settings-link" href="tax-settings.html" hidden>Tax & Fee Settings</a>
+          <button type="button" id="business-logout">Log Out</button>
+        </div>
+      </div>
+      <div class="order-status-board" id="order-status-board" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script src="../assets/js/business-auth.js"></script>
+  <script>
+    if (!window.PurBlumBusinessAuth.requireAccess('orders:read')) {
+      throw new Error('Business login required');
+    }
+
+    const statusLabels = {
+      new: 'New',
+      accepted: 'Accepted',
+      ready: 'Ready',
+      completed: 'Completed',
+      canceled: 'Canceled',
+      rejected: 'Rejected'
+    };
+
+    async function apiJSON(path, options) {
+      const url = window.AuroraDeliAPI ? window.AuroraDeliAPI.url(path) : path;
+      const nextOptions = Object.assign({}, options || {});
+      nextOptions.headers = window.PurBlumBusinessAuth.headers(nextOptions.headers);
+      const response = await fetch(url, nextOptions);
+      if (!response.ok) throw new Error('Request failed');
+      return response.json();
+    }
+
+    function money(value) {
+      return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value || 0);
+    }
+
+    async function updateStatus(orderId, status) {
+      await apiJSON(`/api/orders/${orderId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      loadDashboard();
+    }
+
+    function renderOrder(order) {
+      const items = (order.items || []).map((item) => {
+        const notes = item.modifiers || item.notes ? ` <small>${item.modifiers || item.notes}</small>` : '';
+        return `<li>${item.quantity} x ${item.name}${notes}</li>`;
+      }).join('');
+      const choices = Object.keys(statusLabels).map((status) => {
+        return `<option value="${status}" ${order.status === status ? 'selected' : ''}>${statusLabels[status]}</option>`;
+      }).join('');
+      return `
+        <article class="private-order-card">
+          <div>
+            <strong>${order.id}</strong>
+            <span>${order.customer_name || 'Customer'} · ${order.pickup_time || 'No pickup time'}</span>
+          </div>
+          <ul>${items}</ul>
+          <p>${order.notes || 'No order notes'}</p>
+          <div class="private-order-foot">
+            <span>${order.estimate_message || 'Subtotal before taxes/fees.'}</span>
+            <strong>${money(order.total || order.subtotal)}</strong>
+          </div>
+          <label>Status
+            <select data-order-id="${order.id}">
+              ${choices}
+            </select>
+          </label>
+        </article>`;
+    }
+
+    async function loadDashboard() {
+      const board = document.getElementById('order-status-board');
+      try {
+        const data = await apiJSON('/api/orders-dashboard');
+        const dashboard = data.dashboard;
+        board.innerHTML = dashboard.status_order.map((status) => {
+          const orders = dashboard.orders_by_status[status] || [];
+          return `
+            <section class="order-status-column">
+              <h2>${statusLabels[status]} <span>${orders.length}</span></h2>
+              ${orders.length ? orders.map(renderOrder).join('') : '<p class="empty-cart">No orders in this status.</p>'}
+            </section>`;
+        }).join('');
+      } catch (error) {
+        board.innerHTML = '<p class="order-status warning">Order dashboard is unavailable.</p>';
+      }
+    }
+
+    document.getElementById('order-status-board').addEventListener('change', (event) => {
+      if (!event.target.matches('select[data-order-id]')) return;
+      updateStatus(event.target.dataset.orderId, event.target.value);
+    });
+
+    document.getElementById('business-logout').addEventListener('click', () => {
+      window.PurBlumBusinessAuth.logout();
+      window.location.href = 'contact.html';
+    });
+
+    const session = window.PurBlumBusinessAuth.getSession();
+    if (session) {
+      document.getElementById('private-session-label').textContent = `${session.display_name || session.role} · ${session.role}`;
+    }
+    if (window.PurBlumBusinessAuth.has('tax_settings:read')) {
+      document.getElementById('tax-settings-link').hidden = false;
+    }
+
+    loadDashboard();
+  </script>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
+</body>
+</html>

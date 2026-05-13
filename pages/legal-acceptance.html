@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Legal Acceptance Gate | Orbi</title>
+  <meta name="description" content="Legal acceptance gate required before onboarding or setup can continue.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="legal-gate-page">
+  <main>
+    <section class="legal-hero">
+      <p class="eyebrow">Required before setup</p>
+      <h1>Legal Acceptance Gate</h1>
+      <p class="legal-note-warning">Acceptance required before setup continues.</p>
+      <p>Review the plain-English summary and the full legal terms. Setup cannot continue unless every required acknowledgement is accepted.</p>
+    </section>
+
+    <section class="section legal-layout">
+      <aside class="legal-summary-card" aria-labelledby="aurora-summary-heading">
+        <p class="eyebrow">Aurora summary</p>
+        <h2 id="aurora-summary-heading">Plain-English explanation</h2>
+        <p>Aurora can summarize the terms, but the full legal text controls. In simple terms:</p>
+        <ul id="legal-summary-list"></ul>
+      </aside>
+
+      <article class="legal-terms-card" aria-labelledby="legal-terms-heading">
+        <div class="section-head">
+          <h2 id="legal-terms-heading">Full Legal Terms</h2>
+          <span class="status-pill warning">Acceptance required</span>
+        </div>
+        <div id="legal-terms-content" class="legal-terms-content" aria-live="polite">
+          <p>Loading legal terms...</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section legal-acceptance-panel" aria-labelledby="legal-acceptance-heading">
+      <div>
+        <p class="eyebrow">Electronic acceptance</p>
+        <h2 id="legal-acceptance-heading">Accept before continuing</h2>
+        <p>All acknowledgements are required before onboarding/setup can continue.</p>
+      </div>
+      <form id="legal-acceptance-form" class="legal-acceptance-form">
+        <div class="form-row">
+          <label>
+            Owner full name
+            <input type="text" id="legal-name" autocomplete="name" required>
+          </label>
+          <label>
+            Business name
+            <input type="text" id="legal-business" autocomplete="organization" required>
+          </label>
+          <label>
+            Owner email
+            <input type="email" id="legal-email" autocomplete="email" required>
+          </label>
+          <label>
+            Phone
+            <input type="tel" id="legal-phone" autocomplete="tel">
+          </label>
+          <label>
+            Business website
+            <input type="text" id="legal-website" inputmode="url" autocomplete="url" placeholder="purblum.com or https://purblum.com">
+          </label>
+          <label>
+            Selected product/module
+            <input type="text" id="legal-product-module" placeholder="Website Controller, Receptionist, Bundle">
+          </label>
+        </div>
+        <label class="legal-checkbox"><input type="checkbox" data-legal-key="terms" required> I have read and agree to the Terms of Service.</label>
+        <label class="legal-checkbox"><input type="checkbox" data-legal-key="ai_supervision" required> I understand AI may make mistakes and requires supervision.</label>
+        <label class="legal-checkbox"><input type="checkbox" data-legal-key="business_responsibility" required> I understand my business remains responsible for taxes, pricing, compliance, orders, and operations.</label>
+        <label class="legal-checkbox"><input type="checkbox" data-legal-key="no_professional_advice" required> I understand Orbi does not provide legal, tax, financial, or professional advice.</label>
+        <label class="legal-checkbox"><input type="checkbox" data-legal-key="liability_electronic_acceptance" required> I agree to the liability limitations and electronic acceptance.</label>
+        <div class="legal-actions">
+          <button type="submit" class="btn primary">Accept and Continue</button>
+          <button type="button" class="btn secondary" id="decline-legal">Decline</button>
+        </div>
+        <p id="legal-status" class="order-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const requestedNext = params.get('next') || 'setup.html';
+    const nextPath = /^[a-z0-9-]+\.html$/i.test(requestedNext) ? requestedNext : 'setup.html';
+    const onboardingSessionId = params.get('session_id') || window.localStorage.getItem('orbiOnboardingSessionId') || crypto.randomUUID();
+    const summaryList = document.getElementById('legal-summary-list');
+    const termsContent = document.getElementById('legal-terms-content');
+    const legalStatus = document.getElementById('legal-status');
+
+    function apiURL(path) {
+      return window.AuroraDeliAPI ? window.AuroraDeliAPI.url(path) : path;
+    }
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    function renderTerms(terms) {
+      summaryList.innerHTML = terms.plain_english_summary.map((item) => `<li>${escapeHTML(item)}</li>`).join('');
+      termsContent.innerHTML = terms.sections.map((section) => `
+        <section class="legal-term-section">
+          <h3>${escapeHTML(section.heading)}</h3>
+          <p>${escapeHTML(section.body)}</p>
+        </section>`).join('');
+    }
+
+    async function loadTerms() {
+      try {
+        const response = await fetch(apiURL('/api/legal-terms'));
+        if (!response.ok) throw new Error('Terms unavailable');
+        const data = await response.json();
+        renderTerms(data.legal_terms);
+      } catch (error) {
+        termsContent.innerHTML = '<p class="order-status warning">Legal terms are unavailable. Setup cannot continue.</p>';
+      }
+    }
+
+    function prefillFromParams() {
+      const map = {
+        'legal-name': params.get('owner_name') || params.get('name') || '',
+        'legal-business': params.get('business_name') || '',
+        'legal-email': params.get('owner_email') || params.get('email') || '',
+        'legal-phone': params.get('phone') || '',
+        'legal-website': params.get('website') || '',
+        'legal-product-module': params.get('product') || params.get('module') || ''
+      };
+      Object.entries(map).forEach(([id, value]) => {
+        if (value) document.getElementById(id).value = value;
+      });
+      window.localStorage.setItem('orbiOnboardingSessionId', onboardingSessionId);
+    }
+
+    function payload(decision) {
+      const checkboxes = {};
+      document.querySelectorAll('[data-legal-key]').forEach((input) => {
+        checkboxes[input.dataset.legalKey] = input.checked;
+      });
+      return {
+        owner_full_name: document.getElementById('legal-name').value.trim(),
+        name: document.getElementById('legal-name').value.trim(),
+        business_name: document.getElementById('legal-business').value.trim(),
+        owner_email: document.getElementById('legal-email').value.trim(),
+        phone: document.getElementById('legal-phone').value.trim(),
+        business_website: document.getElementById('legal-website').value.trim(),
+        selected_product_module: document.getElementById('legal-product-module').value.trim(),
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || '',
+        onboarding_session_id: onboardingSessionId,
+        decision,
+        checkboxes
+      };
+    }
+
+    function saveAcceptanceHandoff(record) {
+      const handoff = {
+        acceptance_id: record.acceptance_id,
+        legal_acceptance_id: record.acceptance_id,
+        legal_document_version: record.legal_document_version,
+        legal_text_hash: record.legal_text_hash,
+        legal_acceptance_timestamp: record.timestamp_utc || record.timestamp,
+        owner_full_name: record.owner_full_name || record.name,
+        business_name: record.business_name,
+        owner_email: record.owner_email,
+        phone: record.phone,
+        business_website: record.business_website,
+        onboarding_session_id: record.onboarding_session_id,
+        customer_business_id: record.customer_business_id,
+        selected_product_module: record.selected_product_module
+      };
+      window.localStorage.setItem('orbiLegalAcceptanceId', record.acceptance_id);
+      window.localStorage.setItem('orbiLegalAcceptanceHandoff', JSON.stringify(handoff));
+    }
+
+    document.getElementById('decline-legal').addEventListener('click', async () => {
+      window.localStorage.removeItem('orbiLegalAcceptanceId');
+      window.localStorage.removeItem('orbiLegalAcceptanceHandoff');
+      try {
+        await fetch(apiURL('/api/legal-decline'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload('declined'))
+        });
+      } catch (error) {
+        // Decline still blocks setup even if the evidence write is unavailable.
+      } finally {
+        legalStatus.textContent = 'Thank you for your interest. We cannot continue setup unless the legal terms are accepted.';
+        legalStatus.className = 'order-status warning';
+      }
+    });
+
+    document.getElementById('legal-acceptance-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const body = payload('accepted');
+      legalStatus.textContent = 'Saving legal acceptance...';
+      legalStatus.className = 'order-status';
+      try {
+        const response = await fetch(apiURL('/api/legal-acceptance'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Legal acceptance failed');
+        }
+        const data = await response.json();
+        saveAcceptanceHandoff(data.legal_acceptance);
+        const receiptUrl = apiURL(`/api/legal-acceptance/receipt?acceptance_id=${encodeURIComponent(data.legal_acceptance.acceptance_id)}`);
+        legalStatus.innerHTML = `Legal acceptance saved. <a href="${receiptUrl}" download>Download acceptance receipt</a>. Continuing setup...`;
+        legalStatus.className = 'order-status success';
+        window.location.href = nextPath;
+      } catch (error) {
+        legalStatus.textContent = error.message || 'Legal acceptance could not be saved.';
+        legalStatus.className = 'order-status warning';
+      }
+    });
+
+    prefillFromParams();
+    loadTerms();
+  </script>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
+</body>
+</html>

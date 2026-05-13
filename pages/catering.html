@@ -186,7 +186,9 @@
             <div class="grand-total"><span>Estimated total</span><strong id="catering-total">$0.00</strong></div>
           </div>
 
-          <button type="submit" class="place-order-btn">Submit Catering Request</button>
+          <button type="button" class="place-order-btn" id="review-catering-btn">View Catering Request</button>
+          <button type="submit" class="place-order-btn secondary-catering-submit" id="submit-catering-btn" hidden>Submit Catering Request</button>
+          <div class="catering-review-card" id="catering-review-card" hidden aria-live="polite"></div>
           <p id="catering-status" class="order-status" role="status" aria-live="polite"></p>
         </form>
       </aside>
@@ -245,9 +247,56 @@
       cateringTotal.textContent = currency.format(total);
     }
 
-    document.querySelectorAll('select, input').forEach((field) => {
-      field.addEventListener('input', updateEstimate);
-      field.addEventListener('change', updateEstimate);
+    const reviewButton = document.getElementById('review-catering-btn');
+    const submitButton = document.getElementById('submit-catering-btn');
+    const reviewCard = document.getElementById('catering-review-card');
+
+    function moneyFromText(value) {
+      return Number(String(value).replace(/[^0-9.]/g, '')) || 0;
+    }
+
+    function selectedAddons() {
+      return Array.from(document.querySelectorAll('.addon-option:checked')).map((input) => {
+        return input.parentElement.textContent.trim();
+      });
+    }
+
+    function buildCateringRequestBody() {
+      const selectedPackage = packageSelect.options[packageSelect.selectedIndex].text.split(' - ')[0];
+      const eventDate = document.getElementById('event-date').value;
+      const eventTime = document.getElementById('event-time').value;
+      const serviceValue = document.querySelector('input[name="service"]:checked').value;
+      return {
+        customer_name: document.getElementById('contact-name').value.trim(),
+        phone: document.getElementById('contact-phone').value.trim(),
+        email: document.getElementById('contact-email').value.trim(),
+        package: selectedPackage,
+        guest_count: Number(guestCount.value) || 0,
+        event_time: `${eventDate}T${eventTime}`,
+        service_type: serviceValue === '0' ? 'pickup' : 'delivery',
+        estimated_total: moneyFromText(cateringTotal.textContent),
+        notes: document.getElementById('event-notes').value.trim(),
+        addons: selectedAddons()
+      };
+    }
+
+    function resetReview() {
+      submitButton.hidden = true;
+      reviewCard.hidden = true;
+      reviewCard.innerHTML = '';
+      status.textContent = '';
+      status.className = 'order-status';
+    }
+
+    document.querySelectorAll('select, input, textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        updateEstimate();
+        resetReview();
+      });
+      field.addEventListener('change', () => {
+        updateEstimate();
+        resetReview();
+      });
     });
 
     document.querySelectorAll('.select-package-btn').forEach((button) => {
@@ -256,27 +305,39 @@
         const price = card.getAttribute('data-price');
         packageSelect.value = price;
         updateEstimate();
+        resetReview();
         form.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
+    reviewButton.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      const request = buildCateringRequestBody();
+      const addons = request.addons.length ? request.addons.join(', ') : 'No add-ons selected';
+      reviewCard.innerHTML = `
+        <h3>Review catering request</h3>
+        <p><strong>Package:</strong> ${request.package}</p>
+        <p><strong>Guests:</strong> ${request.guest_count}</p>
+        <p><strong>Add-ons:</strong> ${addons}</p>
+        <p><strong>Service:</strong> ${request.service_type}</p>
+        <p><strong>Date/time:</strong> ${request.event_time}</p>
+        <p><strong>Contact:</strong> ${request.customer_name} · ${request.phone} · ${request.email}</p>
+        <p><strong>Estimated total:</strong> ${currency.format(request.estimated_total)}</p>
+        <p><strong>Notes:</strong> ${request.notes || 'None'}</p>
+      `;
+      reviewCard.hidden = false;
+      submitButton.hidden = false;
+      status.textContent = 'Review the catering request, then submit it when ready.';
+      status.className = 'order-status success';
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      const selectedPackage = packageSelect.options[packageSelect.selectedIndex].text.split(' - ')[0];
-      const eventDate = document.getElementById('event-date').value;
-      const eventTime = document.getElementById('event-time').value;
-      const serviceValue = document.querySelector('input[name="service"]:checked').value;
-      const requestBody = {
-        customer_name: document.getElementById('contact-name').value.trim(),
-        phone: document.getElementById('contact-phone').value.trim(),
-        email: document.getElementById('contact-email').value.trim(),
-        package: selectedPackage,
-        guest_count: Number(guestCount.value) || 0,
-        event_time: `${eventDate}T${eventTime}`,
-        service_type: serviceValue === '0' ? 'pickup' : 'delivery',
-        estimated_total: Number(cateringTotal.textContent.replace(/[^0-9.]/g, '')) || 0,
-        notes: document.getElementById('event-notes').value.trim()
-      };
+      if (submitButton.hidden) {
+        reviewButton.click();
+        return;
+      }
+      const requestBody = buildCateringRequestBody();
       try {
         const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/catering') : '/api/catering';
         const response = await fetch(apiPath, {
@@ -286,14 +347,32 @@
         });
         if (!response.ok) throw new Error('Catering request failed');
         const data = await response.json();
-        status.textContent = `Catering request ${data.catering_request.id} saved for review. PurBlum will call back to confirm timing and menu details.`;
+        status.textContent = `Catering request ${data.catering_request.id} submitted. PurBlum will call back to confirm timing and menu details.`;
       } catch (error) {
-        status.textContent = 'Catering request saved for review. PurBlum will call back to confirm timing and menu details.';
+        status.textContent = 'Catering request could not be submitted online. Please call PurBlum to confirm.';
+        status.className = 'order-status warning';
+        return;
       }
       status.className = 'order-status success';
+      form.reset();
+      guestCount.value = 25;
+      updateEstimate();
+      submitButton.hidden = true;
+      reviewCard.hidden = true;
     });
 
     updateEstimate();
   </script>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
 </body>
 </html>

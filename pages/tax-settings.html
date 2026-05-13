@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Private Tax & Fee Settings | PurBlum</title>
+  <meta name="description" content="Owner-only tax and fee settings for PurBlum order estimates.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="private-backend-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Private tax settings</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="private-hero">
+      <p class="eyebrow">Owner-only workspace</p>
+      <h1>Tax and fee settings</h1>
+      <p>Manually configure sales tax, local tax, service fees, and delivery fees used by order estimates.</p>
+    </section>
+
+    <section class="private-dashboard">
+      <div class="private-session-bar">
+        <span id="private-session-label">Owner settings</span>
+        <div>
+          <a class="private-owner-link" href="orders-dashboard.html">Orders Dashboard</a>
+          <button type="button" id="business-logout">Log Out</button>
+        </div>
+      </div>
+      <form class="tax-settings-form" id="tax-settings-form">
+        <label><input type="checkbox" id="tax-enabled"> Enable taxes and fees in order estimates</label>
+        <label>Sales tax percentage <input type="number" min="0" step="0.001" id="sales-tax"></label>
+        <label>City/local tax percentage <input type="number" min="0" step="0.001" id="local-tax"></label>
+        <label><input type="checkbox" id="service-fee-enabled"> Enable service fee</label>
+        <label>Service fee <input type="number" min="0" step="0.01" id="service-fee"></label>
+        <label><input type="checkbox" id="delivery-fee-enabled"> Enable delivery fee</label>
+        <label>Delivery fee <input type="number" min="0" step="0.01" id="delivery-fee"></label>
+        <button type="submit" class="place-order-btn">Save Tax Settings</button>
+        <p id="tax-settings-status" class="order-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script src="../assets/js/business-auth.js"></script>
+  <script>
+    if (!window.PurBlumBusinessAuth.requireAccess('tax_settings:read')) {
+      throw new Error('Business login required');
+    }
+
+    async function apiJSON(path, options) {
+      const url = window.AuroraDeliAPI ? window.AuroraDeliAPI.url(path) : path;
+      const nextOptions = Object.assign({}, options || {});
+      nextOptions.headers = window.PurBlumBusinessAuth.headers(nextOptions.headers);
+      const response = await fetch(url, nextOptions);
+      if (!response.ok) throw new Error('Request failed');
+      return response.json();
+    }
+
+    function fill(settings) {
+      document.getElementById('tax-enabled').checked = Boolean(settings.enabled);
+      document.getElementById('sales-tax').value = settings.sales_tax_percent || 0;
+      document.getElementById('local-tax').value = settings.local_tax_percent || 0;
+      document.getElementById('service-fee-enabled').checked = Boolean(settings.service_fee_enabled);
+      document.getElementById('service-fee').value = settings.service_fee || 0;
+      document.getElementById('delivery-fee-enabled').checked = Boolean(settings.delivery_fee_enabled);
+      document.getElementById('delivery-fee').value = settings.delivery_fee || 0;
+    }
+
+    async function loadSettings() {
+      try {
+        const data = await apiJSON('/api/tax-settings');
+        fill(data.tax_settings);
+      } catch (error) {
+        document.getElementById('tax-settings-status').textContent = 'Tax settings are unavailable.';
+        document.getElementById('tax-settings-status').className = 'order-status warning';
+      }
+    }
+
+    document.getElementById('tax-settings-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = document.getElementById('tax-settings-status');
+      const payload = {
+        enabled: document.getElementById('tax-enabled').checked,
+        sales_tax_percent: Number(document.getElementById('sales-tax').value || 0),
+        local_tax_percent: Number(document.getElementById('local-tax').value || 0),
+        service_fee_enabled: document.getElementById('service-fee-enabled').checked,
+        service_fee: Number(document.getElementById('service-fee').value || 0),
+        delivery_fee_enabled: document.getElementById('delivery-fee-enabled').checked,
+        delivery_fee: Number(document.getElementById('delivery-fee').value || 0)
+      };
+      try {
+        const data = await apiJSON('/api/tax-settings', {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+        });
+        fill(data.tax_settings);
+        status.textContent = 'Tax and fee settings saved.';
+        status.className = 'order-status success';
+      } catch (error) {
+        status.textContent = 'Tax settings could not be saved.';
+        status.className = 'order-status warning';
+      }
+    });
+
+    document.getElementById('business-logout').addEventListener('click', () => {
+      window.PurBlumBusinessAuth.logout();
+      window.location.href = 'contact.html';
+    });
+
+    const session = window.PurBlumBusinessAuth.getSession();
+    if (session) {
+      document.getElementById('private-session-label').textContent = `${session.display_name || session.role} · ${session.role}`;
+    }
+
+    loadSettings();
+  </script>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
+</body>
+</html>

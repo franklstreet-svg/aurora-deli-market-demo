@@ -60,7 +60,7 @@
             <span class="tag">Best seller</span>
             <h3>Sierra Turkey Club</h3>
             <p>Roasted turkey, bacon, avocado, tomato, romaine, and pepper aioli on toasted sourdough.</p>
-            <div class="product-foot"><strong>$12.95</strong><a href="order.html">Order Online</a></div>
+            <div class="product-foot"><strong>$12.95</strong><a href="order.html?add=sandwich-sierra-turkey">Add to Order</a></div>
           </div>
         </article>
         <article class="product-card">
@@ -68,7 +68,7 @@
           <div class="product-body">
             <h3>Truckee Italian</h3>
             <p>Genoa salami, capicola, ham, provolone, shredded lettuce, onion, oil, vinegar, and oregano.</p>
-            <div class="product-foot"><strong>$13.50</strong><a href="order.html">Order Online</a></div>
+            <div class="product-foot"><strong>$13.50</strong><a href="order.html?add=sandwich-truckee-italian">Add to Order</a></div>
           </div>
         </article>
         <article class="product-card">
@@ -84,7 +84,7 @@
           <div class="product-body">
             <h3>Reno Roast Beef</h3>
             <p>Rare roast beef, horseradish cream, Swiss, pickled red onion, arugula, and deli mustard.</p>
-            <div class="product-foot"><strong>$14.25</strong><a href="order.html">Order Online</a></div>
+            <div class="product-foot"><strong>$14.25</strong><a href="order.html?add=sandwich-roast-beef">Add to Order</a></div>
           </div>
         </article>
       </div>
@@ -116,7 +116,7 @@
       <div class="product-grid compact-products">
         <article class="product-card">
           <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80" alt="Colorful chopped salad">
-          <div class="product-body"><h3>Market Chopped Salad</h3><p>Romaine, cucumber, tomato, chickpeas, provolone, salami, olives, and red wine vinaigrette.</p><div class="product-foot"><strong>$11.75</strong><a href="order.html">Order Online</a></div></div>
+          <div class="product-body"><h3>Market Chopped Salad</h3><p>Romaine, cucumber, tomato, chickpeas, provolone, salami, olives, and red wine vinaigrette.</p><div class="product-foot"><strong>$11.75</strong><a href="order.html?add=salad-market-chopped">Add to Order</a></div></div>
         </article>
         <article class="product-card">
           <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=80" alt="Green salad with vegetables">
@@ -124,7 +124,7 @@
         </article>
         <article class="product-card">
           <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=900&q=80" alt="Pasta salad with vegetables">
-          <div class="product-body"><h3>Deli Pasta Salad</h3><p>Rotini, roasted peppers, mozzarella pearls, olives, parsley, and house Italian dressing.</p><div class="product-foot"><strong>Pint $6.50</strong><a href="order.html">Order Online</a></div></div>
+          <div class="product-body"><h3>Deli Pasta Salad</h3><p>Rotini, roasted peppers, mozzarella pearls, olives, parsley, and house Italian dressing.</p><div class="product-foot"><strong>Pint $6.50</strong><a href="order.html?add=side-pasta-salad">Add to Order</a></div></div>
         </article>
       </div>
     </section>
@@ -140,7 +140,7 @@
           <div><span>Cold brew coffee</span><strong>$4.75</strong></div>
           <div><span>Fresh orange juice</span><strong>$5.25</strong></div>
         </div>
-        <a class="btn primary" href="order.html">Add Drinks to Order</a>
+        <a class="btn primary" href="order.html?add=drink-house-tea">Add Drinks to Order</a>
       </div>
       <img src="https://images.unsplash.com/photo-1581006852262-e4307cf6283a?auto=format&fit=crop&w=900&q=80" alt="Cold bottled drinks in a market cooler">
     </section>
@@ -187,5 +187,16 @@
       <a href="contact.html">Contact</a>
     </div>
   </footer>
+
+  <script>
+    window.ORBY_CONFIG = {
+      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
+      apiUrl: "http://127.0.0.1:8070",
+      stage: "sales",
+      qaMode: true
+    };
+  </script>
+  <script src="../assets/js/orbi-widget.js"></script>
+
 </body>
 </html>
