@@ -22,10 +22,22 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Italian roll", "price_delta": 0},
-                {"label": "Sourdough", "price_delta": 0},
-                {"label": "Wheat", "price_delta": 0},
-                {"label": "Gluten-free", "price_delta": 1.50}
+                {
+                  "label": "Italian roll",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sourdough",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Wheat",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Gluten-free",
+                  "price_delta": 1.5
+                }
               ]
             },
             {
@@ -33,25 +45,55 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Half (6-inch)", "price_delta": 0},
-                {"label": "Whole (12-inch)", "price_delta": 4.00}
+                {
+                  "label": "Half (6-inch)",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Whole (12-inch)",
+                  "price_delta": 4.0
+                }
               ]
             },
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Lettuce", "Tomato", "Onion", "Banana peppers", "Oil & vinegar"]
+              "defaults_on": [
+                "Lettuce",
+                "Tomato",
+                "Onion",
+                "Banana peppers",
+                "Oil & vinegar"
+              ]
             },
             {
               "name": "Add extras",
               "type": "multi",
               "options": [
-                {"label": "Extra meat", "price_delta": 3.00},
-                {"label": "Bacon", "price_delta": 1.75},
-                {"label": "Avocado", "price_delta": 2.00},
-                {"label": "Jalapeños", "price_delta": 0.50},
-                {"label": "Pesto", "price_delta": 0.75},
-                {"label": "Toasted", "price_delta": 0}
+                {
+                  "label": "Extra meat",
+                  "price_delta": 3.0
+                },
+                {
+                  "label": "Bacon",
+                  "price_delta": 1.75
+                },
+                {
+                  "label": "Avocado",
+                  "price_delta": 2.0
+                },
+                {
+                  "label": "Jalape\u00f1os",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Pesto",
+                  "price_delta": 0.75
+                },
+                {
+                  "label": "Toasted",
+                  "price_delta": 0
+                }
               ]
             },
             {
@@ -59,51 +101,109 @@
               "type": "single",
               "required": false,
               "options": [
-                {"label": "Provolone (standard)", "price_delta": 0},
-                {"label": "Add cheddar", "price_delta": 1.00},
-                {"label": "Add Swiss", "price_delta": 1.00},
-                {"label": "Add pepper jack", "price_delta": 1.00},
-                {"label": "No cheese", "price_delta": -0.50}
+                {
+                  "label": "Provolone (standard)",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Add cheddar",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Add Swiss",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Add pepper jack",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "No cheese",
+                  "price_delta": -0.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "sub-turkey-club",
           "name": "Sierra Turkey Club",
           "description": "Roast turkey, bacon, Swiss, lettuce, tomato, avocado, garlic aioli on toasted sourdough.",
-          "base_price": 12.50,
+          "base_price": 12.5,
           "modifier_groups": [
             {
               "name": "Bread",
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Sourdough", "price_delta": 0},
-                {"label": "Wheat", "price_delta": 0},
-                {"label": "White", "price_delta": 0},
-                {"label": "Croissant", "price_delta": 1.00},
-                {"label": "Gluten-free", "price_delta": 1.50}
+                {
+                  "label": "Sourdough",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Wheat",
+                  "price_delta": 0
+                },
+                {
+                  "label": "White",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Croissant",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Gluten-free",
+                  "price_delta": 1.5
+                }
               ]
             },
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Bacon", "Swiss", "Lettuce", "Tomato", "Avocado", "Garlic aioli", "Toasted"]
+              "defaults_on": [
+                "Bacon",
+                "Swiss",
+                "Lettuce",
+                "Tomato",
+                "Avocado",
+                "Garlic aioli",
+                "Toasted"
+              ]
             },
             {
               "name": "Add extras",
               "type": "multi",
               "options": [
-                {"label": "Extra turkey", "price_delta": 2.50},
-                {"label": "Extra bacon", "price_delta": 1.75},
-                {"label": "Cranberry sauce", "price_delta": 0.50},
-                {"label": "Stuffing (Thanksgiving mode)", "price_delta": 1.00},
-                {"label": "Pickles", "price_delta": 0},
-                {"label": "Red onion", "price_delta": 0}
+                {
+                  "label": "Extra turkey",
+                  "price_delta": 2.5
+                },
+                {
+                  "label": "Extra bacon",
+                  "price_delta": 1.75
+                },
+                {
+                  "label": "Cranberry sauce",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Stuffing (Thanksgiving mode)",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Pickles",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Red onion",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1550507992-eb63ffee0847?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "sub-melt",
@@ -112,32 +212,62 @@
           "base_price": 9.75,
           "modifier_groups": [
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Cheddar", "Swiss", "Provolone", "Butter"]
+              "defaults_on": [
+                "Cheddar",
+                "Swiss",
+                "Provolone",
+                "Butter"
+              ]
             },
             {
               "name": "Add protein",
               "type": "single",
               "required": false,
               "options": [
-                {"label": "No protein", "price_delta": 0},
-                {"label": "Add bacon", "price_delta": 2.00},
-                {"label": "Add ham", "price_delta": 2.50},
-                {"label": "Add turkey", "price_delta": 2.50}
+                {
+                  "label": "No protein",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Add bacon",
+                  "price_delta": 2.0
+                },
+                {
+                  "label": "Add ham",
+                  "price_delta": 2.5
+                },
+                {
+                  "label": "Add turkey",
+                  "price_delta": 2.5
+                }
               ]
             },
             {
               "name": "Add extras",
               "type": "multi",
               "options": [
-                {"label": "Tomato", "price_delta": 0},
-                {"label": "Caramelized onion", "price_delta": 1.00},
-                {"label": "Jalapeños", "price_delta": 0.50},
-                {"label": "Pesto", "price_delta": 0.75}
+                {
+                  "label": "Tomato",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Caramelized onion",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Jalape\u00f1os",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Pesto",
+                  "price_delta": 0.75
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1528736235302-52922df5c122?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "sub-roast-beef",
@@ -150,29 +280,63 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "French roll", "price_delta": 0},
-                {"label": "Sourdough", "price_delta": 0},
-                {"label": "Wheat", "price_delta": 0},
-                {"label": "Gluten-free", "price_delta": 1.50}
+                {
+                  "label": "French roll",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sourdough",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Wheat",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Gluten-free",
+                  "price_delta": 1.5
+                }
               ]
             },
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Cheddar", "Horseradish cream", "Lettuce", "Tomato", "Red onion"]
+              "defaults_on": [
+                "Cheddar",
+                "Horseradish cream",
+                "Lettuce",
+                "Tomato",
+                "Red onion"
+              ]
             },
             {
               "name": "Add extras",
               "type": "multi",
               "options": [
-                {"label": "Extra beef", "price_delta": 3.50},
-                {"label": "Au jus on the side", "price_delta": 0.75},
-                {"label": "Swiss instead of cheddar", "price_delta": 0},
-                {"label": "Avocado", "price_delta": 2.00},
-                {"label": "Toasted", "price_delta": 0}
+                {
+                  "label": "Extra beef",
+                  "price_delta": 3.5
+                },
+                {
+                  "label": "Au jus on the side",
+                  "price_delta": 0.75
+                },
+                {
+                  "label": "Swiss instead of cheddar",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Avocado",
+                  "price_delta": 2.0
+                },
+                {
+                  "label": "Toasted",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1567234669003-dce7a7a88821?auto=format&fit=crop&w=700&q=80"
         }
       ]
     },
@@ -191,20 +355,36 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Cup", "price_delta": 0},
-                {"label": "Bowl", "price_delta": 3.00}
+                {
+                  "label": "Cup",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Bowl",
+                  "price_delta": 3.0
+                }
               ]
             },
             {
               "name": "Add",
               "type": "multi",
               "options": [
-                {"label": "Crackers", "price_delta": 0},
-                {"label": "Extra parmesan", "price_delta": 0.50},
-                {"label": "Side bread", "price_delta": 1.50}
+                {
+                  "label": "Crackers",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Extra parmesan",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Side bread",
+                  "price_delta": 1.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "soup-chicken-rice",
@@ -217,19 +397,32 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Cup", "price_delta": 0},
-                {"label": "Bowl", "price_delta": 3.25}
+                {
+                  "label": "Cup",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Bowl",
+                  "price_delta": 3.25
+                }
               ]
             },
             {
               "name": "Add",
               "type": "multi",
               "options": [
-                {"label": "Crackers", "price_delta": 0},
-                {"label": "Side bread", "price_delta": 1.50}
+                {
+                  "label": "Crackers",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Side bread",
+                  "price_delta": 1.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "soup-potato",
@@ -242,25 +435,45 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Cup", "price_delta": 0},
-                {"label": "Bowl", "price_delta": 3.50}
+                {
+                  "label": "Cup",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Bowl",
+                  "price_delta": 3.5
+                }
               ]
             },
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Bacon", "Cheddar", "Scallion"]
+              "defaults_on": [
+                "Bacon",
+                "Cheddar",
+                "Scallion"
+              ]
             },
             {
               "name": "Add",
               "type": "multi",
               "options": [
-                {"label": "Extra bacon", "price_delta": 1.50},
-                {"label": "Extra cheese", "price_delta": 1.00},
-                {"label": "Crackers", "price_delta": 0}
+                {
+                  "label": "Extra bacon",
+                  "price_delta": 1.5
+                },
+                {
+                  "label": "Extra cheese",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Crackers",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=700&q=80"
         }
       ]
     },
@@ -279,26 +492,57 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Regular", "price_delta": 0},
-                {"label": "Large", "price_delta": 3.50}
+                {
+                  "label": "Regular",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Large",
+                  "price_delta": 3.5
+                }
               ]
             },
             {
-              "name": "Comes with — uncheck to remove",
+              "name": "Comes with \u2014 uncheck to remove",
               "type": "remove",
-              "defaults_on": ["Cucumber", "Tomato", "Chickpeas", "Provolone", "Salami", "Olives"]
+              "defaults_on": [
+                "Cucumber",
+                "Tomato",
+                "Chickpeas",
+                "Provolone",
+                "Salami",
+                "Olives"
+              ]
             },
             {
               "name": "Dressing",
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Red wine vinaigrette", "price_delta": 0},
-                {"label": "Ranch", "price_delta": 0},
-                {"label": "Balsamic", "price_delta": 0},
-                {"label": "Caesar", "price_delta": 0},
-                {"label": "Italian", "price_delta": 0},
-                {"label": "Dressing on the side", "price_delta": 0}
+                {
+                  "label": "Red wine vinaigrette",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Ranch",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Balsamic",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Caesar",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Italian",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Dressing on the side",
+                  "price_delta": 0
+                }
               ]
             },
             {
@@ -306,14 +550,30 @@
               "type": "single",
               "required": false,
               "options": [
-                {"label": "No protein", "price_delta": 0},
-                {"label": "Add grilled chicken", "price_delta": 4.50},
-                {"label": "Add turkey", "price_delta": 4.00},
-                {"label": "Add tuna salad", "price_delta": 4.00},
-                {"label": "Add avocado", "price_delta": 2.00}
+                {
+                  "label": "No protein",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Add grilled chicken",
+                  "price_delta": 4.5
+                },
+                {
+                  "label": "Add turkey",
+                  "price_delta": 4.0
+                },
+                {
+                  "label": "Add tuna salad",
+                  "price_delta": 4.0
+                },
+                {
+                  "label": "Add avocado",
+                  "price_delta": 2.0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "salad-garden",
@@ -326,39 +586,68 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Lemon herb (standard)", "price_delta": 0},
-                {"label": "Ranch", "price_delta": 0},
-                {"label": "Balsamic", "price_delta": 0},
-                {"label": "Dressing on the side", "price_delta": 0}
+                {
+                  "label": "Lemon herb (standard)",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Ranch",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Balsamic",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Dressing on the side",
+                  "price_delta": 0
+                }
               ]
             },
             {
               "name": "Add",
               "type": "multi",
               "options": [
-                {"label": "Grilled chicken", "price_delta": 4.50},
-                {"label": "Avocado", "price_delta": 2.00},
-                {"label": "Feta", "price_delta": 1.50}
+                {
+                  "label": "Grilled chicken",
+                  "price_delta": 4.5
+                },
+                {
+                  "label": "Avocado",
+                  "price_delta": 2.0
+                },
+                {
+                  "label": "Feta",
+                  "price_delta": 1.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "side-pasta-salad",
           "name": "Deli Pasta Salad",
           "description": "Rotini, roasted peppers, mozzarella pearls, olives, parsley, house Italian dressing.",
-          "base_price": 6.50,
+          "base_price": 6.5,
           "modifier_groups": [
             {
               "name": "Size",
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Pint", "price_delta": 0},
-                {"label": "Quart", "price_delta": 5.50}
+                {
+                  "label": "Pint",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Quart",
+                  "price_delta": 5.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=700&q=80"
         }
       ]
     },
@@ -370,16 +659,25 @@
           "id": "drink-fountain",
           "name": "Fountain Drink",
           "description": "Refillable in-store.",
-          "base_price": 2.50,
+          "base_price": 2.5,
           "modifier_groups": [
             {
               "name": "Size",
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Small (16 oz)", "price_delta": 0},
-                {"label": "Medium (20 oz)", "price_delta": 0.75},
-                {"label": "Large (32 oz)", "price_delta": 1.50}
+                {
+                  "label": "Small (16 oz)",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Medium (20 oz)",
+                  "price_delta": 0.75
+                },
+                {
+                  "label": "Large (32 oz)",
+                  "price_delta": 1.5
+                }
               ]
             },
             {
@@ -387,14 +685,38 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Coke", "price_delta": 0},
-                {"label": "Diet Coke", "price_delta": 0},
-                {"label": "Coke Zero", "price_delta": 0},
-                {"label": "Sprite", "price_delta": 0},
-                {"label": "Dr Pepper", "price_delta": 0},
-                {"label": "Lemonade", "price_delta": 0},
-                {"label": "Iced tea (unsweetened)", "price_delta": 0},
-                {"label": "Iced tea (sweet)", "price_delta": 0}
+                {
+                  "label": "Coke",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Diet Coke",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Coke Zero",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sprite",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Dr Pepper",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Lemonade",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Iced tea (unsweetened)",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Iced tea (sweet)",
+                  "price_delta": 0
+                }
               ]
             },
             {
@@ -402,17 +724,27 @@
               "type": "single",
               "required": false,
               "options": [
-                {"label": "Normal ice", "price_delta": 0},
-                {"label": "Light ice", "price_delta": 0},
-                {"label": "No ice", "price_delta": 0}
+                {
+                  "label": "Normal ice",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Light ice",
+                  "price_delta": 0
+                },
+                {
+                  "label": "No ice",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "drink-bottled",
           "name": "Bottled Drink",
-          "description": "Cooler selection — water, sparkling, kombucha, juice.",
+          "description": "Cooler selection \u2014 water, sparkling, kombucha, juice.",
           "base_price": 3.25,
           "modifier_groups": [
             {
@@ -420,14 +752,30 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Bottled water", "price_delta": 0},
-                {"label": "Sparkling water", "price_delta": 0.50},
-                {"label": "Kombucha", "price_delta": 2.00},
-                {"label": "Orange juice", "price_delta": 1.00},
-                {"label": "Apple juice", "price_delta": 0.75}
+                {
+                  "label": "Bottled water",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sparkling water",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Kombucha",
+                  "price_delta": 2.0
+                },
+                {
+                  "label": "Orange juice",
+                  "price_delta": 1.0
+                },
+                {
+                  "label": "Apple juice",
+                  "price_delta": 0.75
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1581006852262-e4307cf6283a?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "drink-coffee",
@@ -440,24 +788,52 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "12 oz", "price_delta": 0},
-                {"label": "16 oz", "price_delta": 0.50},
-                {"label": "20 oz", "price_delta": 1.00}
+                {
+                  "label": "12 oz",
+                  "price_delta": 0
+                },
+                {
+                  "label": "16 oz",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "20 oz",
+                  "price_delta": 1.0
+                }
               ]
             },
             {
               "name": "Add",
               "type": "multi",
               "options": [
-                {"label": "Cream", "price_delta": 0},
-                {"label": "Sugar", "price_delta": 0},
-                {"label": "Oat milk", "price_delta": 0.75},
-                {"label": "Almond milk", "price_delta": 0.75},
-                {"label": "Vanilla syrup", "price_delta": 0.50},
-                {"label": "Caramel syrup", "price_delta": 0.50}
+                {
+                  "label": "Cream",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sugar",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Oat milk",
+                  "price_delta": 0.75
+                },
+                {
+                  "label": "Almond milk",
+                  "price_delta": 0.75
+                },
+                {
+                  "label": "Vanilla syrup",
+                  "price_delta": 0.5
+                },
+                {
+                  "label": "Caramel syrup",
+                  "price_delta": 0.5
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=700&q=80"
         }
       ]
     },
@@ -468,7 +844,7 @@
         {
           "id": "chips-kettle",
           "name": "Tahoe Kettle Chips",
-          "description": "Sea salt, jalapeño, barbecue, or vinegar.",
+          "description": "Sea salt, jalape\u00f1o, barbecue, or vinegar.",
           "base_price": 2.95,
           "modifier_groups": [
             {
@@ -476,37 +852,58 @@
               "type": "single",
               "required": true,
               "options": [
-                {"label": "Sea salt", "price_delta": 0},
-                {"label": "Jalapeño", "price_delta": 0},
-                {"label": "Barbecue", "price_delta": 0},
-                {"label": "Salt & vinegar", "price_delta": 0}
+                {
+                  "label": "Sea salt",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Jalape\u00f1o",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Barbecue",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Salt & vinegar",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "sourdough-loaf",
           "name": "Sourdough Loaf",
           "description": "Local bakery loaf, sliced on request.",
-          "base_price": 7.50,
+          "base_price": 7.5,
           "modifier_groups": [
             {
               "name": "Slicing",
               "type": "single",
               "required": false,
               "options": [
-                {"label": "Whole, unsliced", "price_delta": 0},
-                {"label": "Sliced", "price_delta": 0}
+                {
+                  "label": "Whole, unsliced",
+                  "price_delta": 0
+                },
+                {
+                  "label": "Sliced",
+                  "price_delta": 0
+                }
               ]
             }
-          ]
+          ],
+          "image": "https://images.unsplash.com/photo-1602504289474-6de5118ca4dd?auto=format&fit=crop&w=700&q=80"
         },
         {
           "id": "cookie-box",
           "name": "House Cookie Box",
           "description": "Six rotating bakery cookies packed to go.",
           "base_price": 8.95,
-          "modifier_groups": []
+          "modifier_groups": [],
+          "image": "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80"
         }
       ]
     }
