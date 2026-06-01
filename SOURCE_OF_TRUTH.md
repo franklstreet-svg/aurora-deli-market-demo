@@ -1,6 +1,6 @@
 # PurBlum Source Of Truth
 
-Last updated: May 11, 2026 - Public storefront deploy source fixed
+Last updated: May 11, 2026 - Legal evidence trail, purchase handoff, and refreshed rollback backup added
 
 ## Core Architecture
 
@@ -10,7 +10,32 @@ It is not connected to Orbi yet. It is not an Orbi-owned site, not an Orbi runti
 
 Do not touch Orbi core brain code while working in this project. Do not add Orbi, AI, receptionist, controller, scan, scanning, setup, or powered wording to customer-facing pages.
 
+## Permanent Project Separation
+
+- ShadowBridge is a bridge/relay project only and is not part of Orbi.
+- Orbi AI Solutions is the Orbi platform/system only.
+- PurBlum is a separate customer/test website project only.
+- PurBlum is used to test or demo Orbi externally, but it is not part of the Orbi core system.
+- Orbi files, backups, manifests, and source-of-truth records stay inside `/home/frank/projects/ORBI_AI_SOLUTIONS`.
+- Do not mix backups between Orbi, ShadowBridge, and PurBlum.
+- Do not move Orbi files into ShadowBridge.
+- Do not move PurBlum into Orbi unless Frank explicitly instructs an external attach phase.
+- Keep documentation, backups, manifests, and source-of-truth records separated by project identity.
+
 Current public website scope: storefront home, menu/products, pickup order request, catering request, contact/location/hours, customer help, and safe public availability language only. Internal business OS pages remain in the repo for future gated/admin products, but they are removed from public navigation and visually gated when opened directly.
+
+## Separate Test Project / Not Orbi Core
+- PurBlum is its own separate website project.
+- PurBlum is NOT Orbi.
+- PurBlum is NOT ShadowBridge.
+- PurBlum is NOT the bridge/relay.
+- PurBlum is only a separate customer/test website used to test/demo Orbi.
+- Do not merge PurBlum backups into Orbi backups unless explicitly instructed.
+- Do not treat PurBlum runtime code as Orbi core code.
+- Keep PurBlum documentation/backups separate from Orbi and ShadowBridge.
+- Correct project root: `/home/frank/projects/ORBI_AI_SOLUTIONS/Orbi_AI_ChatBrain/aurora_deli_market_demo`
+- Important runtime paths: `backend/server.py`, `backend/storage.py`, `backend/modules/`, `assets/js/business-api.js`, `pages/`, `data/`, `render.yaml`, and the live static export served by the Orbi project for deployment alignment when needed.
+- Read these first before working on PurBlum: `ORBI_HANDOFF.md`, `ORBI_MASTER_VISION.md`, `00_DOCS/SOURCE_OF_TRUTH.md`, and this file.
 
 ## Exact Project Root
 
@@ -23,7 +48,7 @@ Current public website scope: storefront home, menu/products, pickup order reque
 - GitHub repo: `https://github.com/franklstreet-svg/aurora-deli-market-demo`
 - Local remote: `origin https://github.com/franklstreet-svg/aurora-deli-market-demo.git`
 - Current branch inspected: `main`
-- Working tree inspected before this document update: clean
+- Working tree inspected before this document update: contains the current order/tax module work plus business login access-control changes.
 
 ## Deployment State
 
@@ -46,6 +71,13 @@ Current public website scope: storefront home, menu/products, pickup order reque
 - Frontend/backend API config: same-origin by default; deployed frontend now uses `assets/js/deployment-config.js` to set `window.AURORA_DELI_API_BASE` to the verified Render backend URL.
 - Current live Vercel/Render service names still contain the legacy `aurora-deli-market-demo` slug; this is deployment naming only and was intentionally not changed in Phase 1.
 
+## Rollback Backup
+
+- Refreshed in place: Orbi backup snapshot at `/home/frank/projects/ORBI_AI_SOLUTIONS/.backup/current_orbi_live_system`
+- Historical backup tree `aurora_deli_market_demo/.backup/before_order_flow_fix` was left untouched.
+- Excluded from the refresh: `.git`, `.backup`, `__pycache__`, `*.pyc`, `*.log`, `*.pid`, `node_modules`, `.venv`, `venv`, `logs`, `.pytest_cache`, `tmp`, `*.tmp`
+- Restore verification: `rsync --dry-run` from `.backup/current_live_system/files/` back to the project root produced no file differences.
+
 ## Current Folders And Files
 
 ```text
@@ -58,34 +90,50 @@ aurora_deli_market_demo/
     css/
       styles.css
     js/
+      business-auth.js
       business-api.js
       deployment-config.js
   backend/
     __init__.py
+    modules/
+      __init__.py
+      access_control.py
+      legal_gate.py
+      order_intake.py
+      tax_fee_settings.py
     server.py
     storage.py
   data/
     .gitkeep
     audit_log.json
+    business_users.json
     business_settings.json
     catering_requests.json
     customer_messages.json
     inventory.json
+    legal_acceptances.json
+    legal_terms.json
     orders.json
     products.json
     reports_metrics.json
     staff_schedule.json
+    tax_fee_settings.json
   pages/
     admin.html
     catering.html
     contact.html
+    get-started.html
     inventory.html
+    legal-acceptance.html
     menu.html
     messages.html
     order.html
+    orders-dashboard.html
     reports.html
     settings.html
+    setup.html
     staff.html
+    tax-settings.html
 ```
 
 ## Backend Implementation
@@ -150,10 +198,18 @@ ss -tlnp | grep 8126
 - `GET /api/products`
 - `GET /api/products/{id}`
 - `PATCH /api/products/{id}`
-- `GET /api/orders`
-- `GET /api/orders/{id}`
+- `GET /api/legal-terms`
+- `POST /api/legal-acceptance`
+- `POST /api/legal-decline`
+- `GET /api/legal-acceptance/status`
+- `GET /api/legal-acceptance/receipt`
+- `POST /api/business-login`
+- `GET /api/orders` - business login required
+- `GET /api/orders/{id}` - business login required
+- `GET /api/orders-dashboard` - business login required
+- `POST /api/order-estimate`
 - `POST /api/orders`
-- `PATCH /api/orders/{id}`
+- `PATCH /api/orders/{id}` - business login required
 - `GET /api/catering`
 - `GET /api/catering/{id}`
 - `POST /api/catering`
@@ -170,10 +226,213 @@ ss -tlnp | grep 8126
 - `POST /api/messages`
 - `PATCH /api/messages/{id}`
 - `GET /api/reports`
-- `GET /api/settings`
-- `PATCH /api/settings`
-- `GET /api/audit-log`
+- `GET /api/settings` - business login required
+- `PATCH /api/settings` - owner business login required
+- `GET /api/tax-settings` - owner business login required
+- `PATCH /api/tax-settings` - owner business login required
+- `GET /api/audit-log` - business login required
 - `GET /api/system-status`
+
+## Current UX Flow Status
+
+Completed May 11, 2026:
+
+- Menu page add-to-order links verified.
+- Order page URL auto-add flow verified.
+- Order review flow added before final submit.
+- Catering review flow added before final submit.
+- Business login modal styling added.
+- Business access control module active.
+- Legal onboarding/setup gate active.
+- Tax and fee calculation module active.
+- Public pages remain customer-safe and non-Orbi branded.
+- Internal/admin business pages remain gated from public navigation.
+
+## Legal Acceptance Gate
+
+Completed May 11, 2026:
+
+- Module path: `backend/modules/legal_gate.py`
+- Legal document version: `orbi-terms-2026-05-11`
+- Legal terms metadata path: `data/legal_terms.json`
+- Acceptance records path: `data/legal_acceptances.json`
+- Legal gate page: `pages/legal-acceptance.html`
+- Gate entry route/page: `pages/get-started.html`
+- Setup continuation page: `pages/setup.html`
+- Legal copy is marked with acceptance-required status only.
+- Full legal terms cover acceptance, product nature, AI limitations, customer responsibility, ordering disclaimer, tax/fee responsibility, no professional advice, privacy/customer data, third-party integrations, downtime, limitation of liability, no warranty, indemnification, voice/recording disclosure, owner configuration responsibility, future features, suspension/termination, payment terms, intellectual property, Nevada governing law, arbitration/class action waiver, electronic acceptance, and setup acceptance flow.
+- Aurora-style plain-English summary is shown separately from the full legal terms and does not replace the full terms.
+- Required checkboxes must all be accepted before setup continues.
+- Declining shows: `Thank you for your interest. We cannot continue setup unless the legal terms are accepted.`
+- `pages/setup.html` checks the saved acceptance id through `GET /api/legal-acceptance/status`; without a valid current-version acceptance, setup remains blocked.
+
+API behavior:
+
+- `GET /api/legal-terms` returns the current legal version, plain-English summary, checkbox keys, and full terms sections.
+- `POST /api/legal-acceptance` requires owner full name, business name, owner email, and all checkbox values set to true.
+- `POST /api/legal-decline` saves a declined evidence record and keeps setup blocked.
+- Acceptance records are append-only JSON records. There is no UI overwrite/delete path.
+- Acceptance records save owner full name, business name, owner email, phone, business website, UTC timestamp, timezone, IP address, browser/user-agent, legal document version, exact legal text hash, checkbox values, onboarding session ID, customer/business ID, selected product/module, and a legal document snapshot.
+- `GET /api/legal-acceptance/status?acceptance_id=...` returns accepted status plus legal-to-purchase handoff fields for the current legal document version.
+- `GET /api/legal-acceptance/receipt?acceptance_id=...` returns downloadable JSON proof with the acceptance evidence and accepted legal document snapshot.
+- After acceptance, `pages/legal-acceptance.html` stores `orbiLegalAcceptanceHandoff` in localStorage so downstream purchase/order forms can reuse the owner name, business name, email, phone, website, acceptance ID, onboarding session ID, customer/business ID, selected product/module, legal document version, legal text hash, and acceptance timestamp.
+- `pages/order.html` reads the handoff, prefills customer name/phone/email when available, asks only for missing visible order fields, and links stored orders back to the legal evidence fields.
+
+Files changed for this gate:
+
+- `backend/modules/legal_gate.py`
+- `backend/server.py`
+- `backend/storage.py`
+- `backend/modules/order_intake.py`
+- `data/legal_terms.json`
+- `data/legal_acceptances.json`
+- `data/orders.json`
+- `data/audit_log.json`
+- `pages/legal-acceptance.html`
+- `pages/get-started.html`
+- `pages/setup.html`
+- `pages/order.html`
+- `assets/css/styles.css`
+- `SOURCE_OF_TRUTH.md`
+- `/home/frank/projects/ORBI_AI_SOLUTIONS/ORBI_HANDOFF.md`
+
+Verification:
+
+- `python3 -m py_compile backend/server.py backend/storage.py backend/modules/access_control.py backend/modules/legal_gate.py backend/modules/order_intake.py backend/modules/tax_fee_settings.py` passed.
+- `python3 -m json.tool data/legal_terms.json` and `python3 -m json.tool data/legal_acceptances.json` passed.
+- Inline script syntax checks passed for `pages/legal-acceptance.html`, `pages/setup.html`, and `pages/get-started.html`.
+- Local backend started on `127.0.0.1:8126`; `/health` returned HTTP 200 JSON.
+- `GET /api/legal-terms` returned HTTP 200 with version `orbi-terms-2026-05-11` and 23 legal sections.
+- `GET /api/legal-acceptance/status` without an id returned accepted `false`.
+- `POST /api/legal-acceptance` with missing checkbox acknowledgements returned HTTP 400.
+- `POST /api/legal-acceptance` with all acknowledgements returned HTTP 201 and saved acceptance `LEGAL-E4B291D5283B`.
+- `GET /api/legal-acceptance/status?acceptance_id=LEGAL-E4B291D5283B` returned accepted `true`.
+- Owner-proof update verification: `GET /api/legal-terms` returned legal text hash `b8b6ff1f3af220b93c3c3b402b7d3ac14da5a04158b1fc3bda96c495651aadf7`.
+- Exact typed statement mismatch returned HTTP 400.
+- `POST /api/legal-decline` saved declined evidence record `LEGAL-4EB0CC34072C`.
+- `POST /api/legal-acceptance` saved owner-proof acceptance `LEGAL-3DB29AA8C15C` with owner email, phone, website, timezone, IP/user-agent, typed statement, onboarding session ID, selected module, customer/business ID, legal hash, and document snapshot.
+- `GET /api/legal-acceptance/receipt?acceptance_id=LEGAL-3DB29AA8C15C` returned HTTP 200 JSON with `Content-Disposition: attachment`.
+- Legal-to-order handoff test created order `ADM-1005`; it is marked as test data and links to `LEGAL-3DB29AA8C15C`, legal version, legal hash, timestamp, onboarding session ID, customer/business ID, and selected product/module.
+- HTTP checks returned 200 for legal gate pages, public pages, and CSS.
+- Local link/asset resolver passed across 16 HTML files.
+- Public customer-facing pages still have no links to private/internal/legal setup routes.
+- Local backend was stopped after tests; port `8126` was confirmed closed.
+- Reserved ports `8088`, `8090`, `8091`, and `8095` were not modified.
+
+## Business Login Access Control
+
+Completed May 11, 2026:
+
+- Module path: `backend/modules/access_control.py`
+- User data path: `data/business_users.json`
+- Frontend helper path: `assets/js/business-auth.js`
+- Public access point: a small `Business Login` button exists only in the Contact page footer.
+- Public navigation remains limited to Home, Menu, Order, Catering, and Contact.
+- Business sessions use signed local tokens stored in browser `sessionStorage`; no cookies or external identity provider were added.
+- CORS preflight now allows the `Authorization` header for protected local/API calls.
+
+Roles:
+
+- `owner`: can read/update orders, read/update tax and fee settings, and read/update general business settings.
+- `manager`: can read/update orders and read limited business settings.
+- `staff`: can read/update orders only.
+
+Protected surfaces:
+
+- `pages/orders-dashboard.html` requires `orders:read`.
+- `pages/tax-settings.html` requires `tax_settings:read`; only owner can use it.
+- `pages/settings.html` remains hidden by default and only reveals its private workspace content when the logged-in role has `settings:read`.
+- `GET /api/orders`, `GET /api/orders/{id}`, `GET /api/orders-dashboard`, and `PATCH /api/orders/{id}` require order permissions.
+- `GET /api/tax-settings` and `PATCH /api/tax-settings` require owner tax settings permissions.
+- `GET /api/settings` requires settings read permission; `PATCH /api/settings` requires owner settings update permission.
+
+Verification order state:
+
+- `ADM-1004` remains in `data/orders.json` as explicit test/module verification data.
+- It is marked with `is_test: true` and a `test_note`.
+
+## Order Intake Module And Tax/Fee Settings Module
+
+Completed May 11, 2026:
+
+Order Intake Module:
+
+- Module path: `backend/modules/order_intake.py`
+- Reusable by the public Website Controller flow and future phone intake because it accepts plain JSON order payloads independent of page-specific UI.
+- Captures items, product IDs, quantities, modifiers, item notes, customer name, phone/email, pickup time, order notes, fulfillment type, and source.
+- Calculates subtotal from configured `data/products.json` menu prices. Client-submitted item prices are no longer trusted for server totals.
+- Reads `data/tax_fee_settings.json` through the Tax/Fee module.
+- If tax/fee settings are enabled, returns estimated tax/fees and estimated total.
+- If tax/fee settings are disabled or missing, returns subtotal and the message `Subtotal shown before taxes and fees.`
+- Stores orders in `data/orders.json` with status `new`.
+- Supports staff status updates through `PATCH /api/orders/{id}` with allowed statuses: `new`, `accepted`, `ready`, `completed`, `canceled`, `rejected`.
+- Private order dashboard page: `pages/orders-dashboard.html`.
+
+Tax & Fee Settings Module:
+
+- Module path: `backend/modules/tax_fee_settings.py`
+- Settings data path: `data/tax_fee_settings.json`
+- Owner/private page: `pages/tax-settings.html`
+- Stores sales tax percentage, city/local tax percentage, optional service fee, optional delivery fee, and enabled flags.
+- `GET /api/tax-settings` reads settings.
+- `PATCH /api/tax-settings` saves settings and writes an audit entry.
+- Aurora or any future intake surface must not invent tax rates. If settings are disabled, totals are presented as before taxes/fees.
+
+Public website impact:
+
+- Public navigation remains limited to Home, Menu, Order, Catering, Contact.
+- No backend dashboard/settings pages are linked from public header/footer.
+- Public order page now includes email capture, per-item modifiers/notes, backend order estimates, and server-calculated totals.
+
+Files changed:
+
+- `backend/modules/__init__.py`
+- `backend/modules/access_control.py`
+- `backend/modules/order_intake.py`
+- `backend/modules/tax_fee_settings.py`
+- `backend/server.py`
+- `backend/storage.py`
+- `data/business_users.json`
+- `data/tax_fee_settings.json`
+- `data/orders.json`
+- `data/audit_log.json`
+- `pages/contact.html`
+- `pages/order.html`
+- `pages/orders-dashboard.html`
+- `pages/settings.html`
+- `pages/tax-settings.html`
+- `assets/js/business-auth.js`
+- `assets/css/styles.css`
+- `SOURCE_OF_TRUTH.md`
+- `/home/frank/projects/ORBI_AI_SOLUTIONS/ORBI_HANDOFF.md`
+
+Verification:
+
+- `python3 -m py_compile backend/server.py backend/storage.py backend/modules/access_control.py backend/modules/order_intake.py backend/modules/tax_fee_settings.py` passed.
+- `node --check assets/js/business-api.js`, `node --check assets/js/deployment-config.js`, and `node --check assets/js/business-auth.js` passed.
+- Inline script syntax checks passed for `pages/contact.html`, `pages/order.html`, `pages/orders-dashboard.html`, `pages/settings.html`, and `pages/tax-settings.html`.
+- Public nav/private link check passed: no public header/footer links to private dashboards/settings pages.
+- Local link/asset resolver passed across all HTML pages.
+- Local backend started on `127.0.0.1:8126`; `/health` returned HTTP 200 JSON.
+- `GET /api/tax-settings` returned disabled tax/fee settings.
+- `GET /api/orders-dashboard` without business login returned HTTP 401.
+- `GET /api/tax-settings` without business login returned HTTP 401.
+- Invalid business login returned HTTP 401.
+- Owner, manager, and staff business logins returned signed sessions with expected permissions.
+- Owner access could read the order dashboard, read tax settings, update order status, update tax settings, and restore tax settings to disabled.
+- Manager access could read the order dashboard and was blocked from tax settings with HTTP 403.
+- Staff access could read the order dashboard and update order status, but was blocked from tax settings with HTTP 403.
+- `GET /api/settings` without login returned HTTP 401; owner/manager settings read passed; staff settings read was blocked; manager settings update was blocked.
+- `POST /api/order-estimate` with disabled settings returned subtotal and `Subtotal shown before taxes and fees.`
+- `POST /api/orders` created stored test order `ADM-1004` from an Aurora-style JSON payload with product IDs and modifiers.
+- `GET /api/orders-dashboard` showed test order `ADM-1004` in the dashboard data.
+- `PATCH /api/orders/ADM-1004` updated status to `accepted`.
+- `PATCH /api/tax-settings` saved enabled tax/fee settings.
+- `POST /api/order-estimate` with enabled settings returned calculated estimated tax/fees and estimated total.
+- `PATCH /api/tax-settings` reset settings to disabled after verification.
+- HTTP checks returned 200 for `index.html`, `pages/menu.html`, `pages/order.html`, `pages/catering.html`, `pages/contact.html`, `pages/orders-dashboard.html`, `pages/tax-settings.html`, `assets/css/styles.css`, and `assets/js/business-auth.js`.
+- Local backend was stopped after tests; `ss -tlnp` confirmed port `8126` was not listening.
+- Reserved ports `8088`, `8090`, `8091`, and `8095` were not modified.
 
 ## Frontend Connection State
 
@@ -491,3 +750,86 @@ Inspect and fix only when explicitly requested:
 6. Optionally run a manual visual browser pass on `https://aurora-deli-market-demo.vercel.app` and the custom domain.
 7. Keep all customer-facing pages free of Orbi/AI/receptionist/controller language.
 8. Do not connect this project to Orbi until an explicit external attach phase begins.
+
+
+## May 11, 2026 — Frank Demo Mode Detour Window
+
+The current Orbi runtime now has a Frank-only demo switch in `business_master.json`:
+
+- `demo_persona: frank`
+
+That switch is used only by the active Orbi demo runtime to allow a wider off-topic window for Frank demo sessions. The normal customer/business behavior remains separate and unchanged.
+
+Changed files:
+- `business_master.json`
+- `industry_modules/orbi_demo.py`
+- `chat_pipeline.py`
+- `ORBI_HANDOFF.md`
+
+Behavior change:
+- Frank demo mode: allow `3 to 5` short off-topic/general-knowledge exchanges before gently steering back.
+- Normal customer mode: remains brief and business-focused; no change was made to customer deployments.
+
+Tests run:
+- `python3 -m py_compile chat_pipeline.py industry_modules/orbi_demo.py`
+- Live `curl` chat flow on `8070` with `Frank` and `purblum.com`
+- `curl -s http://127.0.0.1:8070/health`
+
+Current risks:
+- Detour handling still depends on prompt/model behavior, so exact wording can vary.
+- The Frank-only behavior is controlled by `demo_persona` in the runtime config; keep that flag separate from customer deployments.
+
+
+## May 11, 2026 — Voice Widget Echo Suppression
+
+The live Orbi voice widget now suppresses echo in the browser runtime:
+
+- Recognition is paused before TTS starts.
+- Recognition stays paused while TTS is speaking.
+- Recognition restarts only after a short cooldown.
+- Transcript fragments that strongly match Orbi's last spoken reply are ignored for a short window.
+
+Changed files:
+- `assets/js/aurora-widget.js`
+- `pricing.html`
+- `ORBI_HANDOFF.md`
+
+Behavior scope:
+- This applies to the shared live Orbi runtime voice path and the pricing/onboarding voice overlay.
+- It does not change LLM behavior.
+- `checkout-success.html` has no active TTS path and was not changed.
+
+Tests run:
+- `rg -n` verification of the live served widget and pricing files for the new echo-suppression helpers and cooldown variables.
+- `curl -s http://127.0.0.1:8070/health`
+- `python3 -m py_compile chat_pipeline.py`
+
+Current risks:
+- Speech recognition remains browser-dependent.
+- Very noisy speech may still be interpreted as user input if it does not closely match Orbi's last spoken reply.
+
+
+## May 11, 2026 — Confirmed-Facts Name Memory Fix
+
+The active Orbi runtime now answers known-name questions from confirmed session facts before the LLM runs.
+
+Changed files:
+- `chat_pipeline.py`
+- `session_facts.json` (live test state)
+- `sessions.json` (live test state)
+- `ORBI_HANDOFF.md`
+
+Behavior change:
+- If `user_name` exists in confirmed session facts, Orbi answers `Your name is Frank.` for name queries like `you know my name` and `what is my name` instead of asking again.
+- Bare names like `Frank` are captured again during early conversation turns.
+- Session and fact reads refresh from disk on each request so worker switching does not drop confirmed facts.
+- This applies to the active Orbi runtime generally, not just Frank demo mode.
+
+Tests run:
+- `python3 -m py_compile chat_pipeline.py`
+- Live `curl` chat flow on `8070` with session `name-regression-test7`
+- `curl -s http://127.0.0.1:8070/health`
+
+Current risks:
+- Session state remains file-backed runtime state; manual edits to `sessions.json` or `session_facts.json` can affect live behavior.
+- Only explicit name-query phrasings are short-circuited before the LLM; unusual phrasing may still fall through.

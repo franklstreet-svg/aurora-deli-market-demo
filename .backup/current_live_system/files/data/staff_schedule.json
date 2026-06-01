@@ -1,0 +1,56 @@
+[
+  {
+    "id": "shift-001",
+    "employee": "Maya Chen",
+    "role": "Manager",
+    "date": "2026-05-10",
+    "start": "06:30",
+    "end": "15:00",
+    "coverage": "opening"
+  },
+  {
+    "id": "shift-002",
+    "employee": "Luis Ortega",
+    "role": "Kitchen lead",
+    "date": "2026-05-10",
+    "start": "07:00",
+    "end": "15:30",
+    "coverage": "prep"
+  },
+  {
+    "id": "shift-003",
+    "employee": "Priya Shah",
+    "role": "Deli counter",
+    "date": "2026-05-10",
+    "start": "10:00",
+    "end": "18:00",
+    "coverage": "lunch"
+  },
+  {
+    "id": "shift-004",
+    "employee": "Theo Martin",
+    "role": "Closer",
+    "date": "2026-05-10",
+    "start": "12:00",
+    "end": "20:30",
+    "coverage": "closing"
+  },
+  {
+    "id": "shift-005",
+    "employee": "B7 Test",
+    "role": "Deli counter",
+    "date": "2026-05-11",
+    "start": "09:00",
+    "end": "14:00",
+    "coverage": "extended lunch"
+  },
+  {
+    "id": "shift-006",
+    "employee": "B12 Staff",
+    "role": "Cashier",
+    "date": "2026-05-12",
+    "start": "10:00",
+    "end": "15:00",
+    "coverage": "front counter"
+  }
+]

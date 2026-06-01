@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Business Settings | PurBlum</title>
+  <meta name="description" content="Enterprise business settings control panel for PurBlum profile, hours, roles, notifications, integrations, and operations.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="internal-gated-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Business settings</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="internal-access-notice" aria-labelledby="internal-access-heading">
+    <p class="eyebrow">Private workspace</p>
+    <h1 id="internal-access-heading">This area is not part of the public PurBlum website.</h1>
+    <p>PurBlum's public site is limited to the deli storefront, menu, pickup order requests, catering inquiries, contact details, and customer help.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="../index.html">Return Home</a>
+      <a class="btn secondary" href="contact.html">Contact the Store</a>
+    </div>
+  </section>
+
+  <main>
+    <section class="settings-hero">
+      <div>
+        <p class="eyebrow">Control panel</p>
+        <h1>Business rules, team access, integrations, and operating controls.</h1>
+        <p>Manage the store profile, hours, notifications, permissions, integrations, ordering policies, catering rules, and operational toggles from one enterprise-style settings workspace.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=1200&q=80" alt="Business operations team reviewing settings and controls on a laptop">
+    </section>
+
+    <section class="settings-dashboard">
+      <div class="settings-topbar">
+        <div>
+          <p class="eyebrow">Configuration</p>
+          <h2>Store control center</h2>
+        </div>
+        <div class="settings-actions">
+          <button type="button">Save Settings</button>
+          <button type="button" class="secondary-action">Reset Changes</button>
+        </div>
+      </div>
+
+      <div class="settings-layout">
+        <aside class="settings-nav" aria-label="Settings sections">
+          <a href="#profile" aria-current="page">Business profile</a>
+          <a href="#hours">Hours and location</a>
+          <a href="#notifications">Notifications</a>
+          <a href="#permissions">Roles and permissions</a>
+          <a href="#integrations">Integrations</a>
+          <a href="#operations">Operations</a>
+        </aside>
+
+        <div class="settings-stack">
+          <section class="settings-panel" id="profile" aria-labelledby="profile-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Profile</p>
+                <h2 id="profile-heading">Business profile settings</h2>
+              </div>
+              <span class="status-pill good">Public profile active</span>
+            </div>
+            <div class="settings-form-grid">
+              <label>Business name <input type="text" value="PurBlum"></label>
+              <label>Business category <input type="text" value="Deli, grocery market, catering"></label>
+              <label>Main phone <input type="tel" value="(775) 555-0194"></label>
+              <label>Public email <input type="email" value="hello@auroradeli.example"></label>
+              <label>Website URL <input type="url" value="https://auroradeli.example"></label>
+              <label>Manager contact <input type="text" value="Maya Chen"></label>
+            </div>
+            <label class="wide-field">Store description
+              <textarea rows="3">Neighborhood deli and small market serving sandwiches, soups, grocery staples, boxed lunches, and local catering orders.</textarea>
+            </label>
+          </section>
+
+          <section class="settings-panel" id="hours" aria-labelledby="hours-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Location</p>
+                <h2 id="hours-heading">Hours and location settings</h2>
+              </div>
+              <a href="../index.html">View storefront</a>
+            </div>
+            <div class="settings-form-grid">
+              <label>Street address <input type="text" value="1845 Sierra Market Lane"></label>
+              <label>City <input type="text" value="Reno"></label>
+              <label>State <input type="text" value="NV"></label>
+              <label>ZIP <input type="text" value="89501"></label>
+            </div>
+            <div class="hours-settings-grid" aria-label="Weekly store hours">
+              <div><span>Mon-Fri</span><strong>6:30 AM-8:00 PM</strong><button type="button">Edit</button></div>
+              <div><span>Saturday</span><strong>7:00 AM-8:00 PM</strong><button type="button">Edit</button></div>
+              <div><span>Sunday</span><strong>8:00 AM-5:00 PM</strong><button type="button">Edit</button></div>
+              <div><span>Holiday mode</span><strong>Off</strong><button type="button">Configure</button></div>
+            </div>
+          </section>
+
+          <section class="settings-panel" id="notifications" aria-labelledby="notifications-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Alerts</p>
+                <h2 id="notifications-heading">Notification settings</h2>
+              </div>
+            </div>
+            <div class="toggle-grid">
+              <label><input type="checkbox" checked> Low-stock alerts to manager</label>
+              <label><input type="checkbox" checked> Catering lead alerts by SMS</label>
+              <label><input type="checkbox" checked> Order issue escalation emails</label>
+              <label><input type="checkbox"> Daily report PDF to ownership</label>
+              <label><input type="checkbox" checked> Staff coverage warning alerts</label>
+              <label><input type="checkbox"> Supplier delivery delay notices</label>
+            </div>
+          </section>
+
+          <section class="settings-panel" id="permissions" aria-labelledby="permissions-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Access</p>
+                <h2 id="permissions-heading">Roles and permissions</h2>
+              </div>
+              <a href="staff.html">Staff schedule</a>
+            </div>
+            <div class="permission-table-wrap">
+              <table class="permission-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Role</th>
+                    <th scope="col">Users</th>
+                    <th scope="col">Inventory</th>
+                    <th scope="col">Orders</th>
+                    <th scope="col">Reports</th>
+                    <th scope="col">Settings</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Owner</th>
+                    <td>2</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Manager</th>
+                    <td>3</td>
+                    <td>Full</td>
+                    <td>Full</td>
+                    <td>View/export</td>
+                    <td>Limited</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Shift lead</th>
+                    <td>4</td>
+                    <td>Update stock</td>
+                    <td>Resolve issues</td>
+                    <td>View</td>
+                    <td>None</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Counter staff</th>
+                    <td>8</td>
+                    <td>View</td>
+                    <td>Create/update</td>
+                    <td>None</td>
+                    <td>None</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="settings-panel" id="integrations" aria-labelledby="integrations-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Connections</p>
+                <h2 id="integrations-heading">System and integration settings</h2>
+              </div>
+              <span class="status-pill warning">Sandbox keys</span>
+            </div>
+            <div class="integration-grid">
+              <article>
+                <strong>Point of Sale API</strong>
+                <span>Connected to MarketPOS</span>
+                <code>pos_market_live_****3842</code>
+                <button type="button">Rotate Key</button>
+              </article>
+              <article>
+                <strong>Supplier ordering feed</strong>
+                <span>High Desert Produce and Sierra Bakery</span>
+                <code>suppliers/sync/v2</code>
+                <button type="button">Test Sync</button>
+              </article>
+              <article>
+                <strong>SMS notifications</strong>
+                <span>Staff and catering lead alerts</span>
+                <code>sms_store_****9107</code>
+                <button type="button">Send Test</button>
+              </article>
+              <article>
+                <strong>Analytics export</strong>
+                <span>Daily CSV and PDF delivery</span>
+                <code>reports/export/daily</code>
+                <button type="button">Configure</button>
+              </article>
+            </div>
+          </section>
+
+          <section class="settings-panel" id="operations" aria-labelledby="operations-heading">
+            <div class="section-head">
+              <div>
+                <p class="eyebrow">Rules</p>
+                <h2 id="operations-heading">Operational toggles</h2>
+              </div>
+              <a href="reports.html">Reports</a>
+            </div>
+            <div class="operations-grid">
+              <article>
+                <strong>Online ordering</strong>
+                <span>Accept pickup orders until 7:30 PM.</span>
+                <label class="switch-row"><input type="checkbox" checked> Enabled</label>
+              </article>
+              <article>
+                <strong>Catering requests</strong>
+                <span>Require 24-hour notice and 10 guest minimum.</span>
+                <label class="switch-row"><input type="checkbox" checked> Enabled</label>
+              </article>
+              <article>
+                <strong>Auto low-stock reorder drafts</strong>
+                <span>Create draft supplier orders below par level.</span>
+                <label class="switch-row"><input type="checkbox" checked> Enabled</label>
+              </article>
+              <article>
+                <strong>Complaint escalation</strong>
+                <span>Escalate unresolved issues after 30 minutes.</span>
+                <label class="switch-row"><input type="checkbox" checked> Enabled</label>
+              </article>
+              <article>
+                <strong>Labor coverage guardrail</strong>
+                <span>Warn when lunch rush has fewer than 4 staff.</span>
+                <label class="switch-row"><input type="checkbox" checked> Enabled</label>
+              </article>
+              <article>
+                <strong>After-hours lead capture</strong>
+                <span>Collect customer inquiries when store is closed.</span>
+                <label class="switch-row"><input type="checkbox"> Paused</label>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>PurBlum</strong>
+      <p>Business settings for store profile, access, integrations, and operating controls.</p>
+    </div>
+    <div class="footer-links">
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script src="../assets/js/business-auth.js"></script>
+  <script>
+    if (window.PurBlumBusinessAuth.has('settings:read')) {
+      document.body.classList.remove('internal-gated-page');
+      document.querySelector('.internal-access-notice').hidden = true;
+    }
+  </script>
+</body>
+</html>

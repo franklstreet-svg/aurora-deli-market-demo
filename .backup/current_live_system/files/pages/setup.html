@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Setup Gate | Orbi</title>
+  <meta name="description" content="Setup continuation page blocked until legal acceptance is recorded.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="legal-gate-page">
+  <main class="legal-redirect">
+    <section class="legal-hero" id="setup-panel" aria-live="polite">
+      <p class="eyebrow">Checking acceptance</p>
+      <h1>Confirming legal acceptance before setup continues.</h1>
+      <p>Please wait while the saved acceptance record is checked.</p>
+    </section>
+  </main>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script>
+    const panel = document.getElementById('setup-panel');
+    const acceptanceId = window.localStorage.getItem('orbiLegalAcceptanceId') || '';
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    async function checkAcceptance() {
+      if (!acceptanceId) {
+        panel.innerHTML = `
+          <p class="eyebrow">Legal acceptance required</p>
+          <h1>Setup is blocked until the legal terms are accepted.</h1>
+          <p>Thank you for your interest. We cannot continue setup unless the legal terms are accepted.</p>
+          <a class="btn primary" href="legal-acceptance.html?next=setup.html">Review Terms</a>`;
+        return;
+      }
+      try {
+        const url = window.AuroraDeliAPI ? window.AuroraDeliAPI.url(`/api/legal-acceptance/status?acceptance_id=${encodeURIComponent(acceptanceId)}`) : `/api/legal-acceptance/status?acceptance_id=${encodeURIComponent(acceptanceId)}`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Status check failed');
+        const data = await response.json();
+        if (!data.legal_acceptance.accepted) throw new Error('Acceptance missing');
+        panel.innerHTML = `
+          <p class="eyebrow">Legal accepted</p>
+          <h1>Setup can continue.</h1>
+          <p>Acceptance ${escapeHTML(data.legal_acceptance.acceptance_id)} was recorded for ${escapeHTML(data.legal_acceptance.business_name)}. The next onboarding/setup step can now proceed.</p>
+          <a class="btn primary" href="contact.html">Continue</a>`;
+      } catch (error) {
+        panel.innerHTML = `
+          <p class="eyebrow">Legal acceptance required</p>
+          <h1>Setup is blocked until the legal terms are accepted.</h1>
+          <p>Thank you for your interest. We cannot continue setup unless the legal terms are accepted.</p>
+          <a class="btn primary" href="legal-acceptance.html?next=setup.html">Review Terms</a>`;
+      }
+    }
+
+    checkAcceptance();
+  </script>
+</body>
+</html>

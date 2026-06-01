@@ -6,6 +6,76 @@
   <title>Order Online | PurBlum</title>
   <meta name="description" content="Online ordering for PurBlum pickup orders.">
   <link rel="stylesheet" href="../assets/css/styles.css">
+  <style>
+    /* ── Order-page styles (modifier modal + cart) ─────────────────── */
+    .order-grid { display: grid; grid-template-columns: 1fr 380px; gap: 24px; }
+    @media (max-width: 900px) { .order-grid { grid-template-columns: 1fr; } }
+
+    .menu-category { margin-bottom: 24px; }
+    .menu-category h3 { margin: 0 0 10px; color:#333; }
+    .menu-card-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 12px; }
+    .menu-card { border: 1px solid #e3e3e3; border-radius: 8px; padding: 14px; background: #fff; display: flex; flex-direction: column; }
+    .menu-card h4 { margin: 0 0 4px; }
+    .menu-card .desc { color:#666; font-size:13px; margin: 0 0 10px; flex:1; }
+    .menu-card .price-row { display:flex; justify-content:space-between; align-items:center; margin-top:8px; }
+    .menu-card .price { font-weight: 700; color:#1a2240; }
+    .customize-btn { background:#1a2240; color:#fff; border:none; border-radius:4px; padding:8px 14px; cursor:pointer; font-weight:600; }
+    .customize-btn:hover { background:#2a3050; }
+
+    /* Customizer modal */
+    .customizer-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:100; align-items:flex-start; justify-content:center; overflow-y:auto; padding:40px 16px; }
+    .customizer-overlay.open { display:flex; }
+    .customizer { background:#fff; border-radius:10px; max-width:560px; width:100%; padding:24px; box-shadow:0 10px 30px rgba(0,0,0,0.3); }
+    .customizer h3 { margin:0 0 4px; }
+    .customizer .desc { color:#666; font-size:14px; margin: 0 0 18px; }
+    .customizer .group { margin-bottom: 18px; padding-bottom: 14px; border-bottom:1px solid #eee; }
+    .customizer .group:last-of-type { border-bottom: none; }
+    .customizer .group-name { font-weight:700; margin-bottom:8px; color:#333; font-size:14px; }
+    .customizer .required-badge { background:#fef0e6; color:#a04500; font-size:11px; padding:2px 6px; border-radius:3px; margin-left:6px; }
+    .customizer label { display:flex; align-items:center; gap:8px; padding:6px 0; cursor:pointer; font-size:14px; }
+    .customizer label:hover { background:#fafafa; }
+    .customizer label input { margin:0; }
+    .customizer label .delta { margin-left:auto; color:#1a8e3a; font-weight:600; font-size:13px; }
+    .customizer label .delta.neg { color:#888; }
+    .customizer .running-total { background:#f7f9fc; padding:12px 14px; border-radius:6px; display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; }
+    .customizer .running-total .label { font-weight:600; color:#555; }
+    .customizer .running-total .amt { font-size:18px; font-weight:700; color:#1a2240; }
+    .customizer .actions { display:flex; gap:10px; justify-content:flex-end; margin-top:18px; }
+    .customizer .actions button { padding:10px 18px; border-radius:5px; border:none; cursor:pointer; font-weight:600; }
+    .customizer .cancel-btn { background:#eee; color:#333; }
+    .customizer .add-btn { background:#1a8e3a; color:#fff; }
+
+    /* Cart sidebar */
+    .cart-panel { background:#f7f9fc; border:1px solid #e3e3e3; border-radius:8px; padding:18px; position:sticky; top:18px; align-self:start; max-height:calc(100vh - 36px); overflow-y:auto; }
+    .cart-panel h3 { margin:0 0 12px; }
+    .cart-empty { color:#888; font-style:italic; padding:18px 0; text-align:center; }
+    .cart-line { background:#fff; border:1px solid #e9e9e9; border-radius:6px; padding:10px; margin-bottom:8px; }
+    .cart-line .top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+    .cart-line .item-name { font-weight:600; font-size:14px; }
+    .cart-line .item-price { font-weight:700; color:#1a2240; font-size:14px; }
+    .cart-line .mods { font-size:12px; color:#666; margin-top:4px; line-height:1.5; }
+    .cart-line .mod-add { color:#1a8e3a; }
+    .cart-line .mod-remove { color:#a04500; }
+    .cart-line .ctrls { display:flex; justify-content:space-between; align-items:center; margin-top:6px; }
+    .cart-line .qty-ctrls { display:flex; align-items:center; gap:6px; }
+    .cart-line .qty-ctrls button { width:24px; height:24px; border:1px solid #ccc; background:#fff; border-radius:3px; cursor:pointer; font-weight:700; }
+    .cart-line .qty-ctrls span { min-width:18px; text-align:center; font-weight:600; }
+    .cart-line .remove-btn { background:none; border:none; color:#a04500; cursor:pointer; font-size:12px; }
+
+    .totals { margin-top:12px; padding-top:12px; border-top:2px solid #ddd; }
+    .totals .row { display:flex; justify-content:space-between; font-size:14px; margin:4px 0; }
+    .totals .row.grand { font-weight:700; font-size:17px; color:#1a2240; margin-top:8px; padding-top:8px; border-top:1px solid #ddd; }
+
+    .pickup-form { margin-top:14px; }
+    .pickup-form label { display:block; font-size:13px; color:#444; margin-top:8px; font-weight:600; }
+    .pickup-form input, .pickup-form textarea { width:100%; padding:7px 9px; border:1px solid #ccc; border-radius:4px; font-size:14px; margin-top:3px; box-sizing:border-box; }
+    .place-order-btn { width:100%; margin-top:14px; padding:12px; background:#1a8e3a; color:#fff; border:none; border-radius:5px; font-size:15px; font-weight:700; cursor:pointer; }
+    .place-order-btn:hover { background:#136d2c; }
+    .place-order-btn:disabled { background:#aaa; cursor:not-allowed; }
+    .order-status { margin-top:10px; padding:10px; border-radius:4px; font-size:14px; text-align:center; }
+    .order-status.success { background:#e6f7ea; color:#1a6e2c; }
+    .order-status.error   { background:#fde8e8; color:#a02020; }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -27,426 +97,344 @@
       <div>
         <p class="eyebrow">Online ordering</p>
         <h1>Build a pickup order from the deli counter.</h1>
-        <p>Add items, choose a pickup time, enter contact details, and send an order request to the counter.</p>
+        <p>Click any item to customize, add to your order, then send it to the counter.</p>
       </div>
-      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=80" alt="Prepared deli sandwiches and sides ready for pickup">
     </section>
 
-    <section class="order-layout">
-      <div class="order-menu">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Choose items</p>
-            <h2>Deli pickup menu</h2>
-          </div>
-          <a href="menu.html">View full menu</a>
-        </div>
-
-        <div class="order-category">
-          <h3>Sandwiches</h3>
-          <div class="order-card-grid">
-            <article class="order-item" data-product-id="sandwich-sierra-turkey" data-name="Sierra Turkey Club" data-price="12.95">
-              <img src="https://images.unsplash.com/photo-1550507992-eb63ffee0847?auto=format&fit=crop&w=700&q=80" alt="Turkey club sandwich">
-              <div>
-                <h4>Sierra Turkey Club</h4>
-                <p>Turkey, bacon, avocado, romaine, tomato, and pepper aioli.</p>
-                <strong>$12.95</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Sierra Turkey Club quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="No tomato, toasted, extra pickles"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="sandwich-truckee-italian" data-name="Truckee Italian" data-price="13.50">
-              <img src="https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?auto=format&fit=crop&w=700&q=80" alt="Italian deli sandwich">
-              <div>
-                <h4>Truckee Italian</h4>
-                <p>Salami, capicola, ham, provolone, lettuce, onion, oil, and oregano.</p>
-                <strong>$13.50</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Truckee Italian quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="No onion, extra dressing"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="sandwich-roast-beef" data-name="Reno Roast Beef" data-price="14.25">
-              <img src="https://images.unsplash.com/photo-1567234669003-dce7a7a88821?auto=format&fit=crop&w=700&q=80" alt="Roast beef sandwich">
-              <div>
-                <h4>Reno Roast Beef</h4>
-                <p>Roast beef, Swiss, arugula, pickled onion, mustard, and horseradish cream.</p>
-                <strong>$14.25</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Reno Roast Beef quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Light horseradish, toasted"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="order-category">
-          <h3>Soups, salads, and sides</h3>
-          <div class="order-card-grid">
-            <article class="order-item" data-product-id="soup-chicken-wild-rice" data-name="Chicken & Wild Rice Soup" data-price="8.50">
-              <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=80" alt="Bowl of soup">
-              <div>
-                <h4>Chicken & Wild Rice Soup</h4>
-                <p>Bowl size with chicken, vegetables, wild rice, thyme, and rich broth.</p>
-                <strong>$8.50</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Chicken and Wild Rice Soup quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Crackers, utensils"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="salad-market-chopped" data-name="Market Chopped Salad" data-price="11.75">
-              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80" alt="Chopped salad">
-              <div>
-                <h4>Market Chopped Salad</h4>
-                <p>Romaine, tomato, chickpeas, provolone, salami, olives, and vinaigrette.</p>
-                <strong>$11.75</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Market Chopped Salad quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Dressing on side"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="side-pasta-salad" data-name="Deli Pasta Salad Pint" data-price="6.50">
-              <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=700&q=80" alt="Pasta salad">
-              <div>
-                <h4>Deli Pasta Salad Pint</h4>
-                <p>Rotini, roasted peppers, mozzarella, olives, parsley, and Italian dressing.</p>
-                <strong>$6.50</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Deli Pasta Salad quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Forks, napkins"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <div class="order-category">
-          <h3>Drinks and market add-ons</h3>
-          <div class="order-card-grid">
-            <article class="order-item" data-product-id="drink-house-tea" data-name="House Iced Tea" data-price="3.25">
-              <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="Glass of iced tea">
-              <div>
-                <h4>House Iced Tea</h4>
-                <p>Fresh brewed black tea served cold with lemon.</p>
-                <strong>$3.25</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="24" value="1" aria-label="House Iced Tea quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Lemon, no ice"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="market-kettle-chips" data-name="Tahoe Kettle Chips" data-price="2.95">
-              <img src="https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&w=700&q=80" alt="Bag of chips">
-              <div>
-                <h4>Tahoe Kettle Chips</h4>
-                <p>Single bag. Sea salt, jalapeno, barbecue, or vinegar.</p>
-                <strong>$2.95</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="24" value="1" aria-label="Tahoe Kettle Chips quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="Flavor preference"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-            <article class="order-item" data-product-id="bakery-cookie-box" data-name="House Cookie Box" data-price="8.95">
-              <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80" alt="Cookies on a tray">
-              <div>
-                <h4>House Cookie Box</h4>
-                <p>Six rotating bakery cookies packed for pickup.</p>
-                <strong>$8.95</strong>
-                <div class="order-controls">
-                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="House Cookie Box quantity"></label>
-                  <label>Notes <input type="text" class="item-modifiers" placeholder="No nuts if possible"></label>
-                  <button type="button" class="add-btn">Add to Order</button>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
+    <section class="order-grid">
+      <div>
+        <div id="menu-loading" class="cart-empty">Loading menu…</div>
+        <div id="menu-root"></div>
       </div>
 
-      <aside class="cart-panel" aria-label="Order summary">
-        <div class="cart-card">
-          <p class="eyebrow">Pickup order</p>
-          <h2>View Order</h2>
-          <div id="cart-items" class="cart-items">
-            <p class="empty-cart">No items yet. Add a sandwich, soup, salad, drink, or market item.</p>
-          </div>
+      <aside class="cart-panel">
+        <h3>Your order</h3>
+        <div id="cart-lines"></div>
+        <div id="cart-empty" class="cart-empty">No items yet — click anything on the left to start.</div>
 
-          <div class="totals">
-            <div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
-            <div><span>Estimated taxes/fees</span><strong id="tax">Before taxes/fees</strong></div>
-            <div class="grand-total"><span>Estimated total</span><strong id="total">$0.00</strong></div>
-            <p id="tax-note" class="tax-note">Subtotal shown before taxes and fees.</p>
-          </div>
-
-          <form class="pickup-form" id="pickup-form">
-            <h3>Pickup details</h3>
-            <label>
-              Customer name
-              <input type="text" id="customer-name" required>
-            </label>
-            <label>
-              Phone number
-              <input type="tel" id="customer-phone" required>
-            </label>
-            <label>
-              Email address
-              <input type="email" id="customer-email">
-            </label>
-            <label>
-              Pickup time
-              <select id="pickup-time" required>
-                <option value="">Choose a pickup time</option>
-                <option>Today, 11:30 AM</option>
-                <option>Today, 12:00 PM</option>
-                <option>Today, 12:30 PM</option>
-                <option>Today, 1:00 PM</option>
-                <option>Today, 5:30 PM</option>
-                <option>Tomorrow, 9:00 AM</option>
-              </select>
-            </label>
-            <label>
-              Order notes
-              <textarea id="order-notes" rows="3"></textarea>
-            </label>
-            <button type="submit" class="place-order-btn">Place Pickup Order</button>
-            <p id="order-status" class="order-status" role="status" aria-live="polite"></p>
-          </form>
+        <div class="totals">
+          <div class="row"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+          <div class="row"><span>Tax (8.25%)</span><span id="tax">$0.00</span></div>
+          <div class="row grand"><span>Total</span><span id="total">$0.00</span></div>
         </div>
+
+        <form id="pickup-form" class="pickup-form" novalidate>
+          <label>Name
+            <input type="text" id="customer-name" required placeholder="Sarah Johnson">
+          </label>
+          <label>Phone
+            <input type="tel" id="customer-phone" required placeholder="775-555-0123">
+          </label>
+          <label>Pickup time
+            <input type="text" id="pickup-time" placeholder="e.g. 6:30 PM today">
+          </label>
+          <label>Notes for the kitchen
+            <textarea id="order-notes" rows="2" placeholder="Park around back, etc."></textarea>
+          </label>
+          <button type="submit" class="place-order-btn" id="place-btn" disabled>Place Pickup Order</button>
+          <div id="order-status" class="order-status" hidden></div>
+        </form>
       </aside>
     </section>
   </main>
 
+  <!-- Customizer modal — populated dynamically per item -->
+  <div class="customizer-overlay" id="customizer-overlay" role="dialog" aria-modal="true">
+    <div class="customizer" id="customizer">
+      <h3 id="cust-name">Item name</h3>
+      <p class="desc" id="cust-desc"></p>
+      <div class="running-total"><span class="label">Total</span><span class="amt" id="cust-total">$0.00</span></div>
+      <div id="cust-groups"></div>
+      <div class="actions">
+        <button type="button" class="cancel-btn" id="cust-cancel">Cancel</button>
+        <button type="button" class="add-btn" id="cust-add">Add to Order — $0.00</button>
+      </div>
+    </div>
+  </div>
+
   <footer class="site-footer">
-    <div>
-      <strong>PurBlum</strong>
-      <p>Pickup orders are prepared for counter confirmation. Payment is handled at pickup.</p>
-    </div>
-    <div class="footer-links">
-      <a href="menu.html">Menu</a>
-      <a href="order.html">Order</a>
-      <a href="catering.html">Catering</a>
-      <a href="contact.html">Contact</a>
-    </div>
+    <p>PurBlum · Reno, NV · Demo site</p>
   </footer>
 
   <script src="../assets/js/deployment-config.js"></script>
   <script src="../assets/js/business-api.js"></script>
   <script>
-    const cart = new Map();
-    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
-    let legalHandoff = null;
+    // ════════════════════════════════════════════════════════════════════
+    //   PurBlum order page — menu loader + customizer + cart + submit
+    // ════════════════════════════════════════════════════════════════════
 
-    function readLegalHandoff() {
+    const cart = [];
+    const currency = new Intl.NumberFormat('en-US', { style:'currency', currency:'USD' });
+    let menuData = null;
+    let activeItem = null;
+
+    async function loadMenu() {
       try {
-        return JSON.parse(window.localStorage.getItem('orbiLegalAcceptanceHandoff') || 'null');
-      } catch (error) {
-        return null;
+        const res = await fetch('../data/menu.json', { cache: 'no-cache' });
+        if (!res.ok) throw new Error('menu fetch failed: ' + res.status);
+        menuData = await res.json();
+        document.getElementById('menu-loading').style.display = 'none';
+        renderMenu();
+      } catch (e) {
+        document.getElementById('menu-loading').textContent = 'Failed to load menu: ' + e.message;
       }
     }
 
-    function cartPayload() {
-      return Array.from(cart.values()).map((item) => ({
-        product_id: item.product_id,
-        name: item.name,
-        quantity: item.qty,
-        modifiers: item.modifiers,
-        notes: item.notes
-      }));
-    }
-
-    async function estimateOrder() {
-      const subtotal = Array.from(cart.values()).reduce((sum, item) => sum + item.price * item.qty, 0);
-      if (cart.size === 0) {
-        return { subtotal, tax: 0, total: 0, message: 'Subtotal shown before taxes and fees.', tax_configured: false };
-      }
-      try {
-        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/order-estimate') : '/api/order-estimate';
-        const response = await fetch(apiPath, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: 'pickup', items: cartPayload() })
+    function renderMenu() {
+      const root = document.getElementById('menu-root');
+      root.innerHTML = '';
+      menuData.categories.forEach((cat) => {
+        const section = document.createElement('div');
+        section.className = 'menu-category';
+        section.innerHTML = `<h3>${escapeHtml(cat.name)}</h3>
+                              <div class="menu-card-grid"></div>`;
+        const grid = section.querySelector('.menu-card-grid');
+        cat.items.forEach((item) => {
+          const card = document.createElement('article');
+          card.className = 'menu-card';
+          card.innerHTML = `
+            <h4>${escapeHtml(item.name)}</h4>
+            <p class="desc">${escapeHtml(item.description || '')}</p>
+            <div class="price-row">
+              <span class="price">From ${currency.format(item.base_price)}</span>
+              <button class="customize-btn" type="button">Customize &amp; Add</button>
+            </div>`;
+          card.querySelector('button').addEventListener('click', () => openCustomizer(item));
+          grid.appendChild(card);
         });
-        if (!response.ok) throw new Error('Estimate unavailable');
-        const data = await response.json();
-        return data.estimate;
-      } catch (error) {
-        return { subtotal, tax: 0, total: subtotal, message: 'Subtotal shown before taxes and fees.', tax_configured: false };
-      }
-    }
-
-    async function renderCart() {
-      const list = document.getElementById('cart-items');
-      list.innerHTML = '';
-
-      if (cart.size === 0) {
-        const empty = document.createElement('p');
-        empty.className = 'empty-cart';
-        empty.textContent = 'No items yet. Add a sandwich, soup, salad, drink, or market item.';
-        list.appendChild(empty);
-      } else {
-        cart.forEach((item, key) => {
-          const row = document.createElement('div');
-          row.className = 'cart-row';
-          row.innerHTML = `
-            <div>
-              <strong>${item.name}</strong>
-              <span>${item.qty} x ${currency.format(item.price)}</span>
-              ${item.modifiers ? `<small>${item.modifiers}</small>` : ''}
-            </div>
-            <div>
-              <strong>${currency.format(item.price * item.qty)}</strong>
-              <button type="button" data-remove="${key}" aria-label="Remove ${item.name}">Remove</button>
-            </div>
-          `;
-          list.appendChild(row);
-        });
-      }
-
-      const estimate = await estimateOrder();
-      document.getElementById('subtotal').textContent = currency.format(estimate.subtotal || 0);
-      document.getElementById('tax').textContent = estimate.tax_configured ? currency.format((estimate.tax || 0) + (estimate.service_fee || 0) + (estimate.delivery_fee || 0)) : 'Before taxes/fees';
-      document.getElementById('total').textContent = currency.format(estimate.total || estimate.subtotal || 0);
-      document.getElementById('tax-note').textContent = estimate.message || 'Subtotal shown before taxes and fees.';
-    }
-
-    document.querySelectorAll('.order-item').forEach((card) => {
-      card.querySelector('.add-btn').addEventListener('click', () => {
-        const productId = card.dataset.productId;
-        const name = card.dataset.name;
-        const price = Number(card.dataset.price);
-        const qtyInput = card.querySelector('input[type="number"]');
-        const modifierInput = card.querySelector('.item-modifiers');
-        const modifiers = modifierInput ? modifierInput.value.trim() : '';
-        const key = `${productId}:${modifiers}`;
-        const qty = Math.max(1, Math.min(Number(qtyInput.value) || 1, Number(qtyInput.max) || 24));
-        const existing = cart.get(key) || { product_id: productId, name, price, qty: 0, modifiers, notes: '' };
-        existing.qty += qty;
-        cart.set(key, existing);
-        qtyInput.value = 1;
-        if (modifierInput) modifierInput.value = '';
-        renderCart();
+        root.appendChild(section);
       });
+    }
+
+    function openCustomizer(item) {
+      activeItem = item;
+      document.getElementById('cust-name').textContent = item.name;
+      document.getElementById('cust-desc').textContent = item.description || '';
+      const groupsHost = document.getElementById('cust-groups');
+      groupsHost.innerHTML = '';
+
+      (item.modifier_groups || []).forEach((group, gi) => {
+        const wrap = document.createElement('div');
+        wrap.className = 'group';
+        wrap.dataset.groupIndex = gi;
+        wrap.dataset.groupType = group.type;
+        const required = group.required ? '<span class="required-badge">required</span>' : '';
+        wrap.innerHTML = `<div class="group-name">${escapeHtml(group.name)}${required}</div>`;
+
+        if (group.type === 'single') {
+          (group.options || []).forEach((opt, oi) => {
+            const delta = opt.price_delta || 0;
+            const deltaHtml = delta === 0 ? '' :
+              `<span class="delta ${delta<0?'neg':''}">${delta>0?'+':''}${currency.format(delta)}</span>`;
+            const checked = (oi === 0 && group.required) ? 'checked' : '';
+            wrap.innerHTML += `
+              <label><input type="radio" name="g${gi}" value="${oi}" ${checked}
+                            data-delta="${delta}" data-label="${escapeAttr(opt.label)}">
+                <span>${escapeHtml(opt.label)}</span>${deltaHtml}</label>`;
+          });
+        } else if (group.type === 'multi') {
+          (group.options || []).forEach((opt, oi) => {
+            const delta = opt.price_delta || 0;
+            const deltaHtml = delta === 0 ? '' :
+              `<span class="delta ${delta<0?'neg':''}">${delta>0?'+':''}${currency.format(delta)}</span>`;
+            wrap.innerHTML += `
+              <label><input type="checkbox" name="g${gi}" value="${oi}"
+                            data-delta="${delta}" data-label="${escapeAttr(opt.label)}">
+                <span>${escapeHtml(opt.label)}</span>${deltaHtml}</label>`;
+          });
+        } else if (group.type === 'remove') {
+          (group.defaults_on || []).forEach((label, oi) => {
+            wrap.innerHTML += `
+              <label><input type="checkbox" name="g${gi}" value="${oi}" checked
+                            data-delta="0" data-label="${escapeAttr(label)}">
+                <span>${escapeHtml(label)}</span></label>`;
+          });
+        }
+        groupsHost.appendChild(wrap);
+      });
+
+      groupsHost.querySelectorAll('input').forEach((inp) => {
+        inp.addEventListener('change', updateCustomizerTotal);
+      });
+      updateCustomizerTotal();
+      document.getElementById('customizer-overlay').classList.add('open');
+    }
+
+    function updateCustomizerTotal() {
+      if (!activeItem) return;
+      let total = activeItem.base_price;
+      document.querySelectorAll('#cust-groups input:checked').forEach((inp) => {
+        const grp = inp.closest('.group');
+        if (grp.dataset.groupType === 'remove') return;
+        total += parseFloat(inp.dataset.delta || 0);
+      });
+      total = Math.max(0, total);
+      document.getElementById('cust-total').textContent = currency.format(total);
+      document.getElementById('cust-add').textContent = `Add to Order — ${currency.format(total)}`;
+      activeItem._currentTotal = total;
+    }
+
+    document.getElementById('cust-cancel').addEventListener('click', closeCustomizer);
+    document.getElementById('customizer-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'customizer-overlay') closeCustomizer();
     });
 
-    document.getElementById('cart-items').addEventListener('click', (event) => {
-      const key = event.target.dataset.remove;
-      if (!key) return;
-      cart.delete(key);
+    function closeCustomizer() {
+      document.getElementById('customizer-overlay').classList.remove('open');
+      activeItem = null;
+    }
+
+    document.getElementById('cust-add').addEventListener('click', () => {
+      if (!activeItem) return;
+      const groups = activeItem.modifier_groups || [];
+      for (let gi = 0; gi < groups.length; gi++) {
+        if (groups[gi].type === 'single' && groups[gi].required) {
+          const picked = document.querySelector(`#cust-groups input[name="g${gi}"]:checked`);
+          if (!picked) {
+            alert(`Please pick a ${groups[gi].name}.`);
+            return;
+          }
+        }
+      }
+      const mods = [];
+      groups.forEach((group, gi) => {
+        const inputs = document.querySelectorAll(`#cust-groups input[name="g${gi}"]`);
+        if (group.type === 'remove') {
+          inputs.forEach((inp) => {
+            if (!inp.checked) {
+              mods.push({ group: group.name, action: 'remove', label: inp.dataset.label, delta: 0 });
+            }
+          });
+        } else if (group.type === 'single') {
+          const picked = Array.from(inputs).find((i) => i.checked);
+          if (picked) {
+            mods.push({ group: group.name, action: 'choose', label: picked.dataset.label,
+                        delta: parseFloat(picked.dataset.delta || 0) });
+          }
+        } else if (group.type === 'multi') {
+          inputs.forEach((inp) => {
+            if (inp.checked) {
+              mods.push({ group: group.name, action: 'add', label: inp.dataset.label,
+                          delta: parseFloat(inp.dataset.delta || 0) });
+            }
+          });
+        }
+      });
+      const lineTotal = activeItem._currentTotal || activeItem.base_price;
+      cart.push({
+        id: activeItem.id,
+        name: activeItem.name,
+        base_price: activeItem.base_price,
+        qty: 1,
+        modifiers: mods,
+        line_total: lineTotal,
+      });
+      closeCustomizer();
       renderCart();
     });
 
-    document.getElementById('pickup-form').addEventListener('submit', async (event) => {
-      event.preventDefault();
-      const status = document.getElementById('order-status');
-      if (cart.size === 0) {
-        status.textContent = 'Add at least one item before sending a pickup order.';
-        status.className = 'order-status warning';
+    function renderCart() {
+      const host = document.getElementById('cart-lines');
+      const empty = document.getElementById('cart-empty');
+      host.innerHTML = '';
+      if (cart.length === 0) {
+        empty.style.display = 'block';
+      } else {
+        empty.style.display = 'none';
+        cart.forEach((line, idx) => {
+          const div = document.createElement('div');
+          div.className = 'cart-line';
+          const modsHtml = (line.modifiers || []).map((m) => {
+            const cls = m.action === 'add' ? 'mod-add' :
+                        m.action === 'remove' ? 'mod-remove' : '';
+            const prefix = m.action === 'add' ? '+ ' :
+                           m.action === 'remove' ? '− ' : '';
+            const deltaTxt = m.delta ? ` (${m.delta>0?'+':''}${currency.format(m.delta)})` : '';
+            return `<div class="${cls}">${prefix}${escapeHtml(m.label)}${deltaTxt}</div>`;
+          }).join('');
+          div.innerHTML = `
+            <div class="top">
+              <span class="item-name">${escapeHtml(line.name)}</span>
+              <span class="item-price">${currency.format(line.line_total * line.qty)}</span>
+            </div>
+            <div class="mods">${modsHtml}</div>
+            <div class="ctrls">
+              <div class="qty-ctrls">
+                <button type="button" data-dec="${idx}">−</button>
+                <span>${line.qty}</span>
+                <button type="button" data-inc="${idx}">+</button>
+              </div>
+              <button type="button" class="remove-btn" data-rm="${idx}">Remove</button>
+            </div>`;
+          host.appendChild(div);
+        });
+        host.querySelectorAll('[data-dec]').forEach((b) =>
+          b.addEventListener('click', () => { const i = +b.dataset.dec; cart[i].qty = Math.max(1, cart[i].qty-1); renderCart(); }));
+        host.querySelectorAll('[data-inc]').forEach((b) =>
+          b.addEventListener('click', () => { cart[+b.dataset.inc].qty += 1; renderCart(); }));
+        host.querySelectorAll('[data-rm]').forEach((b) =>
+          b.addEventListener('click', () => { cart.splice(+b.dataset.rm, 1); renderCart(); }));
+      }
+      const sub = cart.reduce((s, l) => s + l.line_total * l.qty, 0);
+      const tax = sub * (menuData?._meta?.tax_rate || 0.0825);
+      document.getElementById('subtotal').textContent = currency.format(sub);
+      document.getElementById('tax').textContent = currency.format(tax);
+      document.getElementById('total').textContent = currency.format(sub + tax);
+      document.getElementById('place-btn').disabled = cart.length === 0;
+    }
+
+    document.getElementById('pickup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const statusEl = document.getElementById('order-status');
+      statusEl.hidden = false;
+      statusEl.className = 'order-status';
+      statusEl.textContent = 'Sending…';
+      if (cart.length === 0) {
+        statusEl.className = 'order-status error';
+        statusEl.textContent = 'Your cart is empty.';
         return;
       }
-      const name = document.getElementById('customer-name').value.trim() || 'Customer';
-      const phone = document.getElementById('customer-phone').value.trim();
-      const email = document.getElementById('customer-email').value.trim();
-      const pickup = document.getElementById('pickup-time').value;
-      const notes = document.getElementById('order-notes').value.trim();
+      const payload = {
+        type: 'pickup',
+        customer_name: document.getElementById('customer-name').value.trim(),
+        customer_phone: document.getElementById('customer-phone').value.trim(),
+        pickup_time: document.getElementById('pickup-time').value.trim(),
+        notes: document.getElementById('order-notes').value.trim(),
+        items: cart.map((l) => ({
+          id: l.id, name: l.name, base_price: l.base_price,
+          qty: l.qty, modifiers: l.modifiers, line_total: l.line_total,
+          price: l.line_total,  // legacy field for back-compat
+        })),
+      };
       try {
-        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/orders') : '/api/orders';
-        legalHandoff = legalHandoff || readLegalHandoff();
-        const linkedLegal = legalHandoff || {};
-        const response = await fetch(apiPath, {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/public/purblum/order') : '/api/public/purblum/order';
+        const res = await fetch(apiPath, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            customer_name: name,
-            phone,
-            email,
-            pickup_time: pickup,
-            notes,
-            type: 'pickup',
-            source: 'public_order_page',
-            items: cartPayload(),
-            business_name: linkedLegal.business_name || '',
-            business_website: linkedLegal.business_website || '',
-            legal_acceptance_id: linkedLegal.legal_acceptance_id || linkedLegal.acceptance_id || '',
-            legal_document_version: linkedLegal.legal_document_version || '',
-            legal_text_hash: linkedLegal.legal_text_hash || '',
-            legal_acceptance_timestamp: linkedLegal.legal_acceptance_timestamp || '',
-            customer_business_id: linkedLegal.customer_business_id || '',
-            onboarding_session_id: linkedLegal.onboarding_session_id || '',
-            selected_product_module: linkedLegal.selected_product_module || ''
-          })
+          body: JSON.stringify(payload),
         });
-        if (!response.ok) throw new Error('Order request failed');
-        const data = await response.json();
-        status.textContent = `Pickup order received for ${name}. ${data.order.estimate_message} Order number ${data.order.id}.`;
-        cart.clear();
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'order failed');
+        statusEl.className = 'order-status success';
+        statusEl.textContent = data.message || `Order #${data.order_id?.slice(0,6)} placed — total ${currency.format(data.total)}`;
+        cart.length = 0;
         renderCart();
-      } catch (error) {
-        status.textContent = 'We could not send the order request. Please call the store to place your order.';
-        status.className = 'order-status warning';
-        return;
+        document.getElementById('pickup-form').reset();
+        document.getElementById('place-btn').disabled = true;
+      } catch (err) {
+        statusEl.className = 'order-status error';
+        statusEl.textContent = 'Could not place order: ' + (err.message || err);
       }
-      status.className = 'order-status success';
     });
 
-    function applyLegalPrefill() {
-      legalHandoff = readLegalHandoff();
-      if (!legalHandoff) return;
-      if (legalHandoff.owner_full_name && !document.getElementById('customer-name').value) {
-        document.getElementById('customer-name').value = legalHandoff.owner_full_name;
-      }
-      if (legalHandoff.phone && !document.getElementById('customer-phone').value) {
-        document.getElementById('customer-phone').value = legalHandoff.phone;
-      }
-      if (legalHandoff.owner_email && !document.getElementById('customer-email').value) {
-        document.getElementById('customer-email').value = legalHandoff.owner_email;
-      }
+    function escapeHtml(s) {
+      return String(s ?? '').replace(/[&<>"']/g, (c) =>
+        ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
     }
+    function escapeAttr(s) { return escapeHtml(s).replace(/`/g, '&#96;'); }
 
-    function addItemFromURL() {
-      const params = new URLSearchParams(window.location.search);
-      const productId = params.get('add');
-      if (!productId) return;
-      const card = Array.from(document.querySelectorAll(".order-item")).find((item) => item.dataset.productId === productId);
-      if (!card) return;
-      const name = card.dataset.name;
-      const price = Number(card.dataset.price);
-      const key = `${productId}:`;
-      const existing = cart.get(key) || { product_id: productId, name, price, qty: 0, modifiers: '', notes: '' };
-      existing.qty += 1;
-      cart.set(key, existing);
-      const panel = document.querySelector('.cart-panel');
-      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      history.replaceState(null, '', 'order.html');
-    }
-
-    applyLegalPrefill();
-    addItemFromURL();
+    loadMenu();
     renderCart();
   </script>
-
-  <script>
-    window.ORBY_CONFIG = {
-      greeting: "Hi, I am Orbi. I can help with PurBlum menu questions, pickup orders, catering trays, store hours, and contact requests.",
-      apiUrl: "http://127.0.0.1:8070",
-      stage: "sales",
-      qaMode: true
-    };
-  </script>
-
 </body>
 </html>

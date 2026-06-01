@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Inventory | PurBlum</title>
+  <meta name="description" content="Deli inventory dashboard for PurBlum stock, suppliers, low-stock alerts, and reorder actions.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body class="internal-gated-page">
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Inventory dashboard</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="internal-access-notice" aria-labelledby="internal-access-heading">
+    <p class="eyebrow">Private workspace</p>
+    <h1 id="internal-access-heading">This area is not part of the public PurBlum website.</h1>
+    <p>PurBlum's public site is limited to the deli storefront, menu, pickup order requests, catering inquiries, contact details, and customer help.</p>
+    <div class="hero-actions">
+      <a class="btn primary" href="../index.html">Return Home</a>
+      <a class="btn secondary" href="contact.html">Contact the Store</a>
+    </div>
+  </section>
+
+  <main>
+    <section class="inventory-hero">
+      <div>
+        <p class="eyebrow">Back office</p>
+        <h1>Daily stock levels for the deli counter and market shelves.</h1>
+        <p>Track current quantity, par levels, suppliers, expiration dates, spoilage risk, and low-stock reorder actions for a realistic deli operation.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=80" alt="Market produce and grocery inventory on shelves">
+    </section>
+
+    <section class="inventory-dashboard">
+      <div class="summary-grid" aria-label="Inventory summary">
+        <article>
+          <span>Total items tracked</span>
+          <strong>48</strong>
+          <p>Deli, grocery, drinks, soup, bread, and catering stock.</p>
+        </article>
+        <article class="summary-warning">
+          <span>Low-stock items</span>
+          <strong>7</strong>
+          <p>Need reorder before tomorrow's lunch rush.</p>
+        </article>
+        <article>
+          <span>Expiring in 48 hours</span>
+          <strong>5</strong>
+          <p>Prep team should rotate or mark down today.</p>
+        </article>
+        <article>
+          <span>Open reorder value</span>
+          <strong>$1,286</strong>
+          <p>Estimated vendor spend if all alerts are ordered.</p>
+        </article>
+      </div>
+
+      <section class="inventory-alerts" aria-labelledby="alerts-heading">
+        <div>
+          <p class="eyebrow">Low-stock alerts</p>
+          <h2 id="alerts-heading">Needs attention today</h2>
+        </div>
+        <div class="alert-grid">
+          <article>
+            <strong>Ciabatta Rolls</strong>
+            <span>18 on hand / par 60</span>
+            <p>Sierra Bakery delivery cutoff is 2:00 PM.</p>
+          </article>
+          <article>
+            <strong>Turkey Breast</strong>
+            <span>7 lb on hand / par 22 lb</span>
+            <p>Popular sandwich protein; reorder before dinner prep.</p>
+          </article>
+          <article>
+            <strong>Chicken & Wild Rice Soup</strong>
+            <span>2 qt on hand / par 10 qt</span>
+            <p>Batch expires today. Make fresh soup by 10:30 AM.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="inventory-section" aria-labelledby="inventory-heading">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Stock table</p>
+            <h2 id="inventory-heading">Inventory by category</h2>
+          </div>
+          <a href="admin.html">Open admin</a>
+        </div>
+
+        <div class="inventory-table-wrap">
+          <table class="inventory-table">
+            <thead>
+              <tr>
+                <th scope="col">Item</th>
+                <th scope="col">Category</th>
+                <th scope="col">Current Qty</th>
+                <th scope="col">Par Level</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Expires</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="is-low">
+                <th scope="row">Ciabatta Rolls</th>
+                <td>Bread</td>
+                <td>18 rolls</td>
+                <td>60 rolls</td>
+                <td>Sierra Bakery Co.</td>
+                <td>May 11</td>
+                <td><span class="status-pill danger">Low stock</span></td>
+                <td><button type="button" class="reorder-btn">Reorder 72</button></td>
+              </tr>
+              <tr class="is-low">
+                <th scope="row">Roasted Turkey Breast</th>
+                <td>Deli meats</td>
+                <td>7 lb</td>
+                <td>22 lb</td>
+                <td>Nevada Provisions</td>
+                <td>May 13</td>
+                <td><span class="status-pill danger">Low stock</span></td>
+                <td><button type="button" class="reorder-btn">Reorder 20 lb</button></td>
+              </tr>
+              <tr>
+                <th scope="row">Black Forest Ham</th>
+                <td>Deli meats</td>
+                <td>19 lb</td>
+                <td>18 lb</td>
+                <td>Nevada Provisions</td>
+                <td>May 15</td>
+                <td><span class="status-pill good">On par</span></td>
+                <td><button type="button" class="reorder-btn secondary-action">Hold</button></td>
+              </tr>
+              <tr class="is-expiring">
+                <th scope="row">Chicken & Wild Rice Soup</th>
+                <td>Prepared soups</td>
+                <td>2 qt</td>
+                <td>10 qt</td>
+                <td>House prep</td>
+                <td>May 10</td>
+                <td><span class="status-pill warning">Use today</span></td>
+                <td><button type="button" class="reorder-btn">Prep batch</button></td>
+              </tr>
+              <tr>
+                <th scope="row">Tomato Basil Soup</th>
+                <td>Prepared soups</td>
+                <td>8 qt</td>
+                <td>8 qt</td>
+                <td>House prep</td>
+                <td>May 12</td>
+                <td><span class="status-pill good">On par</span></td>
+                <td><button type="button" class="reorder-btn secondary-action">Hold</button></td>
+              </tr>
+              <tr class="is-low">
+                <th scope="row">Avocados</th>
+                <td>Produce</td>
+                <td>16 each</td>
+                <td>40 each</td>
+                <td>High Desert Produce</td>
+                <td>May 12</td>
+                <td><span class="status-pill danger">Low stock</span></td>
+                <td><button type="button" class="reorder-btn">Reorder case</button></td>
+              </tr>
+              <tr class="is-expiring">
+                <th scope="row">Romaine Hearts</th>
+                <td>Produce</td>
+                <td>3 cases</td>
+                <td>4 cases</td>
+                <td>High Desert Produce</td>
+                <td>May 11</td>
+                <td><span class="status-pill warning">Rotate first</span></td>
+                <td><button type="button" class="reorder-btn">Reorder 2 cases</button></td>
+              </tr>
+              <tr>
+                <th scope="row">House Kettle Chips</th>
+                <td>Snacks</td>
+                <td>94 bags</td>
+                <td>80 bags</td>
+                <td>Tahoe Snack Supply</td>
+                <td>Jun 18</td>
+                <td><span class="status-pill good">Stocked</span></td>
+                <td><button type="button" class="reorder-btn secondary-action">Hold</button></td>
+              </tr>
+              <tr class="is-low">
+                <th scope="row">Blood Orange Soda</th>
+                <td>Drinks</td>
+                <td>14 bottles</td>
+                <td>48 bottles</td>
+                <td>Truckee Beverage</td>
+                <td>Aug 22</td>
+                <td><span class="status-pill danger">Low stock</span></td>
+                <td><button type="button" class="reorder-btn">Reorder 4 cases</button></td>
+              </tr>
+              <tr>
+                <th scope="row">Imported Olive Oil</th>
+                <td>Grocery</td>
+                <td>21 bottles</td>
+                <td>18 bottles</td>
+                <td>West Coast Pantry</td>
+                <td>Nov 04</td>
+                <td><span class="status-pill good">Stocked</span></td>
+                <td><button type="button" class="reorder-btn secondary-action">Hold</button></td>
+              </tr>
+              <tr class="is-low">
+                <th scope="row">Catering Cookie Trays</th>
+                <td>Bakery</td>
+                <td>4 trays</td>
+                <td>12 trays</td>
+                <td>House bakery</td>
+                <td>May 12</td>
+                <td><span class="status-pill danger">Low stock</span></td>
+                <td><button type="button" class="reorder-btn">Bake 10</button></td>
+              </tr>
+              <tr class="is-expiring">
+                <th scope="row">Fresh Mozzarella</th>
+                <td>Cheese</td>
+                <td>9 lb</td>
+                <td>10 lb</td>
+                <td>Sage Valley Dairy</td>
+                <td>May 11</td>
+                <td><span class="status-pill warning">Rotate first</span></td>
+                <td><button type="button" class="reorder-btn">Reorder 8 lb</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="supplier-strip" aria-label="Supplier schedule">
+        <article>
+          <strong>Sierra Bakery Co.</strong>
+          <span>Next delivery: Mon 6:30 AM</span>
+        </article>
+        <article>
+          <strong>High Desert Produce</strong>
+          <span>Next delivery: Daily 7:15 AM</span>
+        </article>
+        <article>
+          <strong>Nevada Provisions</strong>
+          <span>Next delivery: Tue/Thu 8:00 AM</span>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>PurBlum</strong>
+      <p>Inventory dashboard for stock checks, rotation planning, and supplier reorder review.</p>
+    </div>
+    <div class="footer-links">
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+</body>
+</html>

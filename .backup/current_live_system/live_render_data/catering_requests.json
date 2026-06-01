@@ -1,0 +1,43 @@
+[
+  {
+    "id": "CAT-2201",
+    "customer_name": "Reno Design Co.",
+    "phone": "(775) 555-0137",
+    "email": "events@example.com",
+    "package": "Classic Sandwich Tray",
+    "guest_count": 42,
+    "event_time": "2026-05-15T11:30:00-07:00",
+    "service_type": "delivery",
+    "status": "quote_sent",
+    "priority": "high",
+    "estimated_total": 567.0
+  },
+  {
+    "id": "CAT-2202",
+    "customer_name": "B5 Test Co",
+    "phone": "(775) 555-0202",
+    "email": "events@example.com",
+    "package": "Classic Sandwich Tray",
+    "guest_count": 18,
+    "event_time": "2026-05-16T11:00",
+    "service_type": "pickup",
+    "status": "confirmed",
+    "priority": "high",
+    "estimated_total": 267.3,
+    "notes": "B5 curl test"
+  },
+  {
+    "id": "CAT-2203",
+    "customer_name": "B12 Catering",
+    "phone": "(775) 555-3434",
+    "email": "b12@example.com",
+    "package": "Market Party Platter",
+    "guest_count": 20,
+    "event_time": "2026-05-17T12:00",
+    "service_type": "delivery",
+    "status": "confirmed",
+    "priority": "high",
+    "estimated_total": 343.0,
+    "notes": "B12 persistence test"
+  }
+]

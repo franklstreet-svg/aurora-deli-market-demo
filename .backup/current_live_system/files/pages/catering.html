@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catering | PurBlum</title>
+  <meta name="description" content="Catering requests for PurBlum tray packages, platters, breakfast, and lunch events.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Catering requests</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html" aria-current="page">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="catering-hero">
+      <div>
+        <p class="eyebrow">Catering desk</p>
+        <h1>Party trays, breakfast spreads, and boxed lunches for local events.</h1>
+        <p>Build a catering request with guest count, service choice, event timing, contact details, and an estimated total.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?auto=format&fit=crop&w=1200&q=80" alt="Catering table with sandwiches, fruit, salads, and party platters">
+    </section>
+
+    <section class="catering-layout">
+      <div>
+        <section class="catering-section" aria-labelledby="tray-packages-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Tray packages</p>
+              <h2 id="tray-packages-heading">Deli catering packages</h2>
+            </div>
+            <a href="menu.html">View store menu</a>
+          </div>
+
+          <div class="package-grid">
+            <article class="package-card" data-package="Classic Sandwich Tray" data-price="13.50">
+              <img src="https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?auto=format&fit=crop&w=700&q=80" alt="Assorted deli sandwich tray">
+              <div>
+                <span class="tag">Most ordered</span>
+                <h3>Classic Sandwich Tray</h3>
+                <p>Turkey, roast beef, ham, veggie, Swiss, cheddar, lettuce, tomato, house pickles, and condiments.</p>
+                <strong>$13.50 per guest</strong>
+                <button type="button" class="select-package-btn">Select Package</button>
+              </div>
+            </article>
+
+            <article class="package-card" data-package="Market Party Platter" data-price="15.75">
+              <img src="https://images.unsplash.com/photo-1576788858574-24a6951f55ec?auto=format&fit=crop&w=700&q=80" alt="Party platter with cheeses, meats, fruit, and crackers">
+              <div>
+                <span class="tag">Party platter</span>
+                <h3>Market Party Platter</h3>
+                <p>Cured meats, artisan cheeses, crackers, grapes, olives, roasted vegetables, hummus, and seasonal dips.</p>
+                <strong>$15.75 per guest</strong>
+                <button type="button" class="select-package-btn">Select Package</button>
+              </div>
+            </article>
+
+            <article class="package-card" data-package="Soup & Sandwich Lunch" data-price="16.25">
+              <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=80" alt="Soup and sandwich lunch catering arrangement">
+              <div>
+                <span class="tag">Lunch service</span>
+                <h3>Soup & Sandwich Lunch</h3>
+                <p>Half sandwiches, two soup choices, chopped salad, kettle chips, cookies, plates, napkins, and serving spoons.</p>
+                <strong>$16.25 per guest</strong>
+                <button type="button" class="select-package-btn">Select Package</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="catering-section warm-section" aria-labelledby="options-heading">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">Breakfast and lunch</p>
+              <h2 id="options-heading">Add-ons and service options</h2>
+            </div>
+          </div>
+
+          <div class="catering-options-grid">
+            <article>
+              <img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?auto=format&fit=crop&w=700&q=80" alt="Breakfast sandwiches and pastries">
+              <div>
+                <h3>Breakfast Board</h3>
+                <p>Mini egg sandwiches, bagels, schmear, fruit, muffins, coffee service, and orange juice.</p>
+                <strong>+$6.75 per guest</strong>
+              </div>
+            </article>
+            <article>
+              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80" alt="Large salad and lunch sides">
+              <div>
+                <h3>Lunch Sides Bundle</h3>
+                <p>Market chopped salad, pasta salad, potato salad, chips, pickles, and cookie bites.</p>
+                <strong>+$5.25 per guest</strong>
+              </div>
+            </article>
+            <article>
+              <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80" alt="Dessert tray with pastries and cookies">
+              <div>
+                <h3>Dessert Tray</h3>
+                <p>Cookies, brownies, lemon bars, mini pastries, seasonal fruit, and chocolate-dipped bites.</p>
+                <strong>+$4.50 per guest</strong>
+              </div>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <aside class="catering-request-panel" aria-label="Catering request estimate">
+        <form class="catering-form" id="catering-form">
+          <p class="eyebrow">Request details</p>
+          <h2>Catering estimate</h2>
+
+          <label>
+            Package
+            <select id="package-select" required>
+              <option value="13.50">Classic Sandwich Tray - $13.50/guest</option>
+              <option value="15.75">Market Party Platter - $15.75/guest</option>
+              <option value="16.25">Soup & Sandwich Lunch - $16.25/guest</option>
+            </select>
+          </label>
+
+          <label>
+            Guest count
+            <input type="number" id="guest-count" min="10" max="250" step="1" value="25" required>
+          </label>
+
+          <fieldset>
+            <legend>Add options</legend>
+            <label><input type="checkbox" class="addon-option" value="6.75"> Breakfast board</label>
+            <label><input type="checkbox" class="addon-option" value="5.25"> Lunch sides bundle</label>
+            <label><input type="checkbox" class="addon-option" value="4.50"> Dessert tray</label>
+          </fieldset>
+
+          <div class="form-row">
+            <label>
+              Event date
+              <input type="date" id="event-date" required>
+            </label>
+            <label>
+              Event time
+              <input type="time" id="event-time" required>
+            </label>
+          </div>
+
+          <fieldset>
+            <legend>Service choice</legend>
+            <label><input type="radio" name="service" value="0" checked> Pickup at deli</label>
+            <label><input type="radio" name="service" value="28"> Local delivery +$28</label>
+          </fieldset>
+
+          <label>
+            Contact name
+            <input type="text" id="contact-name" required>
+          </label>
+
+          <label>
+            Phone number
+            <input type="tel" id="contact-phone" required>
+          </label>
+
+          <label>
+            Email
+            <input type="email" id="contact-email" required>
+          </label>
+
+          <label>
+            Event address or pickup notes
+            <textarea id="event-notes" rows="3"></textarea>
+          </label>
+
+          <div class="estimate-card" aria-live="polite">
+            <div><span>Food subtotal</span><strong id="food-subtotal">$0.00</strong></div>
+            <div><span>Service</span><strong id="service-fee">$0.00</strong></div>
+            <div><span>Estimated tax</span><strong id="catering-tax">$0.00</strong></div>
+            <div class="grand-total"><span>Estimated total</span><strong id="catering-total">$0.00</strong></div>
+          </div>
+
+          <button type="button" class="place-order-btn" id="review-catering-btn">View Catering Request</button>
+          <button type="submit" class="place-order-btn secondary-catering-submit" id="submit-catering-btn" hidden>Submit Catering Request</button>
+          <div class="catering-review-card" id="catering-review-card" hidden aria-live="polite"></div>
+          <p id="catering-status" class="order-status" role="status" aria-live="polite"></p>
+        </form>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>PurBlum</strong>
+      <p>Catering requests are reviewed by the store team before confirmation.</p>
+    </div>
+    <div class="footer-links">
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script>
+    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    const taxRate = 0.08265;
+    const form = document.getElementById('catering-form');
+    const packageSelect = document.getElementById('package-select');
+    const guestCount = document.getElementById('guest-count');
+    const foodSubtotal = document.getElementById('food-subtotal');
+    const serviceFee = document.getElementById('service-fee');
+    const cateringTax = document.getElementById('catering-tax');
+    const cateringTotal = document.getElementById('catering-total');
+    const status = document.getElementById('catering-status');
+
+    function currentServiceFee() {
+      const selected = document.querySelector('input[name="service"]:checked');
+      return selected ? Number(selected.value) : 0;
+    }
+
+    function addonTotalPerGuest() {
+      return Array.from(document.querySelectorAll('.addon-option:checked')).reduce((sum, input) => {
+        return sum + Number(input.value);
+      }, 0);
+    }
+
+    function updateEstimate() {
+      const guests = Math.max(Number(guestCount.value) || 0, 0);
+      const base = Number(packageSelect.value) || 0;
+      const subtotal = guests * (base + addonTotalPerGuest());
+      const service = currentServiceFee();
+      const tax = (subtotal + service) * taxRate;
+      const total = subtotal + service + tax;
+
+      foodSubtotal.textContent = currency.format(subtotal);
+      serviceFee.textContent = currency.format(service);
+      cateringTax.textContent = currency.format(tax);
+      cateringTotal.textContent = currency.format(total);
+    }
+
+    const reviewButton = document.getElementById('review-catering-btn');
+    const submitButton = document.getElementById('submit-catering-btn');
+    const reviewCard = document.getElementById('catering-review-card');
+
+    function moneyFromText(value) {
+      return Number(String(value).replace(/[^0-9.]/g, '')) || 0;
+    }
+
+    function selectedAddons() {
+      return Array.from(document.querySelectorAll('.addon-option:checked')).map((input) => {
+        return input.parentElement.textContent.trim();
+      });
+    }
+
+    function buildCateringRequestBody() {
+      const selectedPackage = packageSelect.options[packageSelect.selectedIndex].text.split(' - ')[0];
+      const eventDate = document.getElementById('event-date').value;
+      const eventTime = document.getElementById('event-time').value;
+      const serviceValue = document.querySelector('input[name="service"]:checked').value;
+      return {
+        customer_name: document.getElementById('contact-name').value.trim(),
+        phone: document.getElementById('contact-phone').value.trim(),
+        email: document.getElementById('contact-email').value.trim(),
+        package: selectedPackage,
+        guest_count: Number(guestCount.value) || 0,
+        event_time: `${eventDate}T${eventTime}`,
+        service_type: serviceValue === '0' ? 'pickup' : 'delivery',
+        estimated_total: moneyFromText(cateringTotal.textContent),
+        notes: document.getElementById('event-notes').value.trim(),
+        addons: selectedAddons()
+      };
+    }
+
+    function resetReview() {
+      submitButton.hidden = true;
+      reviewCard.hidden = true;
+      reviewCard.innerHTML = '';
+      status.textContent = '';
+      status.className = 'order-status';
+    }
+
+    document.querySelectorAll('select, input, textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        updateEstimate();
+        resetReview();
+      });
+      field.addEventListener('change', () => {
+        updateEstimate();
+        resetReview();
+      });
+    });
+
+    document.querySelectorAll('.select-package-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        const card = button.closest('.package-card');
+        const price = card.getAttribute('data-price');
+        packageSelect.value = price;
+        updateEstimate();
+        resetReview();
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    reviewButton.addEventListener('click', () => {
+      if (!form.reportValidity()) return;
+      const request = buildCateringRequestBody();
+      const addons = request.addons.length ? request.addons.join(', ') : 'No add-ons selected';
+      reviewCard.innerHTML = `
+        <h3>Review catering request</h3>
+        <p><strong>Package:</strong> ${request.package}</p>
+        <p><strong>Guests:</strong> ${request.guest_count}</p>
+        <p><strong>Add-ons:</strong> ${addons}</p>
+        <p><strong>Service:</strong> ${request.service_type}</p>
+        <p><strong>Date/time:</strong> ${request.event_time}</p>
+        <p><strong>Contact:</strong> ${request.customer_name} · ${request.phone} · ${request.email}</p>
+        <p><strong>Estimated total:</strong> ${currency.format(request.estimated_total)}</p>
+        <p><strong>Notes:</strong> ${request.notes || 'None'}</p>
+      `;
+      reviewCard.hidden = false;
+      submitButton.hidden = false;
+      status.textContent = 'Review the catering request, then submit it when ready.';
+      status.className = 'order-status success';
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (submitButton.hidden) {
+        reviewButton.click();
+        return;
+      }
+      const requestBody = buildCateringRequestBody();
+      try {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/catering') : '/api/catering';
+        const response = await fetch(apiPath, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestBody)
+        });
+        if (!response.ok) throw new Error('Catering request failed');
+        const data = await response.json();
+        status.textContent = `Catering request ${data.catering_request.id} submitted. PurBlum will call back to confirm timing and menu details.`;
+      } catch (error) {
+        status.textContent = 'Catering request could not be submitted online. Please call PurBlum to confirm.';
+        status.className = 'order-status warning';
+        return;
+      }
+      status.className = 'order-status success';
+      form.reset();
+      guestCount.value = 25;
+      updateEstimate();
+      submitButton.hidden = true;
+      reviewCard.hidden = true;
+    });
+
+    updateEstimate();
+  </script>
+</body>
+</html>

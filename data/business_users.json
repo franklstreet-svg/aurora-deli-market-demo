@@ -1,0 +1,20 @@
+[
+  {
+    "username": "owner",
+    "role": "owner",
+    "display_name": "Owner Access",
+    "access_code": "owner-2468"
+  },
+  {
+    "username": "manager",
+    "role": "manager",
+    "display_name": "Manager Access",
+    "access_code": "manager-1357"
+  },
+  {
+    "username": "staff",
+    "role": "staff",
+    "display_name": "Staff Access",
+    "access_code": "staff-8642"
+  }
+]

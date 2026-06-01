@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Order Online | PurBlum</title>
+  <meta name="description" content="Online ordering for PurBlum pickup orders.">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="PurBlum homepage">
+      <span class="brand-mark">P</span>
+      <span><strong>PurBlum</strong><small>Pickup orders</small></span>
+    </a>
+    <nav class="main-nav" aria-label="Primary navigation">
+      <a href="../index.html">Home</a>
+      <a href="menu.html">Menu</a>
+      <a href="order.html" aria-current="page">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="order-hero">
+      <div>
+        <p class="eyebrow">Online ordering</p>
+        <h1>Build a pickup order from the deli counter.</h1>
+        <p>Add items, choose a pickup time, enter contact details, and send an order request to the counter.</p>
+      </div>
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=80" alt="Prepared deli sandwiches and sides ready for pickup">
+    </section>
+
+    <section class="order-layout">
+      <div class="order-menu">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Choose items</p>
+            <h2>Deli pickup menu</h2>
+          </div>
+          <a href="menu.html">View full menu</a>
+        </div>
+
+        <div class="order-category">
+          <h3>Sandwiches</h3>
+          <div class="order-card-grid">
+            <article class="order-item" data-product-id="sandwich-sierra-turkey" data-name="Sierra Turkey Club" data-price="12.95">
+              <img src="https://images.unsplash.com/photo-1550507992-eb63ffee0847?auto=format&fit=crop&w=700&q=80" alt="Turkey club sandwich">
+              <div>
+                <h4>Sierra Turkey Club</h4>
+                <p>Turkey, bacon, avocado, romaine, tomato, and pepper aioli.</p>
+                <strong>$12.95</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Sierra Turkey Club quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="No tomato, toasted, extra pickles"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="sandwich-truckee-italian" data-name="Truckee Italian" data-price="13.50">
+              <img src="https://images.unsplash.com/photo-1521390188846-e2a3a97453a0?auto=format&fit=crop&w=700&q=80" alt="Italian deli sandwich">
+              <div>
+                <h4>Truckee Italian</h4>
+                <p>Salami, capicola, ham, provolone, lettuce, onion, oil, and oregano.</p>
+                <strong>$13.50</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Truckee Italian quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="No onion, extra dressing"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="sandwich-roast-beef" data-name="Reno Roast Beef" data-price="14.25">
+              <img src="https://images.unsplash.com/photo-1567234669003-dce7a7a88821?auto=format&fit=crop&w=700&q=80" alt="Roast beef sandwich">
+              <div>
+                <h4>Reno Roast Beef</h4>
+                <p>Roast beef, Swiss, arugula, pickled onion, mustard, and horseradish cream.</p>
+                <strong>$14.25</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Reno Roast Beef quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Light horseradish, toasted"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="order-category">
+          <h3>Soups, salads, and sides</h3>
+          <div class="order-card-grid">
+            <article class="order-item" data-product-id="soup-chicken-wild-rice" data-name="Chicken & Wild Rice Soup" data-price="8.50">
+              <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=700&q=80" alt="Bowl of soup">
+              <div>
+                <h4>Chicken & Wild Rice Soup</h4>
+                <p>Bowl size with chicken, vegetables, wild rice, thyme, and rich broth.</p>
+                <strong>$8.50</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Chicken and Wild Rice Soup quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Crackers, utensils"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="salad-market-chopped" data-name="Market Chopped Salad" data-price="11.75">
+              <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=700&q=80" alt="Chopped salad">
+              <div>
+                <h4>Market Chopped Salad</h4>
+                <p>Romaine, tomato, chickpeas, provolone, salami, olives, and vinaigrette.</p>
+                <strong>$11.75</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Market Chopped Salad quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Dressing on side"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="side-pasta-salad" data-name="Deli Pasta Salad Pint" data-price="6.50">
+              <img src="https://images.unsplash.com/photo-1607532941433-304659e8198a?auto=format&fit=crop&w=700&q=80" alt="Pasta salad">
+              <div>
+                <h4>Deli Pasta Salad Pint</h4>
+                <p>Rotini, roasted peppers, mozzarella, olives, parsley, and Italian dressing.</p>
+                <strong>$6.50</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="Deli Pasta Salad quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Forks, napkins"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="order-category">
+          <h3>Drinks and market add-ons</h3>
+          <div class="order-card-grid">
+            <article class="order-item" data-product-id="drink-house-tea" data-name="House Iced Tea" data-price="3.25">
+              <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=700&q=80" alt="Glass of iced tea">
+              <div>
+                <h4>House Iced Tea</h4>
+                <p>Fresh brewed black tea served cold with lemon.</p>
+                <strong>$3.25</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="24" value="1" aria-label="House Iced Tea quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Lemon, no ice"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="market-kettle-chips" data-name="Tahoe Kettle Chips" data-price="2.95">
+              <img src="https://images.unsplash.com/photo-1615484477778-ca3b77940c25?auto=format&fit=crop&w=700&q=80" alt="Bag of chips">
+              <div>
+                <h4>Tahoe Kettle Chips</h4>
+                <p>Single bag. Sea salt, jalapeno, barbecue, or vinegar.</p>
+                <strong>$2.95</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="24" value="1" aria-label="Tahoe Kettle Chips quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="Flavor preference"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+            <article class="order-item" data-product-id="bakery-cookie-box" data-name="House Cookie Box" data-price="8.95">
+              <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=700&q=80" alt="Cookies on a tray">
+              <div>
+                <h4>House Cookie Box</h4>
+                <p>Six rotating bakery cookies packed for pickup.</p>
+                <strong>$8.95</strong>
+                <div class="order-controls">
+                  <label>Qty <input type="number" min="1" max="12" value="1" aria-label="House Cookie Box quantity"></label>
+                  <label>Notes <input type="text" class="item-modifiers" placeholder="No nuts if possible"></label>
+                  <button type="button" class="add-btn">Add to Order</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <aside class="cart-panel" aria-label="Order summary">
+        <div class="cart-card">
+          <p class="eyebrow">Pickup order</p>
+          <h2>View Order</h2>
+          <div id="cart-items" class="cart-items">
+            <p class="empty-cart">No items yet. Add a sandwich, soup, salad, drink, or market item.</p>
+          </div>
+
+          <div class="totals">
+            <div><span>Subtotal</span><strong id="subtotal">$0.00</strong></div>
+            <div><span>Estimated taxes/fees</span><strong id="tax">Before taxes/fees</strong></div>
+            <div class="grand-total"><span>Estimated total</span><strong id="total">$0.00</strong></div>
+            <p id="tax-note" class="tax-note">Subtotal shown before taxes and fees.</p>
+          </div>
+
+          <form class="pickup-form" id="pickup-form">
+            <h3>Pickup details</h3>
+            <label>
+              Customer name
+              <input type="text" id="customer-name" required>
+            </label>
+            <label>
+              Phone number
+              <input type="tel" id="customer-phone" required>
+            </label>
+            <label>
+              Email address
+              <input type="email" id="customer-email">
+            </label>
+            <label>
+              Pickup time
+              <select id="pickup-time" required>
+                <option value="">Choose a pickup time</option>
+                <option>Today, 11:30 AM</option>
+                <option>Today, 12:00 PM</option>
+                <option>Today, 12:30 PM</option>
+                <option>Today, 1:00 PM</option>
+                <option>Today, 5:30 PM</option>
+                <option>Tomorrow, 9:00 AM</option>
+              </select>
+            </label>
+            <label>
+              Order notes
+              <textarea id="order-notes" rows="3"></textarea>
+            </label>
+            <button type="submit" class="place-order-btn">Place Pickup Order</button>
+            <p id="order-status" class="order-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <strong>PurBlum</strong>
+      <p>Pickup orders are prepared for counter confirmation. Payment is handled at pickup.</p>
+    </div>
+    <div class="footer-links">
+      <a href="menu.html">Menu</a>
+      <a href="order.html">Order</a>
+      <a href="catering.html">Catering</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </footer>
+
+  <script src="../assets/js/deployment-config.js"></script>
+  <script src="../assets/js/business-api.js"></script>
+  <script>
+    const cart = new Map();
+    const currency = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' });
+    let legalHandoff = null;
+
+    function readLegalHandoff() {
+      try {
+        return JSON.parse(window.localStorage.getItem('orbiLegalAcceptanceHandoff') || 'null');
+      } catch (error) {
+        return null;
+      }
+    }
+
+    function cartPayload() {
+      return Array.from(cart.values()).map((item) => ({
+        product_id: item.product_id,
+        name: item.name,
+        quantity: item.qty,
+        modifiers: item.modifiers,
+        notes: item.notes
+      }));
+    }
+
+    async function estimateOrder() {
+      const subtotal = Array.from(cart.values()).reduce((sum, item) => sum + item.price * item.qty, 0);
+      if (cart.size === 0) {
+        return { subtotal, tax: 0, total: 0, message: 'Subtotal shown before taxes and fees.', tax_configured: false };
+      }
+      try {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/order-estimate') : '/api/order-estimate';
+        const response = await fetch(apiPath, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: 'pickup', items: cartPayload() })
+        });
+        if (!response.ok) throw new Error('Estimate unavailable');
+        const data = await response.json();
+        return data.estimate;
+      } catch (error) {
+        return { subtotal, tax: 0, total: subtotal, message: 'Subtotal shown before taxes and fees.', tax_configured: false };
+      }
+    }
+
+    async function renderCart() {
+      const list = document.getElementById('cart-items');
+      list.innerHTML = '';
+
+      if (cart.size === 0) {
+        const empty = document.createElement('p');
+        empty.className = 'empty-cart';
+        empty.textContent = 'No items yet. Add a sandwich, soup, salad, drink, or market item.';
+        list.appendChild(empty);
+      } else {
+        cart.forEach((item, key) => {
+          const row = document.createElement('div');
+          row.className = 'cart-row';
+          row.innerHTML = `
+            <div>
+              <strong>${item.name}</strong>
+              <span>${item.qty} x ${currency.format(item.price)}</span>
+              ${item.modifiers ? `<small>${item.modifiers}</small>` : ''}
+            </div>
+            <div>
+              <strong>${currency.format(item.price * item.qty)}</strong>
+              <button type="button" data-remove="${key}" aria-label="Remove ${item.name}">Remove</button>
+            </div>
+          `;
+          list.appendChild(row);
+        });
+      }
+
+      const estimate = await estimateOrder();
+      document.getElementById('subtotal').textContent = currency.format(estimate.subtotal || 0);
+      document.getElementById('tax').textContent = estimate.tax_configured ? currency.format((estimate.tax || 0) + (estimate.service_fee || 0) + (estimate.delivery_fee || 0)) : 'Before taxes/fees';
+      document.getElementById('total').textContent = currency.format(estimate.total || estimate.subtotal || 0);
+      document.getElementById('tax-note').textContent = estimate.message || 'Subtotal shown before taxes and fees.';
+    }
+
+    document.querySelectorAll('.order-item').forEach((card) => {
+      card.querySelector('.add-btn').addEventListener('click', () => {
+        const productId = card.dataset.productId;
+        const name = card.dataset.name;
+        const price = Number(card.dataset.price);
+        const qtyInput = card.querySelector('input[type="number"]');
+        const modifierInput = card.querySelector('.item-modifiers');
+        const modifiers = modifierInput ? modifierInput.value.trim() : '';
+        const key = `${productId}:${modifiers}`;
+        const qty = Math.max(1, Math.min(Number(qtyInput.value) || 1, Number(qtyInput.max) || 24));
+        const existing = cart.get(key) || { product_id: productId, name, price, qty: 0, modifiers, notes: '' };
+        existing.qty += qty;
+        cart.set(key, existing);
+        qtyInput.value = 1;
+        if (modifierInput) modifierInput.value = '';
+        renderCart();
+      });
+    });
+
+    document.getElementById('cart-items').addEventListener('click', (event) => {
+      const key = event.target.dataset.remove;
+      if (!key) return;
+      cart.delete(key);
+      renderCart();
+    });
+
+    document.getElementById('pickup-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const status = document.getElementById('order-status');
+      if (cart.size === 0) {
+        status.textContent = 'Add at least one item before sending a pickup order.';
+        status.className = 'order-status warning';
+        return;
+      }
+      const name = document.getElementById('customer-name').value.trim() || 'Customer';
+      const phone = document.getElementById('customer-phone').value.trim();
+      const email = document.getElementById('customer-email').value.trim();
+      const pickup = document.getElementById('pickup-time').value;
+      const notes = document.getElementById('order-notes').value.trim();
+      try {
+        const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/orders') : '/api/orders';
+        legalHandoff = legalHandoff || readLegalHandoff();
+        const linkedLegal = legalHandoff || {};
+        const response = await fetch(apiPath, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customer_name: name,
+            phone,
+            email,
+            pickup_time: pickup,
+            notes,
+            type: 'pickup',
+            source: 'public_order_page',
+            items: cartPayload(),
+            business_name: linkedLegal.business_name || '',
+            business_website: linkedLegal.business_website || '',
+            legal_acceptance_id: linkedLegal.legal_acceptance_id || linkedLegal.acceptance_id || '',
+            legal_document_version: linkedLegal.legal_document_version || '',
+            legal_text_hash: linkedLegal.legal_text_hash || '',
+            legal_acceptance_timestamp: linkedLegal.legal_acceptance_timestamp || '',
+            customer_business_id: linkedLegal.customer_business_id || '',
+            onboarding_session_id: linkedLegal.onboarding_session_id || '',
+            selected_product_module: linkedLegal.selected_product_module || ''
+          })
+        });
+        if (!response.ok) throw new Error('Order request failed');
+        const data = await response.json();
+        status.textContent = `Pickup order received for ${name}. ${data.order.estimate_message} Order number ${data.order.id}.`;
+        cart.clear();
+        renderCart();
+      } catch (error) {
+        status.textContent = 'We could not send the order request. Please call the store to place your order.';
+        status.className = 'order-status warning';
+        return;
+      }
+      status.className = 'order-status success';
+    });
+
+    function applyLegalPrefill() {
+      legalHandoff = readLegalHandoff();
+      if (!legalHandoff) return;
+      if (legalHandoff.owner_full_name && !document.getElementById('customer-name').value) {
+        document.getElementById('customer-name').value = legalHandoff.owner_full_name;
+      }
+      if (legalHandoff.phone && !document.getElementById('customer-phone').value) {
+        document.getElementById('customer-phone').value = legalHandoff.phone;
+      }
+      if (legalHandoff.owner_email && !document.getElementById('customer-email').value) {
+        document.getElementById('customer-email').value = legalHandoff.owner_email;
+      }
+    }
+
+    function addItemFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('add');
+      if (!productId) return;
+      const card = Array.from(document.querySelectorAll(".order-item")).find((item) => item.dataset.productId === productId);
+      if (!card) return;
+      const name = card.dataset.name;
+      const price = Number(card.dataset.price);
+      const key = `${productId}:`;
+      const existing = cart.get(key) || { product_id: productId, name, price, qty: 0, modifiers: '', notes: '' };
+      existing.qty += 1;
+      cart.set(key, existing);
+      const panel = document.querySelector('.cart-panel');
+      if (panel) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', 'order.html');
+    }
+
+    applyLegalPrefill();
+    addItemFromURL();
+    renderCart();
+  </script>
+</body>
+</html>

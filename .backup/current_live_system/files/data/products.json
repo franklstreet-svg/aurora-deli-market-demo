@@ -1,0 +1,74 @@
+[
+  {
+    "id": "sandwich-sierra-turkey",
+    "name": "Sierra Turkey Club",
+    "category": "sandwiches",
+    "price": 12.95,
+    "available": true,
+    "description": "Turkey, bacon, avocado, romaine, tomato, and pepper aioli."
+  },
+  {
+    "id": "sandwich-truckee-italian",
+    "name": "Truckee Italian",
+    "category": "sandwiches",
+    "price": 13.5,
+    "available": true,
+    "description": "Ham, salami, capicola, provolone, pepper relish, lettuce, tomato, and oregano vinaigrette."
+  },
+  {
+    "id": "sandwich-roast-beef",
+    "name": "Reno Roast Beef",
+    "category": "sandwiches",
+    "price": 14.25,
+    "available": true,
+    "description": "Roast beef, cheddar, horseradish cream, onion, arugula, and toasted roll."
+  },
+  {
+    "id": "soup-chicken-wild-rice",
+    "name": "Chicken & Wild Rice Soup",
+    "category": "soups",
+    "price": 8.5,
+    "available": true,
+    "description": "Chicken, vegetables, wild rice, thyme, and deli broth."
+  },
+  {
+    "id": "salad-market-chopped",
+    "name": "Market Chopped Salad",
+    "category": "salads",
+    "price": 11.75,
+    "available": true,
+    "description": "Romaine, cucumber, tomato, chickpeas, provolone, salami, olives, and red wine vinaigrette."
+  },
+  {
+    "id": "side-pasta-salad",
+    "name": "Deli Pasta Salad Pint",
+    "category": "sides",
+    "price": 6.5,
+    "available": true,
+    "description": "Rotini, roasted peppers, mozzarella pearls, olives, parsley, and house Italian dressing."
+  },
+  {
+    "id": "drink-house-tea",
+    "name": "House Iced Tea",
+    "category": "drinks",
+    "price": 3.25,
+    "available": true,
+    "description": "Unsweetened black tea, peach tea, or lemonade tea."
+  },
+  {
+    "id": "market-kettle-chips",
+    "name": "Tahoe Kettle Chips",
+    "category": "market",
+    "price": 2.95,
+    "available": true,
+    "description": "Sea salt, jalapeno, barbecue, or vinegar."
+  },
+  {
+    "id": "bakery-cookie-box",
+    "name": "House Cookie Box",
+    "category": "bakery",
+    "price": 8.95,
+    "available": true,
+    "description": "Six rotating bakery cookies packed to go."
+  }
+]

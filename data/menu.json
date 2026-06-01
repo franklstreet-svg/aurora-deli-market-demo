@@ -1,0 +1,514 @@
+{
+  "_meta": {
+    "version": 1,
+    "generated_at": "2026-05-31",
+    "currency": "USD",
+    "tax_rate": 0.0825,
+    "_note": "Modifier group types: 'single' = pick one (radio), 'remove' = uncheck defaults to remove, 'multi' = pick any (checkboxes). All price_delta values are added to base_price at checkout."
+  },
+  "categories": [
+    {
+      "id": "sandwiches",
+      "name": "Signature Sandwiches",
+      "items": [
+        {
+          "id": "sub-italian",
+          "name": "Truckee Italian",
+          "description": "Capicola, salami, mortadella, provolone, lettuce, tomato, onion, banana peppers, olive oil and vinegar.",
+          "base_price": 11.95,
+          "modifier_groups": [
+            {
+              "name": "Bread",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Italian roll", "price_delta": 0},
+                {"label": "Sourdough", "price_delta": 0},
+                {"label": "Wheat", "price_delta": 0},
+                {"label": "Gluten-free", "price_delta": 1.50}
+              ]
+            },
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Half (6-inch)", "price_delta": 0},
+                {"label": "Whole (12-inch)", "price_delta": 4.00}
+              ]
+            },
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Lettuce", "Tomato", "Onion", "Banana peppers", "Oil & vinegar"]
+            },
+            {
+              "name": "Add extras",
+              "type": "multi",
+              "options": [
+                {"label": "Extra meat", "price_delta": 3.00},
+                {"label": "Bacon", "price_delta": 1.75},
+                {"label": "Avocado", "price_delta": 2.00},
+                {"label": "Jalapeños", "price_delta": 0.50},
+                {"label": "Pesto", "price_delta": 0.75},
+                {"label": "Toasted", "price_delta": 0}
+              ]
+            },
+            {
+              "name": "Cheese",
+              "type": "single",
+              "required": false,
+              "options": [
+                {"label": "Provolone (standard)", "price_delta": 0},
+                {"label": "Add cheddar", "price_delta": 1.00},
+                {"label": "Add Swiss", "price_delta": 1.00},
+                {"label": "Add pepper jack", "price_delta": 1.00},
+                {"label": "No cheese", "price_delta": -0.50}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-turkey-club",
+          "name": "Sierra Turkey Club",
+          "description": "Roast turkey, bacon, Swiss, lettuce, tomato, avocado, garlic aioli on toasted sourdough.",
+          "base_price": 12.50,
+          "modifier_groups": [
+            {
+              "name": "Bread",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Sourdough", "price_delta": 0},
+                {"label": "Wheat", "price_delta": 0},
+                {"label": "White", "price_delta": 0},
+                {"label": "Croissant", "price_delta": 1.00},
+                {"label": "Gluten-free", "price_delta": 1.50}
+              ]
+            },
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Bacon", "Swiss", "Lettuce", "Tomato", "Avocado", "Garlic aioli", "Toasted"]
+            },
+            {
+              "name": "Add extras",
+              "type": "multi",
+              "options": [
+                {"label": "Extra turkey", "price_delta": 2.50},
+                {"label": "Extra bacon", "price_delta": 1.75},
+                {"label": "Cranberry sauce", "price_delta": 0.50},
+                {"label": "Stuffing (Thanksgiving mode)", "price_delta": 1.00},
+                {"label": "Pickles", "price_delta": 0},
+                {"label": "Red onion", "price_delta": 0}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-melt",
+          "name": "Grilled Sourdough Melt",
+          "description": "Three cheeses pressed on grilled sourdough.",
+          "base_price": 9.75,
+          "modifier_groups": [
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Cheddar", "Swiss", "Provolone", "Butter"]
+            },
+            {
+              "name": "Add protein",
+              "type": "single",
+              "required": false,
+              "options": [
+                {"label": "No protein", "price_delta": 0},
+                {"label": "Add bacon", "price_delta": 2.00},
+                {"label": "Add ham", "price_delta": 2.50},
+                {"label": "Add turkey", "price_delta": 2.50}
+              ]
+            },
+            {
+              "name": "Add extras",
+              "type": "multi",
+              "options": [
+                {"label": "Tomato", "price_delta": 0},
+                {"label": "Caramelized onion", "price_delta": 1.00},
+                {"label": "Jalapeños", "price_delta": 0.50},
+                {"label": "Pesto", "price_delta": 0.75}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sub-roast-beef",
+          "name": "Reno Roast Beef",
+          "description": "Slow-roasted beef, sharp cheddar, horseradish cream, lettuce, tomato, red onion on a French roll.",
+          "base_price": 13.25,
+          "modifier_groups": [
+            {
+              "name": "Bread",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "French roll", "price_delta": 0},
+                {"label": "Sourdough", "price_delta": 0},
+                {"label": "Wheat", "price_delta": 0},
+                {"label": "Gluten-free", "price_delta": 1.50}
+              ]
+            },
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Cheddar", "Horseradish cream", "Lettuce", "Tomato", "Red onion"]
+            },
+            {
+              "name": "Add extras",
+              "type": "multi",
+              "options": [
+                {"label": "Extra beef", "price_delta": 3.50},
+                {"label": "Au jus on the side", "price_delta": 0.75},
+                {"label": "Swiss instead of cheddar", "price_delta": 0},
+                {"label": "Avocado", "price_delta": 2.00},
+                {"label": "Toasted", "price_delta": 0}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "soups",
+      "name": "Soups of the Day",
+      "items": [
+        {
+          "id": "soup-tomato",
+          "name": "Tomato Basil Bisque",
+          "description": "Creamy tomato, basil, parmesan, and black pepper.",
+          "base_price": 4.95,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Cup", "price_delta": 0},
+                {"label": "Bowl", "price_delta": 3.00}
+              ]
+            },
+            {
+              "name": "Add",
+              "type": "multi",
+              "options": [
+                {"label": "Crackers", "price_delta": 0},
+                {"label": "Extra parmesan", "price_delta": 0.50},
+                {"label": "Side bread", "price_delta": 1.50}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "soup-chicken-rice",
+          "name": "Chicken & Wild Rice",
+          "description": "Chicken, vegetables, wild rice, thyme, rich deli broth.",
+          "base_price": 5.25,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Cup", "price_delta": 0},
+                {"label": "Bowl", "price_delta": 3.25}
+              ]
+            },
+            {
+              "name": "Add",
+              "type": "multi",
+              "options": [
+                {"label": "Crackers", "price_delta": 0},
+                {"label": "Side bread", "price_delta": 1.50}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "soup-potato",
+          "name": "Loaded Potato Chowder",
+          "description": "Potatoes, bacon, cheddar, scallion, celery, and cream.",
+          "base_price": 5.25,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Cup", "price_delta": 0},
+                {"label": "Bowl", "price_delta": 3.50}
+              ]
+            },
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Bacon", "Cheddar", "Scallion"]
+            },
+            {
+              "name": "Add",
+              "type": "multi",
+              "options": [
+                {"label": "Extra bacon", "price_delta": 1.50},
+                {"label": "Extra cheese", "price_delta": 1.00},
+                {"label": "Crackers", "price_delta": 0}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salads",
+      "name": "Salads & Sides",
+      "items": [
+        {
+          "id": "salad-market-chopped",
+          "name": "Market Chopped Salad",
+          "description": "Romaine, cucumber, tomato, chickpeas, provolone, salami, olives, red wine vinaigrette.",
+          "base_price": 11.75,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Regular", "price_delta": 0},
+                {"label": "Large", "price_delta": 3.50}
+              ]
+            },
+            {
+              "name": "Comes with — uncheck to remove",
+              "type": "remove",
+              "defaults_on": ["Cucumber", "Tomato", "Chickpeas", "Provolone", "Salami", "Olives"]
+            },
+            {
+              "name": "Dressing",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Red wine vinaigrette", "price_delta": 0},
+                {"label": "Ranch", "price_delta": 0},
+                {"label": "Balsamic", "price_delta": 0},
+                {"label": "Caesar", "price_delta": 0},
+                {"label": "Italian", "price_delta": 0},
+                {"label": "Dressing on the side", "price_delta": 0}
+              ]
+            },
+            {
+              "name": "Add protein",
+              "type": "single",
+              "required": false,
+              "options": [
+                {"label": "No protein", "price_delta": 0},
+                {"label": "Add grilled chicken", "price_delta": 4.50},
+                {"label": "Add turkey", "price_delta": 4.00},
+                {"label": "Add tuna salad", "price_delta": 4.00},
+                {"label": "Add avocado", "price_delta": 2.00}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "salad-garden",
+          "name": "Garden Greens Bowl",
+          "description": "Mixed greens, carrots, radish, roasted seeds, herbs, lemon herb dressing.",
+          "base_price": 9.95,
+          "modifier_groups": [
+            {
+              "name": "Dressing",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Lemon herb (standard)", "price_delta": 0},
+                {"label": "Ranch", "price_delta": 0},
+                {"label": "Balsamic", "price_delta": 0},
+                {"label": "Dressing on the side", "price_delta": 0}
+              ]
+            },
+            {
+              "name": "Add",
+              "type": "multi",
+              "options": [
+                {"label": "Grilled chicken", "price_delta": 4.50},
+                {"label": "Avocado", "price_delta": 2.00},
+                {"label": "Feta", "price_delta": 1.50}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "side-pasta-salad",
+          "name": "Deli Pasta Salad",
+          "description": "Rotini, roasted peppers, mozzarella pearls, olives, parsley, house Italian dressing.",
+          "base_price": 6.50,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Pint", "price_delta": 0},
+                {"label": "Quart", "price_delta": 5.50}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "drinks",
+      "name": "Drinks",
+      "items": [
+        {
+          "id": "drink-fountain",
+          "name": "Fountain Drink",
+          "description": "Refillable in-store.",
+          "base_price": 2.50,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Small (16 oz)", "price_delta": 0},
+                {"label": "Medium (20 oz)", "price_delta": 0.75},
+                {"label": "Large (32 oz)", "price_delta": 1.50}
+              ]
+            },
+            {
+              "name": "Flavor",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Coke", "price_delta": 0},
+                {"label": "Diet Coke", "price_delta": 0},
+                {"label": "Coke Zero", "price_delta": 0},
+                {"label": "Sprite", "price_delta": 0},
+                {"label": "Dr Pepper", "price_delta": 0},
+                {"label": "Lemonade", "price_delta": 0},
+                {"label": "Iced tea (unsweetened)", "price_delta": 0},
+                {"label": "Iced tea (sweet)", "price_delta": 0}
+              ]
+            },
+            {
+              "name": "Ice",
+              "type": "single",
+              "required": false,
+              "options": [
+                {"label": "Normal ice", "price_delta": 0},
+                {"label": "Light ice", "price_delta": 0},
+                {"label": "No ice", "price_delta": 0}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "drink-bottled",
+          "name": "Bottled Drink",
+          "description": "Cooler selection — water, sparkling, kombucha, juice.",
+          "base_price": 3.25,
+          "modifier_groups": [
+            {
+              "name": "Choice",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Bottled water", "price_delta": 0},
+                {"label": "Sparkling water", "price_delta": 0.50},
+                {"label": "Kombucha", "price_delta": 2.00},
+                {"label": "Orange juice", "price_delta": 1.00},
+                {"label": "Apple juice", "price_delta": 0.75}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "drink-coffee",
+          "name": "Coffee",
+          "description": "Locally roasted, brewed all day.",
+          "base_price": 2.95,
+          "modifier_groups": [
+            {
+              "name": "Size",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "12 oz", "price_delta": 0},
+                {"label": "16 oz", "price_delta": 0.50},
+                {"label": "20 oz", "price_delta": 1.00}
+              ]
+            },
+            {
+              "name": "Add",
+              "type": "multi",
+              "options": [
+                {"label": "Cream", "price_delta": 0},
+                {"label": "Sugar", "price_delta": 0},
+                {"label": "Oat milk", "price_delta": 0.75},
+                {"label": "Almond milk", "price_delta": 0.75},
+                {"label": "Vanilla syrup", "price_delta": 0.50},
+                {"label": "Caramel syrup", "price_delta": 0.50}
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "name": "Market Items",
+      "items": [
+        {
+          "id": "chips-kettle",
+          "name": "Tahoe Kettle Chips",
+          "description": "Sea salt, jalapeño, barbecue, or vinegar.",
+          "base_price": 2.95,
+          "modifier_groups": [
+            {
+              "name": "Flavor",
+              "type": "single",
+              "required": true,
+              "options": [
+                {"label": "Sea salt", "price_delta": 0},
+                {"label": "Jalapeño", "price_delta": 0},
+                {"label": "Barbecue", "price_delta": 0},
+                {"label": "Salt & vinegar", "price_delta": 0}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sourdough-loaf",
+          "name": "Sourdough Loaf",
+          "description": "Local bakery loaf, sliced on request.",
+          "base_price": 7.50,
+          "modifier_groups": [
+            {
+              "name": "Slicing",
+              "type": "single",
+              "required": false,
+              "options": [
+                {"label": "Whole, unsliced", "price_delta": 0},
+                {"label": "Sliced", "price_delta": 0}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cookie-box",
+          "name": "House Cookie Box",
+          "description": "Six rotating bakery cookies packed to go.",
+          "base_price": 8.95,
+          "modifier_groups": []
+        }
+      ]
+    }
+  ]
+}

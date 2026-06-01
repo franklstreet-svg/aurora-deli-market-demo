@@ -1,0 +1,15 @@
+Orbi current live system backup snapshot
+Created: 2026-05-11 PDT
+Backup path: .backup/current_live_system
+Source path: /home/frank/projects/ORBI_AI_SOLUTIONS/Orbi_AI_ChatBrain/aurora_deli_market_demo
+Remote: https://github.com/franklstreet-svg/aurora-deli-market-demo.git
+HEAD: 61e03949e47bbd9be75c6e04f98cfe1aa35a4fdd
+Remote main: 61e03949e47bbd9be75c6e04f98cfe1aa35a4fdd
+Branch: main
+Tracked working tree status: ## main...origin/main
+Customer demo before rebrand: PurBlum / Aurora Deli & Market
+Planned brand spelling: PurBlum
+Planned domain: purblum.com
+Excluded from backup: .git, .backup, __pycache__, *.pyc, *.log, *.pid, node_modules, .venv, venv, logs, .pytest_cache, tmp, *.tmp
+Restore dry-run verification: rsync dry-run produced no file differences.
+Checksum file: .backup/current_live_system/SHA256SUMS.txt

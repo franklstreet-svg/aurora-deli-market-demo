@@ -1,0 +1,12 @@
+## main...origin/main
+ M SOURCE_OF_TRUTH.md
+ M assets/css/styles.css
+ M backend/server.py
+ M backend/storage.py
+ M data/audit_log.json
+ M data/orders.json
+ M pages/catering.html
+ M pages/contact.html
+ M pages/menu.html
+ M pages/order.html
+ M pages/settings.html

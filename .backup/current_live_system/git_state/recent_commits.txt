@@ -1,0 +1,5 @@
+61e0394 Record PurBlum storefront deploy fix
+d2eb090 Refocus PurBlum public storefront navigation
+398c50a Rebrand Aurora Deli to PurBlum
+ca014c7 Document purblum custom domain setup
+f3c94ff Record Aurora Deli live frontend verification

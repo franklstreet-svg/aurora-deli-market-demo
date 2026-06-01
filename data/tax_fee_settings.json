@@ -1,0 +1,10 @@
+{
+  "enabled": false,
+  "sales_tax_percent": 0.0,
+  "local_tax_percent": 0.0,
+  "service_fee_enabled": false,
+  "service_fee": 0.0,
+  "delivery_fee_enabled": false,
+  "delivery_fee": 0.0,
+  "updated_at": "2026-05-11T18:40:21Z"
+}
