@@ -140,6 +140,34 @@
     </section>
   </main>
 
+  <!-- Receipt/confirmation modal — shows full order detail after submit
+       so the customer (or Frank during a demo) sees exactly what was
+       captured, every modifier intact. Same shape a POS confirmation
+       screen would print. -->
+  <div class="receipt-overlay" id="receipt-overlay" role="dialog" aria-modal="true"
+       style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:200;align-items:flex-start;justify-content:center;overflow-y:auto;padding:40px 16px">
+    <div class="receipt" id="receipt"
+         style="background:#fff;border-radius:10px;max-width:540px;width:100%;padding:0;box-shadow:0 14px 40px rgba(0,0,0,0.35);overflow:hidden">
+      <div style="background:#1a8e3a;color:#fff;padding:18px 24px;text-align:center">
+        <div style="font-size:28px;margin-bottom:4px">✓</div>
+        <h3 style="margin:0;font-size:18px">Order Captured</h3>
+        <p style="margin:4px 0 0;font-size:13px;opacity:0.9" id="receipt-subhead">
+          This is exactly what would land in the POS — every modifier intact.
+        </p>
+      </div>
+      <div id="receipt-body" style="padding:22px 24px;font-family:'SF Mono','Monaco','Consolas',monospace;font-size:13px;color:#222;line-height:1.7;max-height:60vh;overflow-y:auto">
+        <!-- filled dynamically -->
+      </div>
+      <div style="background:#f7f9fc;padding:14px 24px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #e3e3e3">
+        <span id="receipt-order-id" style="font-size:12px;color:#666"></span>
+        <div style="display:flex;gap:10px">
+          <button type="button" id="receipt-print" style="background:#eee;color:#333;border:none;padding:9px 16px;border-radius:5px;cursor:pointer;font-weight:600">Print</button>
+          <button type="button" id="receipt-close" style="background:#1a2240;color:#fff;border:none;padding:9px 16px;border-radius:5px;cursor:pointer;font-weight:600">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Customizer modal — populated dynamically per item -->
   <div class="customizer-overlay" id="customizer-overlay" role="dialog" aria-modal="true">
     <div class="customizer" id="customizer">
@@ -414,6 +442,16 @@
           price: l.line_total,  // legacy field for back-compat
         })),
       };
+      // Snapshot the cart + form fields BEFORE we send and clear them —
+      // we need them to render the receipt popup after success.
+      const submitSnapshot = {
+        customer_name: payload.customer_name,
+        customer_phone: payload.customer_phone,
+        pickup_time: payload.pickup_time,
+        notes: payload.notes,
+        items: cart.map((l) => ({...l, modifiers: [...l.modifiers]})),
+      };
+
       try {
         const apiPath = window.AuroraDeliAPI ? window.AuroraDeliAPI.url('/api/public/purblum/order') : '/api/public/purblum/order';
         const res = await fetch(apiPath, {
@@ -424,7 +462,9 @@
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'order failed');
         statusEl.className = 'order-status success';
-        statusEl.textContent = data.message || `Order #${data.order_id?.slice(0,6)} placed — total ${currency.format(data.total)}`;
+        statusEl.textContent = data.message || `Order placed — total ${currency.format(data.total)}`;
+        // Show the receipt-style confirmation popup
+        showReceipt(submitSnapshot, data);
         cart.length = 0;
         renderCart();
         document.getElementById('pickup-form').reset();
@@ -432,6 +472,87 @@
       } catch (err) {
         statusEl.className = 'order-status error';
         statusEl.textContent = 'Could not place order: ' + (err.message || err);
+      }
+    });
+
+    // ── Receipt popup ──────────────────────────────────────────────────
+    function showReceipt(snapshot, serverResponse) {
+      const body = document.getElementById('receipt-body');
+      const orderIdEl = document.getElementById('receipt-order-id');
+      const lines = [];
+
+      lines.push(`<div style="display:flex;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:2px dashed #ccc">
+        <div>
+          <div style="font-weight:700;color:#1a2240;font-size:14px">PURBLUM PICKUP</div>
+          <div style="color:#666;font-size:11px;margin-top:2px">${new Date().toLocaleString()}</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700">${escapeHtml(snapshot.customer_name || '—')}</div>
+          <div style="color:#666;font-size:11px">${escapeHtml(snapshot.customer_phone || '')}</div>
+          ${snapshot.pickup_time ? `<div style="color:#666;font-size:11px;margin-top:2px">Pickup: ${escapeHtml(snapshot.pickup_time)}</div>` : ''}
+        </div>
+      </div>`);
+
+      // Items with all modifier detail
+      snapshot.items.forEach((line) => {
+        const removes = line.modifiers.filter((m) => m.action === 'remove').map((m) => m.label);
+        const chooses = line.modifiers.filter((m) => m.action === 'choose');
+        const adds    = line.modifiers.filter((m) => m.action === 'add');
+        const linePrice = currency.format(line.line_total * line.qty);
+        lines.push(`<div style="margin-bottom:12px;padding:8px 0;border-bottom:1px solid #eee">
+          <div style="display:flex;justify-content:space-between;font-weight:600">
+            <span>${line.qty} × ${escapeHtml(line.name)}</span>
+            <span>${linePrice}</span>
+          </div>`);
+        chooses.forEach((m) => {
+          const delta = m.delta ? ` <span style="color:#888">(${m.delta>0?'+':''}${currency.format(m.delta)})</span>` : '';
+          lines.push(`<div style="color:#1a8e3a;font-size:12px;margin-left:18px">↳ ${escapeHtml(m.label)}${delta}</div>`);
+        });
+        if (removes.length) {
+          lines.push(`<div style="color:#a04500;font-size:12px;margin-left:18px;font-weight:600">↳ NO ${removes.map(escapeHtml).join(' · NO ')}</div>`);
+        }
+        adds.forEach((m) => {
+          const delta = m.delta ? ` <span style="color:#888">(+${currency.format(m.delta)})</span>` : '';
+          lines.push(`<div style="color:#1a8e3a;font-size:12px;margin-left:18px">+ ${escapeHtml(m.label)}${delta}</div>`);
+        });
+        lines.push(`</div>`);
+      });
+
+      // Totals
+      const tax = (menuData?._meta?.tax_rate || 0.0825);
+      const subtotal = serverResponse.subtotal ?? snapshot.items.reduce((s,l) => s + l.line_total * l.qty, 0);
+      const taxAmt   = serverResponse.tax ?? (subtotal * tax);
+      const total    = serverResponse.total ?? (subtotal + taxAmt);
+      lines.push(`<div style="margin-top:14px;padding-top:10px;border-top:2px dashed #ccc">
+        <div style="display:flex;justify-content:space-between;font-size:13px"><span>Subtotal</span><span>${currency.format(subtotal)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:4px"><span>Tax</span><span>${currency.format(taxAmt)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:16px;font-weight:700;margin-top:8px;padding-top:8px;border-top:1px solid #ccc;color:#1a2240">
+          <span>TOTAL</span><span>${currency.format(total)}</span>
+        </div>
+      </div>`);
+
+      if (snapshot.notes) {
+        lines.push(`<div style="margin-top:14px;padding:8px 12px;background:#fff8e6;border-left:3px solid #d4a017;font-size:12px">
+          <strong>Kitchen note:</strong> ${escapeHtml(snapshot.notes)}
+        </div>`);
+      }
+
+      body.innerHTML = lines.join('');
+      orderIdEl.textContent = serverResponse.order_id
+        ? `Order #${serverResponse.order_id.slice(0,8)}`
+        : '';
+      document.getElementById('receipt-overlay').style.display = 'flex';
+    }
+
+    document.getElementById('receipt-close').addEventListener('click', () => {
+      document.getElementById('receipt-overlay').style.display = 'none';
+    });
+    document.getElementById('receipt-print').addEventListener('click', () => {
+      window.print();
+    });
+    document.getElementById('receipt-overlay').addEventListener('click', (e) => {
+      if (e.target.id === 'receipt-overlay') {
+        document.getElementById('receipt-overlay').style.display = 'none';
       }
     });
 
