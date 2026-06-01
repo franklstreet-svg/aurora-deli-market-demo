@@ -127,6 +127,10 @@
           <label>Phone
             <input type="tel" id="customer-phone" required placeholder="775-555-0123">
           </label>
+          <label style="display:flex;align-items:flex-start;gap:8px;font-weight:normal;font-size:13px;color:#555;line-height:1.4;margin-top:-4px">
+            <input type="checkbox" id="sms-opt-in" style="margin-top:3px;flex-shrink:0">
+            <span>Text me a receipt to the phone number above. One transactional message — no marketing. Reply STOP to opt out.</span>
+          </label>
           <label>Pickup time
             <input type="text" id="pickup-time" placeholder="e.g. 6:30 PM today">
           </label>
@@ -436,6 +440,7 @@
         customer_phone: document.getElementById('customer-phone').value.trim(),
         pickup_time: document.getElementById('pickup-time').value.trim(),
         notes: document.getElementById('order-notes').value.trim(),
+        sms_opt_in: document.getElementById('sms-opt-in').checked,
         items: cart.map((l) => ({
           id: l.id, name: l.name, base_price: l.base_price,
           qty: l.qty, modifiers: l.modifiers, line_total: l.line_total,
@@ -449,6 +454,7 @@
         customer_phone: payload.customer_phone,
         pickup_time: payload.pickup_time,
         notes: payload.notes,
+        sms_opt_in: payload.sms_opt_in,
         items: cart.map((l) => ({...l, modifiers: [...l.modifiers]})),
       };
 
@@ -534,6 +540,13 @@
       if (snapshot.notes) {
         lines.push(`<div style="margin-top:14px;padding:8px 12px;background:#fff8e6;border-left:3px solid #d4a017;font-size:12px">
           <strong>Kitchen note:</strong> ${escapeHtml(snapshot.notes)}
+        </div>`);
+      }
+
+      // SMS opt-in confirmation line
+      if (snapshot.sms_opt_in && snapshot.customer_phone) {
+        lines.push(`<div style="margin-top:14px;padding:8px 12px;background:#eaf5ec;border-left:3px solid #1a8e3a;font-size:12px;color:#1a4d24">
+          <strong>📱 Text receipt:</strong> A copy of this confirmation is on its way to ${escapeHtml(snapshot.customer_phone)}.
         </div>`);
       }
 
